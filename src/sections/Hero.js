@@ -1,7 +1,7 @@
 import React from "react";
 import styled, { keyframes } from "styled-components";
 
-import Demo from "./Demo";
+// import Demo from "./Demo";
 
 const Flow = keyframes`
   to {
@@ -186,7 +186,7 @@ const HeroComp = () => {
     // </Hero>
     <Hero>
       <HeroContent>
-        <Logo src={require("./esplanade-logo-white.png")} />
+        <Logo src={require("../assets/images/esplanade-logo-white.png")} />
         <HeroTitle className="hero-title">the</HeroTitle>
         <HeroTitle className="hero-title" style={{ marginTop: "-100px" }}>
           next

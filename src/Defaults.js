@@ -1,5 +1,8 @@
 import { createGlobalStyle, keyframes } from "styled-components";
 
+require("typeface-space-mono");
+require("typeface-poppins");
+
 const Time = keyframes`
   to {
     stroke-dashoffset: 0px;
@@ -19,9 +22,9 @@ const Defaults = createGlobalStyle`
       --font-secondary: "Poppins";
 
       --color-background: #101223;
-      // --color-background: #1c1c1c;
-      // --color-background: #000000;
       --color-text: #ffffff;
+      --color-gradient-one: #ee0979;
+      --color-gradient-two: #ff6a00;
     }
 
     * {
@@ -77,7 +80,7 @@ const Defaults = createGlobalStyle`
     }
 
     .wavy-highlight {
-      background: url(${require("./wave-accent-one.svg")});
+      background: url(${require("./assets/svgs/wave-accent-one.svg")});
       background-repeat: repeat;
       background-position-x: 0%;
       background-position-y: 0%;

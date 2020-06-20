@@ -41,7 +41,7 @@ const ImageOne = styled.div`
   width: 700px;
   height: 400px;
   background-image: linear-gradient(black, black),
-    url(${require("./image-one.jpg")});
+    url(${require("./assets/images/image-one.jpg")});
   background-size: cover;
   background-blend-mode: saturation;
   background-position: center;
@@ -56,8 +56,8 @@ const ImageOne = styled.div`
     //     rgba(255, 106, 0, 0.3) 60%,
     //     rgba(238, 9, 121, 0.3) 80%
     //   ),
-    //   url(${require("./image-one.jpg")});
-    background-image: url(${require("./image-one.jpg")});
+    //   url(${require("./assets/images/image-one.jpg")});
+    background-image: url(${require("./assets/images/image-one.jpg")});
     background-blend-mode: normal;
     z-index: 99;
     transform: scale(1.1);
@@ -71,7 +71,7 @@ const ImageTwo = styled.div`
   width: 400px;
   height: 500px;
   background-image: linear-gradient(black, black),
-    url(${require("./image-two.jpg")});
+    url(${require("./assets/images/image-two.jpg")});
   background-size: cover;
   background-blend-mode: saturation;
   background-position: center;
@@ -86,8 +86,8 @@ const ImageTwo = styled.div`
     //     rgba(255, 106, 0, 0.3) 60%,
     //     rgba(238, 9, 121, 0.3) 80%
     //   ),
-    //   url(${require("./image-two.jpg")});
-    background-image: url(${require("./image-two.jpg")});
+    //   url(${require("./assets/images/image-two.jpg")});
+    background-image: url(${require("./assets/images/image-two.jpg")});
     background-blend-mode: normal;
     z-index: 99;
     transform: scale(1.1);
@@ -101,7 +101,7 @@ const ImageThree = styled.div`
   width: 500px;
   height: 400px;
   background-image: linear-gradient(black, black),
-    url(${require("./image-three.jpg")});
+    url(${require("./assets/images/image-three.jpg")});
   background-size: cover;
   background-blend-mode: saturation;
   background-position: center;
@@ -116,8 +116,8 @@ const ImageThree = styled.div`
     //     rgba(255, 106, 0, 0.3) 60%,
     //     rgba(238, 9, 121, 0.3) 80%
     //   ),
-    //   url(${require("./image-three.jpg")});
-    background-image: url(${require("./image-three.jpg")});
+    //   url(${require("./assets/images/image-three.jpg")});
+    background-image: url(${require("./assets/images/image-three.jpg")});
     background-blend-mode: normal;
     z-index: 99;
     transform: scale(1.1);

@@ -1,18 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 
 import Defaults from "./Defaults";
-import FixedOverlay from "./FixedOverlay";
-import Hero from "./Hero";
-import About from "./About";
-
-import AboutTwo from "./AboutTwo";
-import AboutThree from "./AboutThree";
-import AboutFour from "./AboutFour";
 import Cursor from "./Cursor";
+import FixedOverlay from "./FixedOverlay";
+import Hero from "./sections/Hero";
+import Theatre from "./sections/Theatre";
+import AboutThree from "./AboutThree";
 
 function App() {
-  const [page, setPage] = useState("main");
-
   document.querySelector("body").addEventListener("mousemove", (e) => {
     const cursor = document.querySelector("#cursor");
     cursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
@@ -35,22 +30,10 @@ function App() {
     <>
       <Defaults />
       <Cursor />
-      <FixedOverlay setPage={setPage} />
-      {/* <SwitchTransition mode="out-in">
-        <CSSTransition
-          key={page}
-          addEndListener={(node, done) => {
-            node.addEventListener("transitionend", done, false);
-          }}
-          classNames="fade"
-        >
-          {page === "main" ? <Hero /> : <About />}
-        </CSSTransition>
-      </SwitchTransition> */}
+      <FixedOverlay />
       <Hero />
-      <AboutTwo />
+      <Theatre />
       <AboutThree />
-      <AboutFour />
     </>
   );
 }
