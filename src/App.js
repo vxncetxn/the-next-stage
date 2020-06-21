@@ -8,6 +8,7 @@ import Hero from "./sections/Hero";
 import Theatre from "./sections/Theatre";
 import Cause from "./sections/Cause";
 import How from "./sections/How";
+import Faqs from "./sections/Faqs";
 import Footer from "./sections/Footer";
 
 function App() {
@@ -38,6 +39,7 @@ function App() {
       <Theatre />
       <Cause />
       <How />
+      <Faqs />
       <Footer />
     </>
   );

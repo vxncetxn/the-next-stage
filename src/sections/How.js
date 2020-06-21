@@ -17,6 +17,17 @@ const HowContent = styled.div`
   padding: 310px 100px 370px 100px;
 `;
 
+const Placeholder = styled.div`
+  position: absolute;
+  left: 330px;
+  bottom: -200px;
+  z-index: 99;
+  width: 888px;
+  height: 500px;
+
+  border: 1px solid green;
+`;
+
 const HowComp = () => {
   return (
     <How>
@@ -49,6 +60,7 @@ const HowComp = () => {
           that tell Singapore and Asian stories.
         </Text>
       </HowContent>
+      <Placeholder />
     </How>
   );
 };
