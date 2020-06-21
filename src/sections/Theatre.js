@@ -14,7 +14,7 @@ const Theatre = styled.section`
 `;
 
 const TheatreContent = styled.div`
-  padding: 50px 100px 400px 100px;
+  padding: 50px 100px 370px 100px;
 `;
 
 const YoutubeFrame = styled.iframe`
@@ -27,7 +27,7 @@ const YoutubeFrame = styled.iframe`
 const TheatreComp = () => {
   return (
     <Theatre>
-      <SectionTitleBar>the theatre</SectionTitleBar>
+      <SectionTitleBar position="left">the theatre</SectionTitleBar>
       <TheatreContent>
         <QuoteText style={{ marginBottom: 40 }}>
           a new semi-flexible 550-seat venue which will fill the gap

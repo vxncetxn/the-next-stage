@@ -1,5 +1,14 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
+
+const Wriggle = keyframes`
+from {
+  background-position: 2px 19px;
+}
+to {
+  background-position: 500px 19px;
+}
+`;
 
 const Anchor = styled.a`
   text-decoration: none;
@@ -10,8 +19,8 @@ const Anchor = styled.a`
   // background-size: 15px 10px;
   background-size: 15px 9px;
   background-position: 2px 19px;
-  animation: move 15s linear infinite;
-  -webkit-animation: move 15s linear infinite;
+  animation: ${Wriggle} 15s linear infinite;
+  -webkit-animation: ${Wriggle} 15s linear infinite;
   animation-play-state: paused;
 
   &:hover {

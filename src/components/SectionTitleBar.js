@@ -3,9 +3,14 @@ import styled from "styled-components";
 
 const SectionTitleBar = styled.div`
   display: flex;
-  justify-content: flex-end;
+  justify-content: ${(props) =>
+    props.position === "left"
+      ? "flex-end"
+      : props.position === "right"
+      ? "flex-start"
+      : null};
   align-items: flex-start;
-  padding-top: 40px;
+  padding-top: ${(props) => (props.paddingTop ? props.paddingTop : "40px")};
   flex-basis: 30%;
   flex-grow: 0;
   flex-shrink: 0;
@@ -20,13 +25,18 @@ const SectionTitle = styled.h2`
   font-family: var(--font-primary);
   font-size: 100px;
   color: var(--color-text);
-  writing-mode: sideways-lr;
+  writing-mode: ${(props) =>
+    props.position === "left"
+      ? "sideways-lr"
+      : props.position === "right"
+      ? "vertical-lr"
+      : null};
 `;
 
-const SectionTitleBarComp = ({ children, ...others }) => {
+const SectionTitleBarComp = ({ children, position, paddingTop, ...others }) => {
   return (
-    <SectionTitleBar {...others}>
-      <SectionTitle>{children}</SectionTitle>
+    <SectionTitleBar position={position} paddingTop={paddingTop} {...others}>
+      <SectionTitle position={position}>{children}</SectionTitle>
     </SectionTitleBar>
   );
 };
