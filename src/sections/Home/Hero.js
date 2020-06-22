@@ -186,7 +186,7 @@ const HeroComp = () => {
     // </Hero>
     <Hero id="hero">
       <HeroContent>
-        <Logo src={require("../assets/images/esplanade-logo-white.png")} />
+        <Logo src={require("../../assets/images/esplanade-logo-white.png")} />
         <HeroTitle className="hero-title">the</HeroTitle>
         <HeroTitle className="hero-title" style={{ marginTop: "-100px" }}>
           next

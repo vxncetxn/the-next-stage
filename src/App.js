@@ -4,13 +4,13 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Defaults from "./Defaults";
 import Cursor from "./Cursor";
 import FixedOverlay from "./FixedOverlay";
-
-import Hero from "./sections/Hero";
-import Theatre from "./sections/Theatre";
-import Cause from "./sections/Cause";
-import How from "./sections/How";
-import Socials from "./sections/Socials";
 import Footer from "./sections/Footer";
+
+import Hero from "./sections/Home/Hero";
+import Theatre from "./sections/Home/Theatre";
+import Cause from "./sections/Home/Cause";
+import How from "./sections/Home/How";
+import Socials from "./sections/Home/Socials";
 
 import Faqs from "./sections/Faqs";
 import Press from "./sections/Press";

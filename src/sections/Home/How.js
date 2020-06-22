@@ -1,34 +1,40 @@
 import React from "react";
 import styled from "styled-components";
 
-import SectionTitleBar from "../components/SectionTitleBar";
-import Text from "../components/Text";
-import QuoteText from "../components/QuoteText";
-import Anchor from "../components/Anchor";
+import SectionTitleBar from "../../components/SectionTitleBar";
+import Text from "../../components/Text";
+import QuoteText from "../../components/QuoteText";
+import Anchor from "../../components/Anchor";
 
-const Theatre = styled.section`
+const How = styled.section`
   position: relative;
   display: flex;
 
   // border: 1px solid green;
 `;
 
-const TheatreContent = styled.div`
-  padding: 50px 100px 370px 100px;
+const HowContent = styled.div`
+  padding: 310px 100px 370px 100px;
 `;
 
-const YoutubeFrame = styled.iframe`
+const Placeholder = styled.div`
   position: absolute;
   left: 330px;
   bottom: -200px;
   z-index: 99;
+  width: 888px;
+  height: 500px;
+
+  border: 1px solid green;
 `;
 
-const TheatreComp = () => {
+const HowComp = () => {
   return (
-    <Theatre id="theatre">
-      <SectionTitleBar position="left">the theatre</SectionTitleBar>
-      <TheatreContent>
+    <How id="how">
+      <SectionTitleBar position="left" paddingTop="300px">
+        how it works
+      </SectionTitleBar>
+      <HowContent>
         <QuoteText style={{ marginBottom: 40 }}>
           a new semi-flexible 550-seat venue which will fill the gap
         </QuoteText>
@@ -53,17 +59,10 @@ const TheatreComp = () => {
           commission, produce and present more productions, especially those
           that tell Singapore and Asian stories.
         </Text>
-      </TheatreContent>
-      <YoutubeFrame
-        title="theatre-intro-youtube"
-        width="888"
-        height="500"
-        src="https://www.youtube.com/embed/p8muUyKAqSM"
-        frameBorder="0"
-        allowFullScreen
-      ></YoutubeFrame>
-    </Theatre>
+      </HowContent>
+      <Placeholder />
+    </How>
   );
 };
 
-export default TheatreComp;
+export default HowComp;

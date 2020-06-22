@@ -1,10 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 
-import SectionTitleBar from "../components/SectionTitleBar";
-import Text from "../components/Text";
-import QuoteText from "../components/QuoteText";
-import Anchor from "../components/Anchor";
+import SectionTitleBar from "../../components/SectionTitleBar";
+import Text from "../../components/Text";
+import QuoteText from "../../components/QuoteText";
+import Anchor from "../../components/Anchor";
 
 const Socials = styled.section`
   position: relative;

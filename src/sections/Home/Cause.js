@@ -1,10 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 
-import SectionTitleBar from "../components/SectionTitleBar";
-import Text from "../components/Text";
-import QuoteText from "../components/QuoteText";
-import Anchor from "../components/Anchor";
+import SectionTitleBar from "../../components/SectionTitleBar";
+import Text from "../../components/Text";
+import QuoteText from "../../components/QuoteText";
+import Anchor from "../../components/Anchor";
 
 const Cause = styled.section`
   position: relative;
@@ -33,14 +33,14 @@ const ImageOne = styled.div`
   height: 350px;
   z-index: 2;
   background-image: linear-gradient(black, black),
-    url(${require("../assets/images/image-one.jpg")});
+    url(${require("../../assets/images/image-one.jpg")});
   background-size: cover;
   background-blend-mode: saturation;
   background-position: center;
   transition: transform 0.2s linear;
 
   &:hover {
-    background-image: url(${require("../assets/images/image-one.jpg")});
+    background-image: url(${require("../../assets/images/image-one.jpg")});
     background-blend-mode: normal;
     z-index: 999;
     transform: scale(1.1);
@@ -55,14 +55,14 @@ const ImageTwo = styled.div`
   height: 400px;
   z-index: 1;
   background-image: linear-gradient(black, black),
-    url(${require("../assets/images/image-two.jpg")});
+    url(${require("../../assets/images/image-two.jpg")});
   background-size: cover;
   background-blend-mode: saturation;
   background-position: center;
   transition: transform 0.2s linear;
 
   &:hover {
-    background-image: url(${require("../assets/images/image-two.jpg")});
+    background-image: url(${require("../../assets/images/image-two.jpg")});
     background-blend-mode: normal;
     z-index: 999;
     transform: scale(1.1);
@@ -77,14 +77,14 @@ const ImageThree = styled.div`
   height: 330px;
   z-index: 3;
   background-image: linear-gradient(black, black),
-    url(${require("../assets/images/image-three.jpg")});
+    url(${require("../../assets/images/image-three.jpg")});
   background-size: cover;
   background-blend-mode: saturation;
   background-position: center;
   transition: transform 0.2s linear;
 
   &:hover {
-    background-image: url(${require("../assets/images/image-three.jpg")});
+    background-image: url(${require("../../assets/images/image-three.jpg")});
     background-blend-mode: normal;
     z-index: 999;
     transform: scale(1.1);
@@ -99,14 +99,14 @@ const ImageFour = styled.div`
   height: 250px;
   z-index: 4;
   background-image: linear-gradient(black, black),
-    url(${require("../assets/images/image-two.jpg")});
+    url(${require("../../assets/images/image-two.jpg")});
   background-size: cover;
   background-blend-mode: saturation;
   background-position: center;
   transition: transform 0.2s linear;
 
   &:hover {
-    background-image: url(${require("../assets/images/image-two.jpg")});
+    background-image: url(${require("../../assets/images/image-two.jpg")});
     background-blend-mode: normal;
     z-index: 999;
     transform: scale(1.1);
