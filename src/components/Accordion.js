@@ -32,11 +32,12 @@ const AccordionBullet = styled.div`
   transition: transform 0.5s ease-out;
 `;
 
-const AccordionTrigger = styled.button`
+const AccordionTrigger = styled.span`
   font-family: var(--font-primary);
   font-size: 24px;
   color: var(--color-text);
   border-bottom: 1px solid white;
+  cursor: pointer;
 `;
 
 const AccordionPanel = styled.div`

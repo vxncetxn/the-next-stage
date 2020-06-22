@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 
 import SectionTitleBar from "../components/SectionTitleBar";
@@ -12,7 +12,7 @@ const Faqs = styled.section`
 `;
 
 const FaqsContent = styled.div`
-  padding: 270px 100px 50px 100px;
+  padding: 150px 100px 50px 100px;
 `;
 
 const faqItems = [
@@ -75,14 +75,18 @@ const faqItems = [
 ];
 
 const FaqsComp = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <Faqs>
+      <SectionTitleBar position="left" paddingTop="140px">
+        faqs
+      </SectionTitleBar>
       <FaqsContent>
         <Accordion items={faqItems} />
       </FaqsContent>
-      <SectionTitleBar position="right" paddingTop="265px">
-        faqs
-      </SectionTitleBar>
     </Faqs>
   );
 };

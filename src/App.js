@@ -1,4 +1,5 @@
 import React from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import Defaults from "./Defaults";
 import Cursor from "./Cursor";
@@ -8,8 +9,14 @@ import Hero from "./sections/Hero";
 import Theatre from "./sections/Theatre";
 import Cause from "./sections/Cause";
 import How from "./sections/How";
-import Faqs from "./sections/Faqs";
+import Socials from "./sections/Socials";
 import Footer from "./sections/Footer";
+
+import Faqs from "./sections/Faqs";
+import Press from "./sections/Press";
+import Tncs from "./sections/Tncs";
+import Privacy from "./sections/Privacy";
+import Error from "./sections/Error";
 
 function App() {
   // document.querySelector("body").addEventListener("mousemove", (e) => {
@@ -34,13 +41,34 @@ function App() {
     <>
       <Defaults />
       {/* <Cursor /> */}
-      <FixedOverlay />
-      <Hero />
-      <Theatre />
-      <Cause />
-      <How />
-      <Faqs />
-      <Footer />
+      <Router>
+        <FixedOverlay />
+        <Switch>
+          <Route exact path="/">
+            <Hero />
+            <Theatre />
+            <Cause />
+            <How />
+            <Socials />
+          </Route>
+          <Route path="/faqs">
+            <Faqs />
+          </Route>
+          <Route path="/press-room">
+            <Press />
+          </Route>
+          <Route path="/terms-and-conditions">
+            <Tncs />
+          </Route>
+          <Route path="/privacy-policy">
+            <Privacy />
+          </Route>
+          <Route path="*">
+            <Error />
+          </Route>
+        </Switch>
+        <Footer />
+      </Router>
     </>
   );
 }
