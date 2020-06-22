@@ -115,7 +115,7 @@ const ImageFour = styled.div`
 
 const CauseComp = () => {
   return (
-    <Cause>
+    <Cause id="cause">
       <CauseContent>
         <QuoteText style={{ marginBottom: 40 }}>
           a new semi-flexible 550-seat venue which will fill the gap

@@ -184,7 +184,7 @@ const HeroComp = () => {
     //     <button>Order Now</button>
     //   </HeroContentContainer>
     // </Hero>
-    <Hero>
+    <Hero id="hero">
       <HeroContent>
         <Logo src={require("../assets/images/esplanade-logo-white.png")} />
         <HeroTitle className="hero-title">the</HeroTitle>

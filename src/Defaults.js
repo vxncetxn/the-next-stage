@@ -25,6 +25,7 @@ const Defaults = createGlobalStyle`
       --color-text: #ffffff;
       --color-gradient-one: #ee0979;
       --color-gradient-two: #ff6a00;
+      --color-grey: #b3b3b3;
     }
 
     * {

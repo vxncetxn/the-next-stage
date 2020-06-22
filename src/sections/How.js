@@ -30,7 +30,7 @@ const Placeholder = styled.div`
 
 const HowComp = () => {
   return (
-    <How>
+    <How id="how">
       <SectionTitleBar position="left" paddingTop="300px">
         how it works
       </SectionTitleBar>

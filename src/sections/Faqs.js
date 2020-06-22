@@ -12,7 +12,7 @@ const Faqs = styled.section`
 `;
 
 const FaqsContent = styled.div`
-  padding: 270px 100px 20px 100px;
+  padding: 270px 100px 50px 100px;
 `;
 
 const faqItems = [

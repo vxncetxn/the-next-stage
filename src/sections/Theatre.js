@@ -26,7 +26,7 @@ const YoutubeFrame = styled.iframe`
 
 const TheatreComp = () => {
   return (
-    <Theatre>
+    <Theatre id="theatre">
       <SectionTitleBar position="left">the theatre</SectionTitleBar>
       <TheatreContent>
         <QuoteText style={{ marginBottom: 40 }}>
