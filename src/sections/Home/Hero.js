@@ -12,7 +12,7 @@ const Flow = keyframes`
 const Hero = styled.section`
   font-family: var(--font-primary);
   width: 100%;
-  height: 100vh;
+  height: 100.5vh;
   display: flex;
   overflow: hidden;
 `;

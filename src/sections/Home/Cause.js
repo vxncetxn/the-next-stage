@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { useInView } from "react-intersection-observer";
 
 import SectionTitleBar from "../../components/SectionTitleBar";
 import Text from "../../components/Text";
@@ -13,6 +14,29 @@ const Cause = styled.section`
 
 const CauseContent = styled.div`
   padding: 270px 100px 490px 100px;
+
+  & > *:first-child {
+    transition: transform 0.6s ease-out, opacity 0.6s ease-out;
+  }
+
+  & > *:nth-child(2) {
+    transition: transform 0.6s ease-out 0.6s, opacity 0.6s ease-out 0.6s;
+  }
+
+  ${(props) =>
+    props.contentInView
+      ? `
+      & > * {
+        transform: translateX(0px);
+        opacity: 1;
+      }
+  `
+      : `
+      & > * {
+        transform: translateX(20px);
+        opacity: 0;
+      }
+  `}
 `;
 
 const ImageGroup = styled.div`
@@ -23,6 +47,52 @@ const ImageGroup = styled.div`
   width: 1000px;
   height: 500px;
   // border: 1px solid green;
+
+  & > *:first-child {
+    transition: transform 0.6s ease-out, opacity 0.6s ease-out;
+  }
+
+  & > *:nth-child(2) {
+    transition: transform 0.6s ease-out 0.3s, opacity 0.6s ease-out 0.3s;
+  }
+
+  & > *:nth-child(3) {
+    transition: transform 0.6s ease-out 0.6s, opacity 0.6s ease-out 0.6s;
+  }
+
+  & > *:nth-child(4) {
+    transition: transform 0.6s ease-out 0.9s, opacity 0.6s ease-out 0.9s;
+  }
+
+  ${(props) =>
+    props.imageGroupInView
+      ? `
+      & > * {
+        transform: rotate(0deg);
+        opacity: 1;
+      }
+  `
+      : `
+      & > * {
+        opacity: 0;
+      }
+
+      & > *:first-child {
+        transform: rotate(10deg);
+      }
+    
+      & > *:nth-child(2) {
+        transform: rotate(10deg);
+      }
+    
+      & > *:nth-child(3) {
+        transform: rotate(10deg);
+      }
+    
+      & > *:nth-child(4) {
+        transform: rotate(10deg);
+      }
+  `}
 `;
 
 const ImageOne = styled.div`
@@ -37,13 +107,13 @@ const ImageOne = styled.div`
   background-size: cover;
   background-blend-mode: saturation;
   background-position: center;
-  transition: transform 0.2s linear;
 
   &:hover {
+    // transition: transform 0.2s linear;
     background-image: url(${require("../../assets/images/image-one.jpg")});
     background-blend-mode: normal;
     z-index: 999;
-    transform: scale(1.1);
+    // transform: scale(1.1);
   }
 `;
 
@@ -59,13 +129,13 @@ const ImageTwo = styled.div`
   background-size: cover;
   background-blend-mode: saturation;
   background-position: center;
-  transition: transform 0.2s linear;
 
   &:hover {
+    // transition: transform 0.2s linear;
     background-image: url(${require("../../assets/images/image-two.jpg")});
     background-blend-mode: normal;
     z-index: 999;
-    transform: scale(1.1);
+    // transform: scale(1.1);
   }
 `;
 
@@ -81,13 +151,13 @@ const ImageThree = styled.div`
   background-size: cover;
   background-blend-mode: saturation;
   background-position: center;
-  transition: transform 0.2s linear;
 
   &:hover {
+    // transition: transform 0.2s linear;
     background-image: url(${require("../../assets/images/image-three.jpg")});
     background-blend-mode: normal;
     z-index: 999;
-    transform: scale(1.1);
+    // transform: scale(1.1);
   }
 `;
 
@@ -103,20 +173,29 @@ const ImageFour = styled.div`
   background-size: cover;
   background-blend-mode: saturation;
   background-position: center;
-  transition: transform 0.2s linear;
 
   &:hover {
+    // transition: transform 0.2s linear;
     background-image: url(${require("../../assets/images/image-two.jpg")});
     background-blend-mode: normal;
     z-index: 999;
-    transform: scale(1.1);
+    // transform: scale(1.1);
   }
 `;
 
 const CauseComp = () => {
+  const [contentRef, contentInView] = useInView({
+    threshold: 0.35,
+    triggerOnce: true,
+  });
+  const [imageGroupRef, imageGroupInView] = useInView({
+    threshold: 0.6,
+    triggerOnce: true,
+  });
+
   return (
     <Cause id="cause">
-      <CauseContent>
+      <CauseContent ref={contentRef} contentInView={contentInView}>
         <QuoteText style={{ marginBottom: 40 }}>
           a new semi-flexible 550-seat venue which will fill the gap
         </QuoteText>
@@ -145,7 +224,7 @@ const CauseComp = () => {
       <SectionTitleBar position="right" paddingTop="265px">
         the cause
       </SectionTitleBar>
-      <ImageGroup>
+      <ImageGroup ref={imageGroupRef} imageGroupInView={imageGroupInView}>
         <ImageOne />
         <ImageTwo />
         <ImageThree />
