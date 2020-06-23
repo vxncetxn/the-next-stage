@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import Defaults from "./Defaults";
 import Cursor from "./Cursor";
-import FixedOverlay from "./FixedOverlay";
+import Navbar from "./sections/Navbar";
 import Footer from "./sections/Footer";
 
 import Hero from "./sections/Home/Hero";
@@ -42,7 +42,7 @@ function App() {
       <Defaults />
       {/* <Cursor /> */}
       <Router>
-        <FixedOverlay />
+        <Navbar />
         <Switch>
           <Route exact path="/">
             <Hero />
