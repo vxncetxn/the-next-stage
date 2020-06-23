@@ -17,28 +17,85 @@ const Footer = styled.footer`
   & > div + div {
     margin-top: 50px;
   }
+
+  @media (max-width: 1200px) {
+    padding: 100px 75px 20px 75px;
+  }
+
+  @media (max-width: 896px) {
+    padding: 75px 50px 20px 50px;
+
+    & > div + div {
+      margin-top: 0;
+    }
+  }
+
+  @media (max-width: 600px) {
+    padding: 50px 20px 20px 20px;
+    font-size: 12px;
+  }
 `;
 
 const SmallGreyText = styled.p`
   font-size: 12px;
   color: var(--color-grey);
+
+  @media (max-width: 600px) {
+    font-size: 10px;
+  }
 `;
 
 const PrimaryRow = styled.div`
   display: flex;
   flex-direction: horizontal;
   justify-content: space-between;
+
+  @media (max-width: 896px) {
+    flex-wrap: wrap;
+
+    & > * {
+      margin-bottom: 50px;
+    }
+
+    & > *:last-child {
+      margin-bottom: 20px;
+    }
+
+    & > *:not(:last-child) {
+      margin-right: 30px;
+    }
+  }
 `;
 
 const SecondaryRow = styled.div`
   display: flex;
   flex-direction: horizontal;
   justify-content: space-between;
+
+  @media (max-width: 896px) {
+    flex-wrap: wrap-reverse;
+
+    & > *:first-child {
+      margin-bottom: 20px;
+    }
+
+    & > *:last-child {
+      margin-bottom: 50px;
+    }
+
+    & > *:not(:last-child) {
+      margin-right: 50px;
+    }
+  }
 `;
 
 const TertiaryRow = styled.div`
   font-size: 12px;
   color: var(--color-grey);
+
+  @media (max-width: 600px) {
+    font-size: 10px;
+  }
 `;
 
 const LinkColumn = styled.ul`
@@ -82,6 +139,12 @@ const LogosGroup = styled.div`
 
   & a + a {
     margin-left: 20px;
+  }
+
+  @media (max-width: 600px) {
+    & img {
+      height: 40px;
+    }
   }
 `;
 

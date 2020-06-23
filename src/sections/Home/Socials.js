@@ -66,7 +66,9 @@ const SocialsComp = () => {
     <Socials id="socials">
       <SocialsContent>
         <Temp>
-          <TempText style={{ marginBottom: 40 }}>thenextstage</TempText>
+          <TempText style={{ marginBottom: 40 }}>
+            esplanadethenextstage
+          </TempText>
         </Temp>
         <Text>
           <i>The Next Stage</i> is a fundraising initiative jointly organised by{" "}

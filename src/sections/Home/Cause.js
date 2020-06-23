@@ -37,6 +37,18 @@ const CauseContent = styled.div`
         opacity: 0;
       }
   `}
+
+  @media (max-width: 1200px) {
+    padding: 270px 75px 490px 75px;
+  }
+
+  @media (max-width: 896px) {
+    padding: 270px 50px 490px 50px;
+  }
+
+  @media (max-width: 600px) {
+    padding: 270px 20px 490px 20px;
+  }
 `;
 
 const ImageGroup = styled.div`

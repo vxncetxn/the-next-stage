@@ -9,12 +9,12 @@ const Flow = keyframes`
 
 const Quote = styled.blockquote`
   position: relative;
-  padding-left: 30px;
+  padding-left: 4%;
 
   &:before {
     content: "“";
     position: absolute;
-    left: -25px;
+    left: -4%;
     top: -15px;
     z-index: -1;
     font-family: var(--font-primary);
@@ -36,6 +36,18 @@ const Quote = styled.blockquote`
     -webkit-text-fill-color: transparent;
 
     animation: ${Flow} 2s linear infinite;
+
+    @media (max-width: 1200px) {
+      font-size: 150px;
+    }
+
+    @media (max-width: 896px) {
+      font-size: 120px;
+    }
+
+    @media (max-width: 600px) {
+      font-size: 90px;
+    }
   }
 `;
 
@@ -43,6 +55,18 @@ const QuoteText = styled.p`
   font-family: var(--font-primary);
   font-size: 42px;
   color: var(--color-text);
+
+  @media (max-width: 1200px) {
+    font-size: 34px;
+  }
+
+  @media (max-width: 896px) {
+    font-size: 26px;
+  }
+
+  @media (max-width: 600px) {
+    font-size: 18px;
+  }
 `;
 
 const QuoteTextComp = ({ children, ...others }) => {

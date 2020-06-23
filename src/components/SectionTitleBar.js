@@ -31,6 +31,14 @@ const SectionTitle = styled.h2`
       : props.position === "right"
       ? "vertical-lr"
       : null};
+
+  @media (max-width: 896px) {
+    font-size: 80px;
+  }
+
+  @media (max-width: 600px) {
+    font-size: 60px;
+  }
 `;
 
 const SectionTitleBarComp = ({ children, position, paddingTop, ...others }) => {

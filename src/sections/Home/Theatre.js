@@ -12,6 +12,14 @@ const Theatre = styled.section`
   display: flex;
 
   // border: 1px solid green;
+
+  @media (max-width: 1200px) {
+    border: 1px solid green;
+  }
+
+  @media (max-width: 896px) {
+    border: 1px solid red;
+  }
 `;
 
 const TheatreContent = styled.div`
@@ -39,12 +47,28 @@ const TheatreContent = styled.div`
         opacity: 0;
       }
   `}
+
+  @media (max-width: 1200px) {
+    padding: 50px 75px 370px 75px;
+  }
+
+  @media (max-width: 896px) {
+    padding: 50px 50px 370px 50px;
+  }
+
+  @media (max-width: 600px) {
+    padding: 50px 20px 200px 20px;
+  }
 `;
 
 const YoutubeFrame = styled.iframe`
   position: absolute;
-  left: 330px;
-  bottom: -200px;
+  // left: 330px;
+  // bottom: -200px;
+  left: 18%;
+  bottom: -18%;
+  width: 888px;
+  height: 500px;
   z-index: 99;
 
   ${(props) =>
@@ -103,8 +127,6 @@ const TheatreComp = () => {
         ref={videoRef}
         videoInView={videoInView}
         title="theatre-intro-youtube"
-        width="888"
-        height="500"
         src="https://www.youtube.com/embed/p8muUyKAqSM"
         frameBorder="0"
         allowFullScreen
