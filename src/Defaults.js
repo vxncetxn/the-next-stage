@@ -27,6 +27,8 @@ const Defaults = createGlobalStyle`
       // --color-text: #525f7f;
       --color-gradient-one: #ee0979;
       --color-gradient-two: #ff6a00;
+      // --color-gradient-one: #00f260;
+      // --color-gradient-two: #0575e6;
       --color-grey: #b3b3b3;
     }
 

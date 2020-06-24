@@ -140,10 +140,14 @@ const HeroTitle = styled.h1`
   // );
   background: linear-gradient(
     150deg,
-    #00f260 20%,
-    #0575e6 40%,
-    #0575e6 60%,
-    #00f260 80%
+    // #00f260 20%,
+      // #0575e6 40%,
+      // #0575e6 60%,
+      // #00f260 80%
+      var(--color-gradient-one) 20%,
+    var(--color-gradient-two) 40%,
+    var(--color-gradient-two) 60%,
+    var(--color-gradient-one) 80%
   );
   background-size: 200% auto;
 

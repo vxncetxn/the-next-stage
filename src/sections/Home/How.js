@@ -4,7 +4,6 @@ import styled from "styled-components";
 import SectionTitleBar from "../../components/SectionTitleBar";
 import Text from "../../components/Text";
 import QuoteText from "../../components/QuoteText";
-import Anchor from "../../components/Anchor";
 
 const How = styled.section`
   position: relative;

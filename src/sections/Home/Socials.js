@@ -6,6 +6,8 @@ import Text from "../../components/Text";
 import QuoteText from "../../components/QuoteText";
 import Anchor from "../../components/Anchor";
 
+import { TwitterTweetEmbed } from "react-twitter-embed";
+
 const Flow = keyframes`
   to {
     background-position: 200% center;
@@ -18,14 +20,26 @@ const Socials = styled.section`
 `;
 
 const SocialsContent = styled.div`
+  width: 70%;
   padding: 270px 100px 50px 100px;
+`;
+
+const SocialsCols = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
+const ColOne = styled.div`
+  width: 47.5%;
+`;
+
+const ColTwo = styled.div`
+  width: 47.5%;
 `;
 
 const Temp = styled.blockquote`
   position: relative;
   padding-left: 30px;
-  // margin-left: 100px;
-  // margin-bottom: 100px;
 
   &:before {
     content: "#";
@@ -70,27 +84,23 @@ const SocialsComp = () => {
             esplanadethenextstage
           </TempText>
         </Temp>
-        <Text>
-          <i>The Next Stage</i> is a fundraising initiative jointly organised by{" "}
-          <Anchor>The Esplanade Co Ltd</Anchor> and students from the{" "}
-          <Anchor>Singapore University of Technology and Design</Anchor>. The
-          Esplanade Co Ltd a not-for-profit organisation and registered Charity
-          whose mission is to preserve Singapore's iconic Esplanade Theatres as
-          a performing arts centre for everyone. This fundraiser aims to raise
-          funds for the SingTel Waterfront Theatre, a new semi-flexible 550-seat
-          venue which will fill the gap between our existing large venues and
-          smaller studio spaces, and enable us to commission, produce and
-          present more productions, especially those that tell Singapore and
-          Asian stories. <br></br>
-          <br></br>The Esplanade Co Ltd a not-for-profit organisation and
-          registered Charity whose mission is to preserve Singapore's iconic
-          Esplanade Theatres as a performing arts centre for everyone. This
-          fundraiser aims to raise funds for the SingTel Waterfront Theatre, a
-          new semi-flexible 550-seat venue which will fill the gap between our
-          existing large venues and smaller studio spaces, and enable us to
-          commission, produce and present more productions, especially those
-          that tell Singapore and Asian stories.
+        <Text style={{ marginBottom: 50, marginTop: -20 }}>
+          Use this hashtag on Twitter or Instagram and you might find yourself
+          featured here! 😎
         </Text>
+        <SocialsCols>
+          <ColOne>
+            <TwitterTweetEmbed tweetId="933354946111705097" />
+            <TwitterTweetEmbed tweetId="1275674112963330050" />
+            <TwitterTweetEmbed tweetId="1275526704245559296" />
+            <TwitterTweetEmbed tweetId="1275634281080119296" />
+          </ColOne>
+          <ColTwo>
+            <TwitterTweetEmbed tweetId="1272875505176293377" />
+            <TwitterTweetEmbed tweetId="1275172694808551425" />
+            <TwitterTweetEmbed tweetId="1275594467995607040" />
+          </ColTwo>
+        </SocialsCols>
       </SocialsContent>
       <SectionTitleBar position="right" paddingTop="265px">
         socials
