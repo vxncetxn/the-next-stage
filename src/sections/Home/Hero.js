@@ -1,7 +1,7 @@
 import React from "react";
 import styled, { keyframes } from "styled-components";
 
-// import Demo from "./Demo";
+import Demo from "../../Demo";
 
 const Flow = keyframes`
   to {

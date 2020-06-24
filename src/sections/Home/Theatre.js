@@ -140,7 +140,7 @@ const TheatreComp = () => {
       <YoutubeFrameWrapper>
         <YoutubeFrame
           ref={videoRef}
-          videoInView={true}
+          videoInView={videoInView}
           title="theatre-intro-youtube"
           src="https://www.youtube.com/embed/p8muUyKAqSM"
           frameBorder="0"
