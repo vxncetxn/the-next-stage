@@ -209,28 +209,28 @@ const CauseComp = () => {
     <Cause id="cause">
       <CauseContent ref={contentRef} contentInView={contentInView}>
         <QuoteText style={{ marginBottom: 40 }}>
-          a new semi-flexible 550-seat venue which will fill the gap
+          a platform through which we can reach out to the communities
         </QuoteText>
         <Text>
-          <i>The Next Stage</i> is a fundraising initiative jointly organised by{" "}
-          <Anchor>The Esplanade Co Ltd</Anchor> and students from the{" "}
-          <Anchor>Singapore University of Technology and Design</Anchor>. The
-          Esplanade Co Ltd a not-for-profit organisation and registered Charity
-          whose mission is to preserve Singapore's iconic Esplanade Theatres as
-          a performing arts centre for everyone. This fundraiser aims to raise
-          funds for the SingTel Waterfront Theatre, a new semi-flexible 550-seat
-          venue which will fill the gap between our existing large venues and
-          smaller studio spaces, and enable us to commission, produce and
-          present more productions, especially those that tell Singapore and
-          Asian stories. <br></br>
-          <br></br>The Esplanade Co Ltd a not-for-profit organisation and
-          registered Charity whose mission is to preserve Singapore's iconic
-          Esplanade Theatres as a performing arts centre for everyone. This
-          fundraiser aims to raise funds for the SingTel Waterfront Theatre, a
-          new semi-flexible 550-seat venue which will fill the gap between our
-          existing large venues and smaller studio spaces, and enable us to
-          commission, produce and present more productions, especially those
-          that tell Singapore and Asian stories.
+          At Esplanade, we believe that the arts transforms lives. We've
+          witnessed how the arts can help build confidence, heal broken spirits
+          and bring people together. Therefore, our theatres, including the new
+          Singtel Waterfront Theatre, is not merely a building - it is a
+          platform through which we can reach out to the communities and bring
+          them transformative and meaningful experiences through the arts.
+          <br></br>
+          <br></br>
+          Ever since our inception, Esplanade has been active in bringing such
+          arts experiences to over 10000 beneficiaries in Singapore, including
+          seniors, children, youth and those with special needs. Your generous
+          support for the new theatre will enable us to further such meaningful
+          causes and outreach efforts and extend it to the generations ahead of
+          us. To find out even more about our community engagement efforts,
+          please refer to{" "}
+          <Anchor href="https://www.esplanade.com/about-us/community-engagement">
+            this link
+          </Anchor>
+          .
         </Text>
       </CauseContent>
       <SectionTitleBar position="right" paddingTop="265px">

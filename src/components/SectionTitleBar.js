@@ -32,6 +32,10 @@ const SectionTitle = styled.h2`
       ? "vertical-lr"
       : null};
 
+  @media (max-width: 1200px) {
+    font-size: 90px;
+  }
+
   @media (max-width: 896px) {
     font-size: 80px;
   }

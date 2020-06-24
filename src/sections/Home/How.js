@@ -14,7 +14,7 @@ const How = styled.section`
 `;
 
 const HowContent = styled.div`
-  padding: 310px 100px 370px 100px;
+  padding: 310px 100px 420px 100px;
 `;
 
 const Placeholder = styled.div`
@@ -36,28 +36,26 @@ const HowComp = () => {
       </SectionTitleBar>
       <HowContent>
         <QuoteText style={{ marginBottom: 40 }}>
-          a new semi-flexible 550-seat venue which will fill the gap
+          Lorem Ipsum is simply generic dummy text of the printing
         </QuoteText>
         <Text>
-          <i>The Next Stage</i> is a fundraising initiative jointly organised by{" "}
-          <Anchor>The Esplanade Co Ltd</Anchor> and students from the{" "}
-          <Anchor>Singapore University of Technology and Design</Anchor>. The
-          Esplanade Co Ltd a not-for-profit organisation and registered Charity
-          whose mission is to preserve Singapore's iconic Esplanade Theatres as
-          a performing arts centre for everyone. This fundraiser aims to raise
-          funds for the SingTel Waterfront Theatre, a new semi-flexible 550-seat
-          venue which will fill the gap between our existing large venues and
-          smaller studio spaces, and enable us to commission, produce and
-          present more productions, especially those that tell Singapore and
-          Asian stories. <br></br>
-          <br></br>The Esplanade Co Ltd a not-for-profit organisation and
-          registered Charity whose mission is to preserve Singapore's iconic
-          Esplanade Theatres as a performing arts centre for everyone. This
-          fundraiser aims to raise funds for the SingTel Waterfront Theatre, a
-          new semi-flexible 550-seat venue which will fill the gap between our
-          existing large venues and smaller studio spaces, and enable us to
-          commission, produce and present more productions, especially those
-          that tell Singapore and Asian stories.
+          Lorem Ipsum is simply dummy text of the printing and typesetting
+          industry. Lorem Ipsum has been the industry's standard dummy text ever
+          since the 1500s, when an unknown printer took a galley of type and
+          scrambled it to make a type specimen book. It has survived not only
+          five centuries, but also the leap into electronic typesetting,
+          remaining essentially unchanged. It was popularised in the 1960s with
+          the release of Letraset sheets containing Lorem Ipsum passages, and
+          more recently with desktop publishing software like Aldus PageMaker
+          including versions of Lorem Ipsum.
+          <br></br>
+          <br></br>
+          Lorem Ipsum is simply dummy text of the printing and typesetting
+          industry. Lorem Ipsum has been the industry's standard dummy text ever
+          since the 1500s, when an unknown printer took a galley of type and
+          scrambled it to make a type specimen book. It has survived not only
+          five centuries, but also the leap into electronic typesetting,
+          remaining essentially unchanged.
         </Text>
       </HowContent>
       <Placeholder />
