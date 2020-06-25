@@ -117,12 +117,17 @@ const TheatreComp = ({ entryIsHero }) => {
         </QuoteText>
         <Text>
           <i>The Next Stage</i> is a fundraising initiative jointly organised by{" "}
-          <Anchor>The Esplanade Co Ltd</Anchor> and students from the{" "}
-          <Anchor>Singapore University of Technology and Design</Anchor>. We are
-          moving into our next phase of growth as an arts centre and are
-          building a new semi-flexible 550-seat venue along our busy waterfront.
-          We broke ground for the theatre's construction on 18th June 2019 and
-          it is targeted for completion in 2022.
+          <Anchor href="https://www.esplanade.com/">
+            The Esplanade Co Ltd
+          </Anchor>{" "}
+          and students from the{" "}
+          <Anchor href="https://www.sutd.edu.sg/">
+            Singapore University of Technology and Design
+          </Anchor>
+          . We are moving into our next phase of growth as an arts centre and
+          are building a new semi-flexible 550-seat venue along our busy
+          waterfront. We broke ground for the theatre's construction on 18th
+          June 2019 and it is targeted for completion in 2022.
           <br></br>
           <br></br>
           The new theatre will help to fill the gap between our existing large

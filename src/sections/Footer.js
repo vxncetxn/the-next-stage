@@ -166,7 +166,7 @@ const ContactsColumn = styled.ul`
 `;
 
 const FooterComp = () => {
-  const location = useLocation();
+  const pathname = useLocation().pathname;
 
   return (
     <Footer>
@@ -176,7 +176,7 @@ const FooterComp = () => {
           {["Theatre", "Cause", "Donate", "Socials"].map((section) => {
             return (
               <li>
-                {location.pathname === "/" ? (
+                {pathname === "/" ? (
                   <button
                     onClick={() => scrollToElement(section.toLowerCase())}
                   >

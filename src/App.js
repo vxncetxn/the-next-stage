@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import Defaults from "./Defaults";
+import Meta from "./Meta";
 import Cursor from "./Cursor";
 import Navbar from "./sections/Navbar";
 import Footer from "./sections/Footer";
@@ -44,6 +45,7 @@ function App() {
       <Defaults />
       {/* <Cursor /> */}
       <Router>
+        <Meta />
         <Navbar />
         <Switch>
           <Route exact path="/">
@@ -65,7 +67,7 @@ function App() {
           <Route path="/privacy-policy">
             <Privacy />
           </Route>
-          <Route path="*">
+          <Route path="*" state="404">
             <Error />
           </Route>
         </Switch>

@@ -1,9 +1,13 @@
 import React from "react";
 import styled from "styled-components";
+import { Link, useLocation } from "react-router-dom";
 
+import PlainAnchor from "../components/PlainAnchor";
 import CTAButton from "../components/CTAButton";
 
 import scrollToElement from "../helpers/scrollToElement";
+
+const A = PlainAnchor;
 
 const Navbar = styled.div`
   position: fixed;
@@ -33,7 +37,6 @@ const Navbar = styled.div`
     font-family: var(--font-primary);
     font-size: 18px;
     color: white;
-    cursor: pointer;
 
     @media (max-width: 1200px) {
       font-size: 16px;
@@ -59,23 +62,31 @@ const Logo = styled.img`
 `;
 
 const NavbarComp = () => {
+  const pathname = useLocation().pathname;
+
   return (
     <Navbar>
       <ul>
         <li style={{ marginRight: "auto" }}>
-          <Logo
-            src={require("../assets/images/esplanade-logo-white.png")}
-          ></Logo>
+          <A href="https://www.esplanade.com/">
+            <Logo src={require("../assets/images/esplanade-logo-white.png")} />
+          </A>
         </li>
-        {["theatre", "cause", "donate", "socials"].map((section) => {
-          return (
-            <li>
-              <button onClick={() => scrollToElement(section)}>
-                {section}
-              </button>
-            </li>
-          );
-        })}
+        {pathname === "/" ? (
+          ["theatre", "cause", "donate", "socials"].map((section) => {
+            return (
+              <li>
+                <button onClick={() => scrollToElement(section)}>
+                  {section}
+                </button>
+              </li>
+            );
+          })
+        ) : (
+          <li>
+            <Link to="/">Back To Homepage</Link>
+          </li>
+        )}
         <li>
           <CTAButton>Donate</CTAButton>
         </li>
