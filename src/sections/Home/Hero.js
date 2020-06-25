@@ -39,25 +39,6 @@ const Logo = styled.img`
   margin-bottom: auto;
 `;
 
-const CTAButton = styled.button`
-  width: 260px;
-  position: relative;
-  margin-left: 15px;
-  margin-top: 20px;
-  font-size: 24px;
-  color: white;
-
-  &::before {
-    position: absolute;
-    top: 50%;
-    left: 0;
-    content: "";
-    width: 40px;
-    height: 3px;
-    background-color: white;
-  }
-`;
-
 const HeroAnim = styled.div`
   position: relative;
   height: 100%;
@@ -198,7 +179,7 @@ const HeroComp = ({ setEntryIsHero }) => {
     //     <button>Order Now</button>
     //   </HeroContentContainer>
     // </Hero>
-    <Hero id="hero" ref={heroRef}>
+    <Hero id="main" ref={heroRef}>
       <HeroContent>
         {/* <Logo src={require("../../assets/images/esplanade-logo-white.png")} /> */}
         <HeroTitle className="hero-title">the</HeroTitle>
@@ -208,35 +189,6 @@ const HeroComp = ({ setEntryIsHero }) => {
         <HeroTitle className="hero-title" style={{ marginTop: "-90px" }}>
           stage
         </HeroTitle>
-        <CTAButton
-        // onMouseDown={() => {
-        //   document
-        //     .querySelectorAll(".hero-title")
-        //     .forEach((n) => (n.style.animationDuration = "0.5s"));
-        // }}
-        // onMouseUp={() => {
-        //   document
-        //     .querySelectorAll(".hero-title")
-        //     .forEach((n) => (n.style.animationDuration = "2s"));
-        // }}
-        // onClick={() => {
-        //   [...Array(15).keys()].forEach((n) => {
-        //     setTimeout(() => {
-        //       // console.log(`iteration ${n + 1}!`);
-        //       const resultantTiming =
-        //         Math.round((2 - 0.1 * (n + 1)) * 10) / 10;
-        //       console.log("resultant timing is ", resultantTiming);
-        //       document
-        //         .querySelectorAll(".hero-title")
-        //         .forEach(
-        //           (n) => (n.style.animationDuration = `${resultantTiming}s`)
-        //         );
-        //     }, Math.round(200 * (n + 1)));
-        //   });
-        // }}
-        >
-          contribute
-        </CTAButton>
       </HeroContent>
       <HeroAnim>
         {/* <img

@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
+import { HashLink as Link } from "react-router-hash-link";
 
 import PlainAnchor from "../components/PlainAnchor";
 
@@ -165,23 +166,28 @@ const ContactsColumn = styled.ul`
 `;
 
 const FooterComp = () => {
+  const location = useLocation();
+
   return (
     <Footer>
       <PrimaryRow>
         <LinkColumn>
           <li>Site</li>
-          <li>
-            <button onClick={() => scrollToElement("hero")}>Main</button>
-          </li>
-          <li>
-            <button onClick={() => scrollToElement("theatre")}>Theatre</button>
-          </li>
-          <li>
-            <button onClick={() => scrollToElement("cause")}>Cause</button>
-          </li>
-          <li>
-            <button onClick={() => scrollToElement("how")}>How it works</button>
-          </li>
+          {["Theatre", "Cause", "Donate", "Socials"].map((section) => {
+            return (
+              <li>
+                {location.pathname === "/" ? (
+                  <button
+                    onClick={() => scrollToElement(section.toLowerCase())}
+                  >
+                    {section}
+                  </button>
+                ) : (
+                  <Link to={`/#${section.toLowerCase()}`}>{section}</Link>
+                )}
+              </li>
+            );
+          })}
         </LinkColumn>
         <LinkColumn>
           <li>Others</li>

@@ -4,6 +4,7 @@ import { useInView } from "react-intersection-observer";
 
 import SectionTitleBar from "../../components/SectionTitleBar";
 import Text from "../../components/Text";
+import CTAButton from "../../components/CTAButton";
 
 const Flow = keyframes`
   to {
@@ -11,12 +12,12 @@ const Flow = keyframes`
   }
 `;
 
-const How = styled.section`
+const Donate = styled.section`
   position: relative;
   display: flex;
 `;
 
-const HowContent = styled.div`
+const DonateContent = styled.div`
   padding: 310px 100px calc(225px + 100px) 100px;
 
   & > *:nth-child(1) {
@@ -200,29 +201,7 @@ const Option = styled.button`
   padding: 8% 6%;
 `;
 
-const DonateButton = styled.button`
-  font-family: var(--font-primary);
-  font-weight: 700;
-  font-size: 18px;
-  padding: 10px 30px;
-  border-radius: 20px;
-  background: rgb(129, 5, 216);
-  background: linear-gradient(
-    150deg,
-    #ee0979 20%,
-    #ff6a00 40%,
-    #ff6a00 60%,
-    #ee0979 80%
-  );
-  background-size: 200% auto;
-  animation: ${Flow} 2s linear infinite;
-
-  &:hover {
-    animation: ${Flow} 0.3s linear infinite;
-  }
-`;
-
-const HowComp = ({ entryIsHero }) => {
+const DonateComp = ({ entryIsHero }) => {
   const [contentRef, contentInView] = useInView({
     threshold: 0.3,
     triggerOnce: true,
@@ -234,11 +213,11 @@ const HowComp = ({ entryIsHero }) => {
   const [option, setOption] = useState("10");
 
   return (
-    <How id="how">
+    <Donate id="donate">
       <SectionTitleBar position="left" paddingTop="300px">
         donate
       </SectionTitleBar>
-      <HowContent
+      <DonateContent
         ref={contentRef}
         contentInView={entryIsHero ? contentInView : true}
       >
@@ -250,8 +229,8 @@ const HowComp = ({ entryIsHero }) => {
           to the wider community. Hence, we urge you to make a personal
           contribution to <i>The Next Stage</i> and to make the incentive to do
           so even greater, we have prepared a unique donation campaign where you
-          can create a virtual art memento which will eventually be showcased in
-          an AR exhibition when the theatre opens!
+          can create a virtual art memento which will eventually be sDonatecased
+          in an AR exhibition when the theatre opens!
           <br></br>
           <br></br>
           The following steps detail the process for the donation campaign:
@@ -268,7 +247,7 @@ const HowComp = ({ entryIsHero }) => {
           exhibition to be held in conjunction with ArchiFest 2020 - see your
           memento in the real world!
         </StepsText>
-      </HowContent>
+      </DonateContent>
       <DonationPanelWrapper>
         <DonationPanel
           ref={panelRef}
@@ -282,7 +261,7 @@ const HowComp = ({ entryIsHero }) => {
               </Option>
             ))}
           </OptionsRow>
-          <DonateButton>Donate</DonateButton>
+          <CTAButton>Donate</CTAButton>
           <PanelSmallText>
             You will be redirected to Giving.sg, our approved donations platform
             partner, to complete your donation. You can learn more about
@@ -290,8 +269,8 @@ const HowComp = ({ entryIsHero }) => {
           </PanelSmallText>
         </DonationPanel>
       </DonationPanelWrapper>
-    </How>
+    </Donate>
   );
 };
 
-export default HowComp;
+export default DonateComp;

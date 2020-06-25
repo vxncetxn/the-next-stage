@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import Defaults from "./Defaults";
@@ -9,7 +9,7 @@ import Footer from "./sections/Footer";
 import Hero from "./sections/Home/Hero";
 import Theatre from "./sections/Home/Theatre";
 import Cause from "./sections/Home/Cause";
-import How from "./sections/Home/How";
+import Donate from "./sections/Home/Donate";
 import Socials from "./sections/Home/Socials";
 
 import Faqs from "./sections/Faqs";
@@ -50,7 +50,7 @@ function App() {
             <Hero setEntryIsHero={setEntryIsHero} />
             <Theatre entryIsHero={entryIsHero} />
             <Cause entryIsHero={entryIsHero} />
-            <How entryIsHero={entryIsHero} />
+            <Donate entryIsHero={entryIsHero} />
             <Socials entryIsHero={entryIsHero} />
           </Route>
           <Route path="/faqs">
