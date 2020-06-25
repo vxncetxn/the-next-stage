@@ -19,18 +19,18 @@ const Socials = styled.section`
 
 const SocialsContent = styled.div`
   width: 70%;
-  padding: 270px 100px 50px 100px;
+  padding: calc(225px + 100px) 100px 50px 100px;
 
   @media (max-width: 1200px) {
-    padding: 270px 75px 50px 75px;
+    padding: calc(197.5px + 100px) 75px 50px 75px;
   }
 
   @media (max-width: 896px) {
-    padding: 270px 50px 50px 50px;
+    padding: calc(197.5px + 50px) 50px 50px 50px;
   }
 
   @media (max-width: 600px) {
-    padding: 270px 20px 50px 20px;
+    padding: calc(197.5px + 50px) 20px 50px 20px;
   }
 `;
 

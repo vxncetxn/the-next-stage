@@ -13,7 +13,7 @@ const Theatre = styled.section`
 `;
 
 const TheatreContent = styled.div`
-  padding: 50px 100px 30% 100px;
+  padding: 50px 100px calc(18vw + 100px) 100px;
 
   & > *:first-child {
     transition: transform 0.6s ease-out, opacity 0.6s ease-out;
@@ -39,23 +39,24 @@ const TheatreContent = styled.div`
   `}
 
   @media (max-width: 1200px) {
-    padding: 50px 75px 30% 75px;
+    padding: 50px 75px calc(18vw + 100px) 75px;
   }
 
   @media (max-width: 896px) {
-    padding: 50px 50px 37% 50px;
+    padding: 50px 50px calc((28.125vw - 28.125px) + 50px) 50px;
   }
 
   @media (max-width: 600px) {
-    padding: 50px 20px 37% 20px;
+    padding: 50px 20px calc((28.125vw - 11.25px) + 50px) 20px;
   }
 `;
 
 const YoutubeFrameWrapper = styled.div`
   position: absolute;
   left: 18%;
-  bottom: -18%;
-  // bottom: -200px;
+  bottom: 0;
+  transform: translateY(50%);
+  z-index: 99;
   padding-bottom: 36.5%;
   width: 65%;
   height: 0;
@@ -76,17 +77,10 @@ const YoutubeFrameWrapper = styled.div`
 
 const YoutubeFrame = styled.iframe`
   position: absolute;
-  // left: 330px;
-  // bottom: -200px;
-  // left: 18%;
-  // bottom: -18%;
   left: 0;
   top: 0;
   width: 100%;
   height: 100%;
-  // width: 888px;
-  // height: 500px;
-  z-index: 99;
 
   ${(props) =>
     props.videoInView

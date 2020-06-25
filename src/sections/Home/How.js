@@ -1,63 +1,239 @@
-import React from "react";
-import styled from "styled-components";
+import React, { useState } from "react";
+import styled, { keyframes } from "styled-components";
 
 import SectionTitleBar from "../../components/SectionTitleBar";
 import Text from "../../components/Text";
-import QuoteText from "../../components/QuoteText";
+
+const Flow = keyframes`
+  to {
+    background-position: 200% center;
+  }
+`;
 
 const How = styled.section`
   position: relative;
   display: flex;
-
-  // border: 1px solid green;
 `;
 
 const HowContent = styled.div`
-  padding: 310px 100px 420px 100px;
+  padding: 310px 100px calc(225px + 100px) 100px;
+
+  @media (max-width: 1200px) {
+    padding: 310px 75px calc(197.5px + 100px) 75px;
+  }
+
+  @media (max-width: 896px) {
+    padding: 310px 50px calc(197.5px + 50px) 50px;
+  }
+
+  @media (max-width: 600px) {
+    padding: 310px 20px calc(197.5px + 50px) 20px;
+  }
 `;
 
-const Placeholder = styled.div`
-  position: absolute;
-  left: 330px;
-  bottom: -200px;
-  z-index: 99;
-  width: 888px;
-  height: 500px;
+const StepsText = styled(Text)`
+  position: relative;
+  padding-top: 30px;
+  padding-left: 20px;
+  margin-top: 50px;
 
-  border: 1px solid green;
+  @media (max-width: 896px) {
+    margin-top: 20px;
+  }
+
+  &:before {
+    content: "${(props) => props.step}";
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: -1;
+    font-family: var(--font-primary);
+    font-size: 100px;
+    line-height: 0.8;
+    opacity: 0.8;
+
+    background: linear-gradient(
+      100deg,
+      var(--color-gradient-one) 20%,
+      var(--color-gradient-two) 40%,
+      var(--color-gradient-two) 60%,
+      var(--color-gradient-one) 80%
+    );
+    background-size: 200% auto;
+    background-clip: text;
+    text-fill-color: transparent;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    animation: ${Flow} 2s linear infinite;
+
+    @media (max-width: 1200px) {
+      font-size: 90px;
+    }
+
+    @media (max-width: 896px) {
+      font-size: 80px;
+    }
+
+    @media (max-width: 600px) {
+      font-size: 70px;
+    }
+  }
+`;
+
+const DonationPanelWrapper = styled.div`
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  transform: translateY(50%);
+  z-index: 99;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+`;
+
+const DonationPanel = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: calc(20px + 3%) calc(10px + 6%);
+  width: 800px;
+  height: 450px;
+  background-color: #181b34;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  font-family: var(--font-secondary);
+  color: var(--color-text);
+
+  @media (max-width: 1200px) {
+    width: 700px;
+    height: 395px;
+  }
+
+  @media (max-width: 896px) {
+    width: calc(100% - 100px);
+    margin-left: 50px;
+    margin-right: 50px;
+  }
+
+  @media (max-width: 600px) {
+    width: calc(100% - 40px);
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+`;
+
+const PanelTopText = styled.p`
+  font-size: 24px;
+  text-align: center;
+
+  @media (max-width: 600px) {
+    font-size: 18px;
+  }
+`;
+
+const PanelSmallText = styled.p`
+  font-size: 12px;
+  text-align: center;
+
+  @media (max-width: 600px) {
+    font-size: 10px;
+  }
+`;
+
+const OptionsRow = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+`;
+
+const Option = styled.button`
+  font-family: var(--font-primary);
+  font-size: 18px;
+  border: 1px solid
+    ${(props) => (props.selected ? "var(--color-text)" : "#40488c")};
+  border-radius: 12px;
+  padding: 8% 6%;
+`;
+
+const DonateButton = styled.button`
+  font-family: var(--font-primary);
+  font-weight: 700;
+  font-size: 18px;
+  padding: 10px 30px;
+  border-radius: 20px;
+  background: rgb(129, 5, 216);
+  background: linear-gradient(
+    150deg,
+    #ee0979 20%,
+    #ff6a00 40%,
+    #ff6a00 60%,
+    #ee0979 80%
+  );
+  background-size: 200% auto;
+  animation: ${Flow} 2s linear infinite;
+
+  &:hover {
+    animation: ${Flow} 0.3s linear infinite;
+  }
 `;
 
 const HowComp = () => {
+  const [option, setOption] = useState("10");
+
   return (
     <How id="how">
       <SectionTitleBar position="left" paddingTop="300px">
-        how it works
+        donate
       </SectionTitleBar>
       <HowContent>
-        <QuoteText style={{ marginBottom: 40 }}>
-          Lorem Ipsum is simply generic dummy text of the printing
-        </QuoteText>
         <Text>
-          Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry. Lorem Ipsum has been the industry's standard dummy text ever
-          since the 1500s, when an unknown printer took a galley of type and
-          scrambled it to make a type specimen book. It has survived not only
-          five centuries, but also the leap into electronic typesetting,
-          remaining essentially unchanged. It was popularised in the 1960s with
-          the release of Letraset sheets containing Lorem Ipsum passages, and
-          more recently with desktop publishing software like Aldus PageMaker
-          including versions of Lorem Ipsum.
-          <br></br>
-          <br></br>
-          Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry. Lorem Ipsum has been the industry's standard dummy text ever
-          since the 1500s, when an unknown printer took a galley of type and
-          scrambled it to make a type specimen book. It has survived not only
-          five centuries, but also the leap into electronic typesetting,
-          remaining essentially unchanged.
+          The Esplanade Co Ltd is a registered charity and not-for-profit
+          organisation. Therefore, we depend greatly on the generous and
+          forthcoming contributions of each and every one of our donors,
+          sponsors and volunteers to persist in our mission to promote the arts
+          to the wider community. Hence, we urge you to make a personal
+          contribution to <i>The Next Stage</i> and to make the incentive to do
+          so even greater, we have prepared a unique donation campaign where you
+          can create a virtual art memento which will eventually be showcased in
+          an AR exhibition when the theatre opens!
         </Text>
+        <br></br>
+        <br></br>
+        <Text>
+          The following steps detail the process for the donation campaign:
+        </Text>
+        <StepsText step="1">
+          Make a donation on Giving.sg - a minimum donation of S$10 is required.
+        </StepsText>
+        <StepsText step="2">
+          After you have successfully donated, a link will be sent to your email
+          allowing you to create your very own virtual art memento!
+        </StepsText>
+        <StepsText step="3">
+          The virtual art memento will eventually be featured in an AR
+          exhibition to be held in conjunction with ArchiFest 2020 - see your
+          memento in the real world!
+        </StepsText>
       </HowContent>
-      <Placeholder />
+      <DonationPanelWrapper>
+        <DonationPanel>
+          <PanelTopText>Help us build #thenextstage.</PanelTopText>
+          <OptionsRow>
+            {["10", "20", "50", "90"].map((val) => (
+              <Option selected={option === val} onClick={() => setOption(val)}>
+                ${val}
+              </Option>
+            ))}
+          </OptionsRow>
+          <DonateButton>Donate</DonateButton>
+          <PanelSmallText>
+            You will be redirected to Giving.sg, our approved donations platform
+            partner, to complete your donation. You can learn more about
+            Giving.sg here.
+          </PanelSmallText>
+        </DonationPanel>
+      </DonationPanelWrapper>
     </How>
   );
 };

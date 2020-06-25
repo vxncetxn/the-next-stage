@@ -44,6 +44,7 @@ const NavbarComp = () => {
         <li>main</li>
         <li>theatre</li>
         <li>cause</li>
+        <li>donate</li>
         <li>socials</li>
       </ul>
     </Navbar>

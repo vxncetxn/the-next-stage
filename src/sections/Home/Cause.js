@@ -13,7 +13,7 @@ const Cause = styled.section`
 `;
 
 const CauseContent = styled.div`
-  padding: 270px 100px 490px 100px;
+  padding: calc(18vw + 100px) 100px 490px 100px;
 
   & > *:first-child {
     transition: transform 0.6s ease-out, opacity 0.6s ease-out;
@@ -39,15 +39,15 @@ const CauseContent = styled.div`
   `}
 
   @media (max-width: 1200px) {
-    padding: 270px 75px 490px 75px;
+    padding: calc(18vw + 100px) 75px 490px 75px;
   }
 
   @media (max-width: 896px) {
-    padding: 270px 50px 490px 50px;
+    padding: calc((28.125vw - 28.125px) + 50px) 50px 490px 50px;
   }
 
   @media (max-width: 600px) {
-    padding: 270px 20px 490px 20px;
+    padding: calc((28.125vw - 11.25px) + 50px) 20px 490px 20px;
   }
 `;
 
