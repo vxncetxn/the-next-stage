@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import Defaults from "./Defaults";
@@ -37,6 +37,8 @@ function App() {
   //   document.querySelector(".cursor-ring").classList.toggle("timing");
   // });
 
+  const [entryIsHero, setEntryIsHero] = useState(false);
+
   return (
     <>
       <Defaults />
@@ -45,11 +47,11 @@ function App() {
         <Navbar />
         <Switch>
           <Route exact path="/">
-            <Hero />
-            <Theatre />
-            <Cause />
-            <How />
-            <Socials />
+            <Hero setEntryIsHero={setEntryIsHero} />
+            <Theatre entryIsHero={entryIsHero} />
+            <Cause entryIsHero={entryIsHero} />
+            <How entryIsHero={entryIsHero} />
+            <Socials entryIsHero={entryIsHero} />
           </Route>
           <Route path="/faqs">
             <Faqs />

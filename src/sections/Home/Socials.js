@@ -1,9 +1,9 @@
 import React from "react";
 import styled, { keyframes } from "styled-components";
+import { useInView } from "react-intersection-observer";
 
 import SectionTitleBar from "../../components/SectionTitleBar";
 import Text from "../../components/Text";
-
 import SocialsCol from "../../components/SocialsCol";
 
 const Flow = keyframes`
@@ -20,6 +20,33 @@ const Socials = styled.section`
 const SocialsContent = styled.div`
   width: 70%;
   padding: calc(225px + 100px) 100px 50px 100px;
+
+  & > *:nth-child(1) {
+    transition: transform 0.6s ease-out, opacity 0.6s ease-out;
+  }
+
+  & > *:nth-child(2) {
+    transition: transform 0.6s ease-out 0.6s, opacity 0.6s ease-out 0.6s;
+  }
+
+  & > *:nth-child(3) {
+    transition: transform 0.6s ease-out 1.2s, opacity 0.6s ease-out 1.2s;
+  }
+
+  ${(props) =>
+    props.contentInView
+      ? `
+      & > * {
+        transform: translateX(0px);
+        opacity: 1;
+      }
+  `
+      : `
+      & > * {
+        transform: translateX(20px);
+        opacity: 0;
+      }
+  `}
 
   @media (max-width: 1200px) {
     padding: calc(197.5px + 100px) 75px 50px 75px;
@@ -113,10 +140,18 @@ const tweetIdsArr = [
   "1275594467995607040",
 ];
 
-const SocialsComp = () => {
+const SocialsComp = ({ entryIsHero }) => {
+  const [contentRef, contentInView] = useInView({
+    threshold: 0.3,
+    triggerOnce: true,
+  });
+
   return (
     <Socials id="socials">
-      <SocialsContent>
+      <SocialsContent
+        ref={contentRef}
+        contentInView={entryIsHero ? contentInView : true}
+      >
         <Hashtag>
           esplanadethenextstage
           {/* <CopyIcon

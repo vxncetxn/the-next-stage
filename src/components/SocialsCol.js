@@ -18,7 +18,7 @@ const DuoCol = styled.div`
   justify-content: space-between;
   width: 100%;
 
-  & > * {
+  & > div {
     width: 47.5%;
   }
 
@@ -39,14 +39,14 @@ const SocialsColComp = ({ tweetIdsArr, ...others }) => {
         <div>
           {tweetIdsArr.flatMap((tweetId, idx) => {
             if (idx % 2 === 0) {
-              return <TwitterTweetEmbed tweetId={tweetId} />;
+              return <TwitterTweetEmbed tweetId={tweetId} idx={idx} />;
             }
           })}
         </div>
         <div>
           {tweetIdsArr.flatMap((tweetId, idx) => {
             if (idx % 2 === 1) {
-              return <TwitterTweetEmbed tweetId={tweetId} />;
+              return <TwitterTweetEmbed tweetId={tweetId} idx={idx} />;
             }
           })}
         </div>

@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled, { keyframes } from "styled-components";
+import { useInView } from "react-intersection-observer";
 
-import Demo from "../../Demo";
+// import Demo from "../../Demo";
 
 const Flow = keyframes`
   to {
@@ -161,7 +162,16 @@ const HeroTitle = styled.h1`
   animation-duration: 2s;
 `;
 
-const HeroComp = () => {
+const HeroComp = ({ setEntryIsHero }) => {
+  const [heroRef, heroInView] = useInView({
+    threshold: 0.95,
+    triggerOnce: true,
+  });
+
+  useEffect(() => {
+    setEntryIsHero(heroInView);
+  }, [heroInView]);
+
   return (
     // <Hero>
     //   <HeroTitleContainer>
@@ -188,7 +198,7 @@ const HeroComp = () => {
     //     <button>Order Now</button>
     //   </HeroContentContainer>
     // </Hero>
-    <Hero id="hero">
+    <Hero id="hero" ref={heroRef}>
       <HeroContent>
         {/* <Logo src={require("../../assets/images/esplanade-logo-white.png")} /> */}
         <HeroTitle className="hero-title">the</HeroTitle>

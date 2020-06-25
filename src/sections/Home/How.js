@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled, { keyframes } from "styled-components";
+import { useInView } from "react-intersection-observer";
 
 import SectionTitleBar from "../../components/SectionTitleBar";
 import Text from "../../components/Text";
@@ -17,6 +18,37 @@ const How = styled.section`
 
 const HowContent = styled.div`
   padding: 310px 100px calc(225px + 100px) 100px;
+
+  & > *:nth-child(1) {
+    transition: transform 0.6s ease-out, opacity 0.6s ease-out;
+  }
+
+  & > *:nth-child(2) {
+    transition: transform 0.6s ease-out 0.6s, opacity 0.6s ease-out 0.6s;
+  }
+
+  & > *:nth-child(3) {
+    transition: transform 0.6s ease-out 1.2s, opacity 0.6s ease-out 1.2s;
+  }
+
+  & > *:nth-child(4) {
+    transition: transform 0.6s ease-out 1.8s, opacity 0.6s ease-out 1.8s;
+  }
+
+  ${(props) =>
+    props.contentInView
+      ? `
+      & > * {
+        transform: translateX(0px);
+        opacity: 1;
+      }
+  `
+      : `
+      & > * {
+        transform: translateX(-20px);
+        opacity: 0;
+      }
+  `}
 
   @media (max-width: 1200px) {
     padding: 310px 75px calc(197.5px + 100px) 75px;
@@ -105,6 +137,18 @@ const DonationPanel = styled.div`
   font-family: var(--font-secondary);
   color: var(--color-text);
 
+  ${(props) =>
+    props.panelInView
+      ? `
+        transform: translateX(0px);
+        opacity: 1;
+  `
+      : `
+        transform: translateX(-20px);
+        opacity: 0;
+  `}
+  transition: transform 0.6s ease-out, opacity 0.6s ease-out;
+
   @media (max-width: 1200px) {
     width: 700px;
     height: 395px;
@@ -178,7 +222,15 @@ const DonateButton = styled.button`
   }
 `;
 
-const HowComp = () => {
+const HowComp = ({ entryIsHero }) => {
+  const [contentRef, contentInView] = useInView({
+    threshold: 0.3,
+    triggerOnce: true,
+  });
+  const [panelRef, panelInView] = useInView({
+    threshold: 0.3,
+    triggerOnce: true,
+  });
   const [option, setOption] = useState("10");
 
   return (
@@ -186,7 +238,10 @@ const HowComp = () => {
       <SectionTitleBar position="left" paddingTop="300px">
         donate
       </SectionTitleBar>
-      <HowContent>
+      <HowContent
+        ref={contentRef}
+        contentInView={entryIsHero ? contentInView : true}
+      >
         <Text>
           The Esplanade Co Ltd is a registered charity and not-for-profit
           organisation. Therefore, we depend greatly on the generous and
@@ -197,10 +252,8 @@ const HowComp = () => {
           so even greater, we have prepared a unique donation campaign where you
           can create a virtual art memento which will eventually be showcased in
           an AR exhibition when the theatre opens!
-        </Text>
-        <br></br>
-        <br></br>
-        <Text>
+          <br></br>
+          <br></br>
           The following steps detail the process for the donation campaign:
         </Text>
         <StepsText step="1">
@@ -217,7 +270,10 @@ const HowComp = () => {
         </StepsText>
       </HowContent>
       <DonationPanelWrapper>
-        <DonationPanel>
+        <DonationPanel
+          ref={panelRef}
+          panelInView={entryIsHero ? panelInView : true}
+        >
           <PanelTopText>Help us build #thenextstage.</PanelTopText>
           <OptionsRow>
             {["10", "20", "50", "90"].map((val) => (
