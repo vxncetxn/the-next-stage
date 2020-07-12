@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import styled, { keyframes } from "styled-components";
 import { useInView } from "react-intersection-observer";
 
-// import Demo from "../../Demo";
+import Demo from "../../Demo";
 
 const Flow = keyframes`
   to {
@@ -11,6 +11,7 @@ const Flow = keyframes`
 `;
 
 const Hero = styled.section`
+  position: relative;
   font-family: var(--font-primary);
   width: 100%;
   height: 100.5vh;
@@ -23,8 +24,10 @@ const HeroContent = styled.div`
   width: 40%;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
-  padding: 40px 0 100px 100px;
+  justify-content: center;
+  align-items: center;
+
+  // border: 1px solid red;
 
   & p {
     margin-left: 15px;
@@ -32,17 +35,29 @@ const HeroContent = styled.div`
     font-size: 12px;
     color: white;
   }
+
+  @media (max-width: 896px) {
+    width: 100%;
+    position: absolute;
+    justify-content: flex-end;
+  }
 `;
 
-const Logo = styled.img`
-  width: 80px;
-  margin-bottom: auto;
+const HeroTitleGroup = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-bottom: -100px;
+
+  @media (max-width: 896px) {
+    margin-bottom: 100px;
+  }
 `;
 
 const HeroAnim = styled.div`
   position: relative;
   height: 100%;
   width: 60%;
+  // background-color: skyblue;
 
   // border: 1px solid red;
 
@@ -59,59 +74,17 @@ const HeroAnim = styled.div`
   & img + img {
     margin-left: 20px;
   }
+
+  @media (max-width: 896px) {
+    width: 100%;
+    z-index: -1;
+  }
 `;
-
-// const HeroTitleContainer = styled.div`
-//   height: 500px;
-
-//   border: 1px solid red;
-// `;
-
-// const HeroContentContainer = styled.div`
-//   // border: 1px solid red;
-//   margin-left: 100px;
-//   height: 450px;
-//   padding: 70px 0;
-//   display: flex;
-//   flex-direction: column;
-
-//   & > p {
-//     font-size: 18px;
-//     color: white;
-//   }
-
-//   & > p + p {
-//     margin-top: 20px;
-//   }
-
-//   & > button {
-//     margin-top: auto;
-//     align-self: start;
-//     font-size: 18px;
-//     font-weight: 700;
-//     padding: 10px 30px;
-//     border-radius: 20px;
-//     background: rgb(129, 5, 216);
-//     background: linear-gradient(
-//       150deg,
-//       #ee0979 20%,
-//       #ff6a00 40%,
-//       #ff6a00 60%,
-//       #ee0979 80%
-//     );
-//     background-size: 200% auto;
-//     color: white;
-//     animation: ${Flow} 2s linear infinite;
-//   }
-
-//   & > button:hover {
-//     animation: ${Flow} 0.3s linear infinite;
-//   }
-// `;
 
 const HeroTitle = styled.h1`
   font-size: 140px;
   font-weight: 700;
+  line-height: 0.9;
   background: white;
   // background: linear-gradient(
   //   150deg,
@@ -141,6 +114,18 @@ const HeroTitle = styled.h1`
 
   animation: ${Flow} linear infinite;
   animation-duration: 2s;
+
+  @media (max-width: 1200px) {
+    font-size: 100px;
+  }
+
+  @media (max-width: 896px) {
+    font-size: 120px;
+  }
+
+  @media (max-width: 600px) {
+    font-size: 100px;
+  }
 `;
 
 const HeroComp = ({ setEntryIsHero }) => {
@@ -154,49 +139,19 @@ const HeroComp = ({ setEntryIsHero }) => {
   }, [heroInView]);
 
   return (
-    // <Hero>
-    //   <HeroTitleContainer>
-    //     <HeroTitle>sutd</HeroTitle>
-    //     <HeroTitle style={{ marginTop: "-80px" }}>ring</HeroTitle>
-    //     <HeroTitle style={{ marginTop: "-60px" }}>2020</HeroTitle>
-    //   </HeroTitleContainer>
-    //   <HeroContentContainer>
-    //     <p>✔ Supports EZ-Link functionalities</p>
-    //     <p>
-    //       ✔ Both <span class="wavy-highlight">ring</span> and{" "}
-    //       <span class="wavy-highlight">band</span> form factors
-    //     </p>
-    //     <p>
-    //       ✔ <span class="wavy-highlight">Free</span> for Class of 2022 Students
-    //     </p>
-    //     <p>
-    //       ✔ Make other school students{" "}
-    //       <span class="wavy-highlight">jealous</span>
-    //     </p>
-    //     <p>
-    //       ✔ Seriously <span class="wavy-highlight">cool</span>!
-    //     </p>
-    //     <button>Order Now</button>
-    //   </HeroContentContainer>
-    // </Hero>
     <Hero id="main" ref={heroRef}>
       <HeroContent>
-        {/* <Logo src={require("../../assets/images/esplanade-logo-white.png")} /> */}
-        <HeroTitle className="hero-title">the</HeroTitle>
-        <HeroTitle className="hero-title" style={{ marginTop: "-100px" }}>
-          next
-        </HeroTitle>
-        <HeroTitle className="hero-title" style={{ marginTop: "-90px" }}>
-          stage
-        </HeroTitle>
+        <HeroTitleGroup>
+          <HeroTitle className="hero-title">the</HeroTitle>
+          <HeroTitle className="hero-title" /*style={{ marginTop: "-100px" }}*/>
+            next
+          </HeroTitle>
+          <HeroTitle className="hero-title" /*style={{ marginTop: "-90px" }}*/>
+            stage
+          </HeroTitle>
+        </HeroTitleGroup>
       </HeroContent>
-      <HeroAnim>
-        {/* <img
-          src={require("./artefact.png")}
-          style={{ width: "100%", height: "100%" }}
-        /> */}
-        {/* <Demo /> */}
-      </HeroAnim>
+      <HeroAnim></HeroAnim>
     </Hero>
   );
 };
