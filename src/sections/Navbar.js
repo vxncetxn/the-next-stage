@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Link, useLocation } from "react-router-dom";
+
+import { ReactComponent as HamburgerIcon } from "../assets/icons/hamburger.svg";
 
 import PlainAnchor from "../components/PlainAnchor";
 import CTAButton from "../components/CTAButton";
@@ -13,7 +15,9 @@ const Navbar = styled.div`
   position: fixed;
   z-index: 9999;
   width: 100vw;
-  background-color: var(--color-background);
+  // background-color: var(--color-background);
+  background-color: ${(props) =>
+    props.atPageTop ? "transparent" : "var(--color-background)"};
 
   & > ul {
     display: flex;
@@ -54,6 +58,20 @@ const Navbar = styled.div`
   & > ul > li + li {
     margin-left: 40px;
   }
+
+  & > ul > li:not(:first-child) {
+    @media (max-width: 896px) {
+      display: none;
+    }
+  }
+
+  & > ul > li:last-child {
+    display: none;
+
+    @media (max-width: 896px) {
+      display: block;
+    }
+  }
 `;
 
 const Logo = styled.img`
@@ -61,11 +79,34 @@ const Logo = styled.img`
   transform: translateY(3px);
 `;
 
-const NavbarComp = () => {
+const NavbarComp = ({ setHamburgerOpen }) => {
   const pathname = useLocation().pathname;
+  const [atPageTop, setAtPageTop] = useState(window.scrollY < 600);
+
+  useEffect(() => {
+    let last_known_scroll_position = 0;
+    let ticking = false;
+
+    function doSomething(scroll_pos) {
+      setAtPageTop(scroll_pos < 600);
+    }
+
+    window.addEventListener("scroll", function (e) {
+      last_known_scroll_position = window.scrollY;
+
+      if (!ticking) {
+        window.requestAnimationFrame(function () {
+          doSomething(last_known_scroll_position);
+          ticking = false;
+        });
+
+        ticking = true;
+      }
+    });
+  }, []);
 
   return (
-    <Navbar>
+    <Navbar atPageTop={atPageTop}>
       <ul>
         <li style={{ marginRight: "auto" }}>
           <A href="https://www.esplanade.com/">
@@ -89,6 +130,11 @@ const NavbarComp = () => {
         )}
         <li>
           <CTAButton>Donate</CTAButton>
+        </li>
+        <li>
+          <button onClick={() => setHamburgerOpen(true)}>
+            <HamburgerIcon />
+          </button>
         </li>
       </ul>
     </Navbar>

@@ -18,7 +18,7 @@ const Donate = styled.section`
 `;
 
 const DonateContent = styled.div`
-  padding: 310px 100px calc(225px + 100px) 100px;
+  padding: 390px 100px calc(225px + 100px) 100px;
 
   & > *:nth-child(1) {
     transition: transform 0.6s ease-out, opacity 0.6s ease-out;
@@ -52,15 +52,15 @@ const DonateContent = styled.div`
   `}
 
   @media (max-width: 1200px) {
-    padding: 310px 75px calc(197.5px + 100px) 75px;
+    padding: 340px 75px calc(197.5px + 100px) 75px;
   }
 
   @media (max-width: 896px) {
-    padding: 310px 50px calc(197.5px + 50px) 50px;
+    padding: calc(((100vw - 100px) / 4) + 70px) 50px calc(197.5px + 50px) 50px;
   }
 
   @media (max-width: 600px) {
-    padding: 310px 20px calc(197.5px + 50px) 20px;
+    padding: calc(((100vw - 40px) / 4) + 70px) 20px calc(197.5px + 50px) 20px;
   }
 `;
 
@@ -214,7 +214,7 @@ const DonateComp = ({ entryIsHero }) => {
 
   return (
     <Donate id="donate">
-      <SectionTitleBar position="left" paddingTop="300px">
+      <SectionTitleBar position="left" paddingTop="380px">
         donate
       </SectionTitleBar>
       <DonateContent
@@ -229,8 +229,8 @@ const DonateComp = ({ entryIsHero }) => {
           to the wider community. Hence, we urge you to make a personal
           contribution to <i>The Next Stage</i> and to make the incentive to do
           so even greater, we have prepared a unique donation campaign where you
-          can create a virtual art memento which will eventually be sDonatecased
-          in an AR exhibition when the theatre opens!
+          can create a virtual art memento which will eventually be showcased in
+          an AR exhibition when the theatre opens!
           <br></br>
           <br></br>
           The following steps detail the process for the donation campaign:
@@ -244,8 +244,8 @@ const DonateComp = ({ entryIsHero }) => {
         </StepsText>
         <StepsText step="3">
           The virtual art memento will eventually be featured in an AR
-          exhibition to be held in conjunction with ArchiFest 2020 - see your
-          memento in the real world!
+          exhibition to be held in conjunction with the opening of the theatre -
+          see your memento in the real world!
         </StepsText>
       </DonateContent>
       <DonationPanelWrapper>

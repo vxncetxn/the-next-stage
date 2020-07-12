@@ -142,7 +142,7 @@ const tweetIdsArr = [
 
 const SocialsComp = ({ entryIsHero }) => {
   const [contentRef, contentInView] = useInView({
-    threshold: 0.3,
+    threshold: 0.4,
     triggerOnce: true,
   });
 
@@ -170,7 +170,7 @@ const SocialsComp = ({ entryIsHero }) => {
         </Text>
         <SocialsCol tweetIdsArr={tweetIdsArr} />
       </SocialsContent>
-      <SectionTitleBar position="right" paddingTop="265px">
+      <SectionTitleBar position="right" paddingTop="320px">
         socials
       </SectionTitleBar>
     </Socials>

@@ -3,8 +3,9 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import Defaults from "./Defaults";
 import Meta from "./Meta";
-import Cursor from "./Cursor";
+// import Cursor from "./Cursor";
 import Navbar from "./sections/Navbar";
+import Hamburger from "./sections/Hamburger";
 import Footer from "./sections/Footer";
 
 import Hero from "./sections/Home/Hero";
@@ -39,6 +40,7 @@ function App() {
   // });
 
   const [entryIsHero, setEntryIsHero] = useState(false);
+  const [hamburgerOpen, setHamburgerOpen] = useState(false);
 
   return (
     <>
@@ -46,7 +48,10 @@ function App() {
       {/* <Cursor /> */}
       <Router>
         <Meta />
-        <Navbar />
+        <Navbar setHamburgerOpen={setHamburgerOpen} />
+        {hamburgerOpen ? (
+          <Hamburger setHamburgerOpen={setHamburgerOpen} />
+        ) : null}
         <Switch>
           <Route exact path="/">
             <Hero setEntryIsHero={setEntryIsHero} />

@@ -13,7 +13,7 @@ const Cause = styled.section`
 `;
 
 const CauseContent = styled.div`
-  padding: calc(18vw + 100px) 100px 490px 100px;
+  padding: calc(18vw + 100px) 100px 420px 100px;
 
   & > *:first-child {
     transition: transform 0.6s ease-out, opacity 0.6s ease-out;
@@ -39,26 +39,54 @@ const CauseContent = styled.div`
   `}
 
   @media (max-width: 1200px) {
-    padding: calc(18vw + 100px) 75px 490px 75px;
+    padding: calc(18vw + 100px) 75px 370px 75px;
   }
 
   @media (max-width: 896px) {
-    padding: calc((28.125vw - 28.125px) + 50px) 50px 490px 50px;
+    padding: calc((28.125vw - 28.125px) + 50px) 50px
+      calc(((100vw - 100px) / 4) + 100px) 50px;
   }
 
   @media (max-width: 600px) {
-    padding: calc((28.125vw - 11.25px) + 50px) 20px 490px 20px;
+    padding: calc((28.125vw - 11.25px) + 50px) 20px
+      calc(((100vw - 40px) / 4) + 90px) 20px;
   }
 `;
 
-const ImageGroup = styled.div`
+const ImageGroupWrapper = styled.div`
   position: absolute;
-  left: 230px;
-  bottom: -180px;
+  left: 0;
+  bottom: 0;
+  transform: translateY(50%);
   z-index: 99;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+`;
+
+const ImageGroup = styled.div`
+  position: relative;
   width: 1000px;
   height: 500px;
-  // border: 1px solid green;
+
+  @media (max-width: 1200px) {
+    width: 800px;
+    height: 400px;
+  }
+
+  @media (max-width: 896px) {
+    width: calc(100% - 100px);
+    height: calc((100vw - 100px) / 2);
+    margin-left: 50px;
+    margin-right: 50px;
+  }
+
+  @media (max-width: 600px) {
+    width: calc(100% - 40px);
+    height: calc((100vw - 40px) / 2);
+    margin-left: 20px;
+    margin-right: 20px;
+  }
 
   & > *:first-child {
     transition: transform 0.6s ease-out, opacity 0.6s ease-out;
@@ -110,9 +138,10 @@ const ImageGroup = styled.div`
 const ImageOne = styled.div`
   position: absolute;
   left: 0;
-  top: 100px;
-  width: 650px;
-  height: 350px;
+  top: 20%;
+  width: 65%;
+  height: 0;
+  padding-top: 35%;
   z-index: 2;
   background-image: linear-gradient(black, black),
     url(${require("../../assets/images/image-one.jpg")});
@@ -131,10 +160,11 @@ const ImageOne = styled.div`
 
 const ImageTwo = styled.div`
   position: absolute;
-  left: 200px;
-  top: -90px;
-  width: 270px;
-  height: 400px;
+  left: 20%;
+  top: -17%;
+  width: 27%;
+  height: 0;
+  padding-top: 40%;
   z-index: 1;
   background-image: linear-gradient(black, black),
     url(${require("../../assets/images/image-two.jpg")});
@@ -153,10 +183,11 @@ const ImageTwo = styled.div`
 
 const ImageThree = styled.div`
   position: absolute;
-  left: 450px;
-  top: 30px;
-  width: 550px;
-  height: 330px;
+  right: 0;
+  top: 6%;
+  width: 55%;
+  height: 0;
+  padding-top: 33%;
   z-index: 3;
   background-image: linear-gradient(black, black),
     url(${require("../../assets/images/image-three.jpg")});
@@ -175,10 +206,11 @@ const ImageThree = styled.div`
 
 const ImageFour = styled.div`
   position: absolute;
-  left: 350px;
-  top: 290px;
-  width: 370px;
-  height: 250px;
+  left: 35%;
+  top: 58%;
+  width: 37%;
+  height: 0;
+  padding-top: 25%;
   z-index: 4;
   background-image: linear-gradient(black, black),
     url(${require("../../assets/images/image-two.jpg")});
@@ -236,18 +268,20 @@ const CauseComp = ({ entryIsHero }) => {
           .
         </Text>
       </CauseContent>
-      <SectionTitleBar position="right" paddingTop="265px">
+      <SectionTitleBar position="right" paddingTop="350px">
         the cause
       </SectionTitleBar>
-      <ImageGroup
-        ref={imageGroupRef}
-        imageGroupInView={entryIsHero ? imageGroupInView : true}
-      >
-        <ImageOne />
-        <ImageTwo />
-        <ImageThree />
-        <ImageFour />
-      </ImageGroup>
+      <ImageGroupWrapper>
+        <ImageGroup
+          ref={imageGroupRef}
+          imageGroupInView={entryIsHero ? imageGroupInView : true}
+        >
+          <ImageOne />
+          <ImageTwo />
+          <ImageThree />
+          <ImageFour />
+        </ImageGroup>
+      </ImageGroupWrapper>
     </Cause>
   );
 };
