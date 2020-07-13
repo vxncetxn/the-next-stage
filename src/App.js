@@ -1,5 +1,6 @@
 import React, { lazy, Suspense, useState, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import styled from "styled-components";
 
 import Defaults from "./Defaults";
 import Meta from "./Meta";
@@ -19,6 +20,11 @@ const Press = lazy(() => import("./sections/Press"));
 const Tncs = lazy(() => import("./sections/Tncs"));
 const Privacy = lazy(() => import("./sections/Privacy"));
 const Error = lazy(() => import("./sections/Error"));
+
+const Container = styled.div`
+  max-width: 1440px;
+  margin: 0 auto 0 auto;
+`;
 
 function App() {
   // document.querySelector("body").addEventListener("mousemove", (e) => {
@@ -66,33 +72,34 @@ function App() {
         {hamburgerOpen ? (
           <Hamburger setHamburgerOpen={setHamburgerOpen} />
         ) : null}
-        <Suspense fallback={() => {}}>
-          <Switch>
-            <Route exact path="/">
-              <Hero />
-              <Theatre />
-              <Cause />
-              <Donate />
-              <Socials />
-            </Route>
-            <Route path="/faqs">
-              <Faqs />
-            </Route>
-            <Route path="/press-room">
-              <Press />
-            </Route>
-            <Route path="/terms-and-conditions">
-              <Tncs />
-            </Route>
-            <Route path="/privacy-policy">
-              <Privacy />
-            </Route>
-            <Route path="*" state="404">
-              <Error />
-            </Route>
-          </Switch>
-        </Suspense>
-
+        <Container>
+          <Suspense fallback={() => {}}>
+            <Switch>
+              <Route exact path="/">
+                <Hero />
+                <Theatre />
+                <Cause />
+                <Donate />
+                <Socials />
+              </Route>
+              <Route path="/faqs">
+                <Faqs />
+              </Route>
+              <Route path="/press-room">
+                <Press />
+              </Route>
+              <Route path="/terms-and-conditions">
+                <Tncs />
+              </Route>
+              <Route path="/privacy-policy">
+                <Privacy />
+              </Route>
+              <Route path="*" state="404">
+                <Error />
+              </Route>
+            </Switch>
+          </Suspense>
+        </Container>
         <Footer />
       </Router>
     </>
