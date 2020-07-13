@@ -30,6 +30,23 @@ const AccordionBullet = styled.div`
   );
   transform: rotate(0deg);
   transition: transform 0.5s ease-out;
+
+  @media (max-width: 1200px) {
+    left: -8px;
+    width: 18px;
+    height: 18px;
+  }
+
+  @media (max-width: 896px) {
+    left: -6px;
+    width: 16px;
+    height: 16px;
+  }
+
+  @media (max-width: 600px) {
+    width: 14px;
+    height: 14px;
+  }
 `;
 
 const AccordionTrigger = styled.span`
@@ -38,6 +55,18 @@ const AccordionTrigger = styled.span`
   color: var(--color-text);
   border-bottom: 1px solid white;
   cursor: pointer;
+
+  @media (max-width: 1200px) {
+    font-size: 22px;
+  }
+
+  @media (max-width: 896px) {
+    font-size: 20px;
+  }
+
+  @media (max-width: 600px) {
+    font-size: 18px;
+  }
 `;
 
 const AccordionPanel = styled.div`

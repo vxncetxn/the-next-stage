@@ -9,8 +9,24 @@ const Tncs = styled.section`
   display: flex;
 `;
 
+const TncsTitleBar = styled(SectionTitleBar)`
+  padding-top: 150px;
+`;
+
 const TncsContent = styled.div`
   padding: 150px 100px 50px 100px;
+
+  @media (max-width: 1200px) {
+    padding: 150px 75px 50px 75px;
+  }
+
+  @media (max-width: 896px) {
+    padding: 150px 50px 50px 50px;
+  }
+
+  @media (max-width: 600px) {
+    padding: 150px 20px 50px 20px;
+  }
 `;
 
 const TncsComp = () => {
@@ -85,9 +101,7 @@ const TncsComp = () => {
           including versions of Lorem Ipsum.
         </Text>
       </TncsContent>
-      <SectionTitleBar position="right" paddingTop="150px">
-        Terms & Conditions
-      </SectionTitleBar>
+      <TncsTitleBar position="right">Terms & Conditions</TncsTitleBar>
     </Tncs>
   );
 };

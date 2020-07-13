@@ -75,14 +75,11 @@ const SocialsContent = styled.div`
 
 const Hashtag = styled.p`
   position: relative;
-  // display: inline;
   margin-bottom: 20px;
   padding-left: 4%;
   font-family: var(--font-primary);
   font-size: 42px;
   color: var(--color-text);
-  overflow-wrap: break-word;
-  // cursor: pointer;
 
   @media (max-width: 1200px) {
     font-size: 34px;
@@ -137,13 +134,13 @@ const Hashtag = styled.p`
 `;
 
 const embedUrlsArr = [
-  "https://www.instagram.com/p/CCa0tvuAodH/",
-  "https://www.instagram.com/p/CCLaq5qAoZq/",
-  "https://www.instagram.com/p/CBvOE9WAvrc/",
-  "https://www.instagram.com/p/CBso2bmAj4S/",
-  "https://www.instagram.com/p/CBQTvi7A08W/",
-  "https://www.instagram.com/p/CA47GD5g6h_/",
-  "https://www.instagram.com/p/CAIP1GDAF4R/",
+  "https://www.instagram.com/p/CBCrw1pgRnX/",
+  "https://www.instagram.com/p/B_mxM40gkfI/",
+  "https://www.instagram.com/p/B_kRy6QguVs/",
+  "https://www.instagram.com/p/B_Ena7ngZDp/",
+  "https://www.instagram.com/p/B9oADHHA9dI/",
+  "https://www.instagram.com/p/B9O7U6gg0zL/",
+  "https://www.instagram.com/p/B6xOUzmASZv/",
 ];
 
 const SocialsComp = () => {
@@ -155,10 +152,10 @@ const SocialsComp = () => {
   return (
     <Socials id="socials">
       <SocialsContent ref={contentRef} contentInView={true}>
-        <Hashtag>esplanadethenextstage</Hashtag>
+        <Hashtag>thenextstage</Hashtag>
         <Text style={{ marginBottom: 50 }}>
-          Use this hashtag on Twitter or Instagram and you might find yourself
-          featured here! 😎
+          Use this hashtag on Instagram and you might find yourself featured
+          here! 😎
         </Text>
         <SocialsCol embedUrlsArr={embedUrlsArr} />
       </SocialsContent>

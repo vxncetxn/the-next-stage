@@ -259,8 +259,8 @@ const CauseComp = () => {
           At Esplanade, we believe that the arts transforms lives. We've
           witnessed how the arts can help build confidence, heal broken spirits
           and bring people together. Therefore, our theatres, including the new
-          Singtel Waterfront Theatre, is not merely a building - it is a
-          platform through which we can reach out to the communities and bring
+          Singtel Waterfront Theatre, are not merely buildings - they are
+          platforms from which we can reach out to the communities and bring
           them transformative and meaningful experiences through the arts.
           <br></br>
           <br></br>

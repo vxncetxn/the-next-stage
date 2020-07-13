@@ -9,8 +9,24 @@ const Privacy = styled.section`
   display: flex;
 `;
 
+const PrivacyTitleBar = styled(SectionTitleBar)`
+  padding-top: 150px;
+`;
+
 const PrivacyContent = styled.div`
   padding: 150px 100px 50px 100px;
+
+  @media (max-width: 1200px) {
+    padding: 150px 75px 50px 75px;
+  }
+
+  @media (max-width: 896px) {
+    padding: 150px 50px 50px 50px;
+  }
+
+  @media (max-width: 600px) {
+    padding: 150px 20px 50px 20px;
+  }
 `;
 
 const PrivacyComp = () => {
@@ -20,9 +36,7 @@ const PrivacyComp = () => {
 
   return (
     <Privacy>
-      <SectionTitleBar position="left" paddingTop="150px">
-        Privacy Policy
-      </SectionTitleBar>
+      <PrivacyTitleBar position="left">Privacy Policy</PrivacyTitleBar>
       <PrivacyContent>
         <Text>
           Lorem Ipsum is simply dummy text of the printing and typesetting

@@ -54,6 +54,7 @@ const Defaults = createGlobalStyle`
       max-width: 100% !important;
       width: 100% !important;
       min-width: auto !important;
+      max-height: auto !important;
     }
 
     ul {

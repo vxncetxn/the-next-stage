@@ -11,8 +11,24 @@ const Faqs = styled.section`
   display: flex;
 `;
 
+const FaqsTitleBar = styled(SectionTitleBar)`
+  padding-top: 140px;
+`;
+
 const FaqsContent = styled.div`
   padding: 150px 100px 50px 100px;
+
+  @media (max-width: 1200px) {
+    padding: 150px 75px 50px 75px;
+  }
+
+  @media (max-width: 896px) {
+    padding: 150px 50px 50px 50px;
+  }
+
+  @media (max-width: 600px) {
+    padding: 150px 20px 50px 20px;
+  }
 `;
 
 const faqItems = [
@@ -81,9 +97,7 @@ const FaqsComp = () => {
 
   return (
     <Faqs>
-      <SectionTitleBar position="left" paddingTop="140px">
-        faqs
-      </SectionTitleBar>
+      <FaqsTitleBar position="left">faqs</FaqsTitleBar>
       <FaqsContent>
         <Accordion items={faqItems} />
       </FaqsContent>

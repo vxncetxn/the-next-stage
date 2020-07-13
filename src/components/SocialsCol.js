@@ -32,7 +32,7 @@ const SocialsColComp = ({ embedUrlsArr, ...others }) => {
     <>
       <SingleCol {...others}>
         {embedUrlsArr.map((url) => (
-          <InstagramEmbed url={url} hideCaption />
+          <InstagramEmbed url={url} />
         ))}
       </SingleCol>
       <DuoCol {...others}>
