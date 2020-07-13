@@ -108,15 +108,21 @@ const NavbarComp = ({ setHamburgerOpen }) => {
   return (
     <Navbar atPageTop={atPageTop}>
       <ul>
-        <li style={{ marginRight: "auto" }}>
+        <li
+          style={{ marginRight: "auto" }}
+          aria-label="Go to Esplanade homepage"
+        >
           <A href="https://www.esplanade.com/">
-            <Logo src={require("../assets/images/esplanade-logo-white.png")} />
+            <Logo
+              src={require("../assets/images/esplanade-logo-white.png")}
+              alt="Esplanade logo"
+            />
           </A>
         </li>
         {pathname === "/" ? (
           ["theatre", "cause", "donate", "socials"].map((section) => {
             return (
-              <li>
+              <li key={section}>
                 <button onClick={() => scrollToElement(section)}>
                   {section}
                 </button>
@@ -132,7 +138,10 @@ const NavbarComp = ({ setHamburgerOpen }) => {
           <CTAButton>Donate</CTAButton>
         </li>
         <li>
-          <button onClick={() => setHamburgerOpen(true)}>
+          <button
+            onClick={() => setHamburgerOpen(true)}
+            aria-label="Open navigation menu"
+          >
             <HamburgerIcon />
           </button>
         </li>

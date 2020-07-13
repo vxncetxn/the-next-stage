@@ -182,7 +182,7 @@ const FooterComp = () => {
           <li>Site</li>
           {["Theatre", "Cause", "Donate", "Socials"].map((section) => {
             return (
-              <li>
+              <li key={section}>
                 {pathname === "/" ? (
                   <button
                     onClick={() => scrollToElement(section.toLowerCase())}
@@ -226,19 +226,30 @@ const FooterComp = () => {
           </li>
         </LinkColumn>
         <SocialsColumn>
-          <SmallGreyText>Keep updated with Esplanade:</SmallGreyText>
-          <SubscribeInput />
+          <label htmlFor="subscribe">
+            <SmallGreyText>Keep updated with Esplanade:</SmallGreyText>
+          </label>
+          <SubscribeInput name="subscribe" id="subscribe" />
           <SmallGreyText style={{ marginTop: 20 }}>
             Connect with us:
           </SmallGreyText>
           <SocialsIconGroup>
-            <A href="https://www.facebook.com/EsplanadeSG">
+            <A
+              href="https://www.facebook.com/EsplanadeSG"
+              aria-label="Go to Esplanade's Facebook page"
+            >
               <FacebookIcon />
             </A>
-            <A href="https://www.youtube.com/user/EsplanadeSG">
+            <A
+              href="https://www.youtube.com/user/EsplanadeSG"
+              aria-label="Go to Esplanade's Youtube page"
+            >
               <YoutubeIcon />
             </A>
-            <A href="https://www.instagram.com/esplanadesingapore/">
+            <A
+              href="https://www.instagram.com/esplanadesingapore/"
+              aria-label="Go to Esplanade's Instagram page"
+            >
               <InstagramIcon />
             </A>
           </SocialsIconGroup>
@@ -249,10 +260,16 @@ const FooterComp = () => {
           <SmallGreyText>A fundraising initiative by:</SmallGreyText>
           <LogosGroup>
             <A href="https://www.esplanade.com/">
-              <img src={require("../assets/images/esplanade-logo-white.png")} />
+              <img
+                src={require("../assets/images/esplanade-logo-white.png")}
+                alt="Esplanade logo"
+              />
             </A>
             <A href="https://www.sutd.edu.sg/">
-              <img src={require("../assets/images/sutd-logo-white.png")} />
+              <img
+                src={require("../assets/images/sutd-logo-white.png")}
+                alt="SUTD logo"
+              />
             </A>
           </LogosGroup>
         </LogosColumn>

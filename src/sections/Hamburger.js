@@ -101,7 +101,10 @@ const SocialsRow = styled.div`
 const HamburgerComp = ({ setHamburgerOpen }) => {
   return (
     <Hamburger>
-      <CloseButton onClick={() => setHamburgerOpen(false)}>
+      <CloseButton
+        onClick={() => setHamburgerOpen(false)}
+        aria-label="Close navigation menu"
+      >
         <CloseIcon />
       </CloseButton>
       <Menu>

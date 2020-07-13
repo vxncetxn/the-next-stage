@@ -264,7 +264,11 @@ const DonateComp = () => {
           <PanelTopText>Help us build #thenextstage.</PanelTopText>
           <OptionsRow>
             {["10", "20", "50", "90"].map((val) => (
-              <Option selected={option === val} onClick={() => setOption(val)}>
+              <Option
+                key={val}
+                selected={option === val}
+                onClick={() => setOption(val)}
+              >
                 ${val}
               </Option>
             ))}
