@@ -157,7 +157,8 @@ const SocialsComp = () => {
           Use this hashtag on Instagram and you might find yourself featured
           here! 😎
         </Text>
-        <SocialsCol embedUrlsArr={embedUrlsArr} />
+        {contentInView ? <SocialsCol embedUrlsArr={embedUrlsArr} /> : null}
+        {/* <SocialsCol embedUrlsArr={embedUrlsArr} /> */}
       </SocialsContent>
       <SocialsTitleBar position="right">socials</SocialsTitleBar>
     </Socials>

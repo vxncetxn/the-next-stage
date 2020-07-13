@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { useInView } from "react-intersection-observer";
+import { LiteYouTubeEmbed } from "react-lite-youtube-embed";
 
 import SectionTitleBar from "../../components/SectionTitleBar";
 import Text from "../../components/Text";
@@ -75,25 +76,25 @@ const YoutubeFrameWrapper = styled.div`
   }
 `;
 
-const YoutubeFrame = styled.iframe`
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
+// const YoutubeFrame = styled.iframe`
+//   position: absolute;
+//   left: 0;
+//   top: 0;
+//   width: 100%;
+//   height: 100%;
 
-  ${(props) =>
-    props.videoInView
-      ? `
-    transform: translateX(0px);
-    opacity: 1;
-  `
-      : `
-    transform: translateX(-20px);
-    opacity: 0;
-  `}
-  transition: transform 0.6s ease-out, opacity 0.6s ease-out;
-`;
+//   ${(props) =>
+//     props.videoInView
+//       ? `
+//     transform: translateX(0px);
+//     opacity: 1;
+//   `
+//       : `
+//     transform: translateX(-20px);
+//     opacity: 0;
+//   `}
+//   transition: transform 0.6s ease-out, opacity 0.6s ease-out;
+// `;
 
 const TheatreComp = () => {
   const [contentRef, contentInView] = useInView({
@@ -137,16 +138,13 @@ const TheatreComp = () => {
         </Text>
       </TheatreContent>
       <YoutubeFrameWrapper>
-        <YoutubeFrame
-          ref={videoRef}
-          videoInView={videoInView}
-          title="theatre-intro-youtube"
-          src="https://www.youtube.com/embed/p8muUyKAqSM"
-          frameBorder="0"
-          allowFullScreen
-          width="888"
-          height="500"
-        ></YoutubeFrame>
+        <LiteYouTubeEmbed
+          id="p8muUyKAqSM"
+          adNetwork={true}
+          playlist={false}
+          poster="hqdefault"
+          title="YouTube Embed"
+        />
       </YoutubeFrameWrapper>
     </Theatre>
   );

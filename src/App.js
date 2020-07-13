@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { lazy, Suspense, useState, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import Defaults from "./Defaults";
@@ -14,11 +14,11 @@ import Cause from "./sections/Home/Cause";
 import Donate from "./sections/Home/Donate";
 import Socials from "./sections/Home/Socials";
 
-import Faqs from "./sections/Faqs";
-import Press from "./sections/Press";
-import Tncs from "./sections/Tncs";
-import Privacy from "./sections/Privacy";
-import Error from "./sections/Error";
+const Faqs = lazy(() => import("./sections/Faqs"));
+const Press = lazy(() => import("./sections/Press"));
+const Tncs = lazy(() => import("./sections/Tncs"));
+const Privacy = lazy(() => import("./sections/Privacy"));
+const Error = lazy(() => import("./sections/Error"));
 
 function App() {
   // document.querySelector("body").addEventListener("mousemove", (e) => {
@@ -39,13 +39,9 @@ function App() {
   //   document.querySelector(".cursor-ring").classList.toggle("timing");
   // });
 
-  // First we get the viewport height and we multiple it by 1% to get a value for a vh unit
   let vh = window.innerHeight * 0.01;
-  // Then we set the value in the --vh custom property to the root of the document
   document.documentElement.style.setProperty("--vh", `${vh}px`);
-  // We listen to the resize event
   window.addEventListener("resize", () => {
-    // We execute the same script as before
     let vh = window.innerHeight * 0.01;
     document.documentElement.style.setProperty("--vh", `${vh}px`);
   });
@@ -70,30 +66,33 @@ function App() {
         {hamburgerOpen ? (
           <Hamburger setHamburgerOpen={setHamburgerOpen} />
         ) : null}
-        <Switch>
-          <Route exact path="/">
-            <Hero />
-            <Theatre />
-            <Cause />
-            <Donate />
-            <Socials />
-          </Route>
-          <Route path="/faqs">
-            <Faqs />
-          </Route>
-          <Route path="/press-room">
-            <Press />
-          </Route>
-          <Route path="/terms-and-conditions">
-            <Tncs />
-          </Route>
-          <Route path="/privacy-policy">
-            <Privacy />
-          </Route>
-          <Route path="*" state="404">
-            <Error />
-          </Route>
-        </Switch>
+        <Suspense fallback={() => {}}>
+          <Switch>
+            <Route exact path="/">
+              <Hero />
+              <Theatre />
+              <Cause />
+              <Donate />
+              <Socials />
+            </Route>
+            <Route path="/faqs">
+              <Faqs />
+            </Route>
+            <Route path="/press-room">
+              <Press />
+            </Route>
+            <Route path="/terms-and-conditions">
+              <Tncs />
+            </Route>
+            <Route path="/privacy-policy">
+              <Privacy />
+            </Route>
+            <Route path="*" state="404">
+              <Error />
+            </Route>
+          </Switch>
+        </Suspense>
+
         <Footer />
       </Router>
     </>

@@ -225,14 +225,14 @@ const ImageFour = styled.div`
   padding-top: 25%;
   z-index: 4;
   background-image: linear-gradient(black, black),
-    url(${require("../../assets/images/image-two.jpg")});
+    url(${require("../../assets/images/image-four.jpg")});
   background-size: cover;
   background-blend-mode: saturation;
   background-position: center;
 
   &:hover {
     // transition: transform 0.2s linear;
-    background-image: url(${require("../../assets/images/image-two.jpg")});
+    background-image: url(${require("../../assets/images/image-four.jpg")});
     background-blend-mode: normal;
     z-index: 999;
     // transform: scale(1.1);

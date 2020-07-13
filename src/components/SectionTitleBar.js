@@ -25,9 +25,11 @@ const SectionTitle = styled.h2`
   font-family: var(--font-primary);
   font-size: 100px;
   color: var(--color-text);
+  white-space: pre;
   writing-mode: vertical-lr;
   transform: ${(props) =>
     props.position === "left" ? "rotate(-180deg)" : null};
+
   @media (max-width: 1200px) {
     font-size: 90px;
   }
