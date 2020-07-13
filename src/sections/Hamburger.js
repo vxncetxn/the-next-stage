@@ -42,7 +42,7 @@ const Hamburger = styled.div`
   justify-content: center;
   align-items: center;
   width: 100vw;
-  height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
   background-color: var(--color-background);
   animation: ${FadeIn} 0.2s ease-out;
 `;
@@ -61,11 +61,11 @@ const Menu = styled.ul`
   display: flex;
   flex-direction: column;
   height: 100%;
-  padding: 80px 0;
+  padding: 60px 0 30px 0;
   justify-content: space-between;
   align-items: center;
   font-family: var(--font-secondary);
-  font-size: 32px;
+  font-size: 28px;
   color: var(--color-text);
 
   & > li + li {
@@ -88,7 +88,7 @@ const SmallGreyText = styled.p`
 `;
 
 const MenuCTAButton = styled(CTAButton)`
-  font-size: 24px;
+  font-size: 20px;
 `;
 
 const SocialsRow = styled.div`

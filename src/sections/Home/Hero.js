@@ -128,15 +128,15 @@ const HeroTitle = styled.h1`
   }
 `;
 
-const HeroComp = ({ setEntryIsHero }) => {
+const HeroComp = () => {
   const [heroRef, heroInView] = useInView({
     threshold: 0.95,
     triggerOnce: true,
   });
 
   useEffect(() => {
-    setEntryIsHero(heroInView);
-  }, [heroInView]);
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <Hero id="main" ref={heroRef}>

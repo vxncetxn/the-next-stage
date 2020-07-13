@@ -50,6 +50,12 @@ const Defaults = createGlobalStyle`
       // cursor: none;
     }
 
+    iframe.instagram-media {
+      max-width: 100% !important;
+      width: 100% !important;
+      min-width: auto !important;
+    }
+
     ul {
       list-style: none;
     }

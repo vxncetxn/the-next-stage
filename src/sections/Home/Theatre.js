@@ -95,7 +95,7 @@ const YoutubeFrame = styled.iframe`
   transition: transform 0.6s ease-out, opacity 0.6s ease-out;
 `;
 
-const TheatreComp = ({ entryIsHero }) => {
+const TheatreComp = () => {
   const [contentRef, contentInView] = useInView({
     threshold: 0.2,
     triggerOnce: true,
@@ -108,10 +108,7 @@ const TheatreComp = ({ entryIsHero }) => {
   return (
     <Theatre id="theatre">
       <SectionTitleBar position="left">the theatre</SectionTitleBar>
-      <TheatreContent
-        ref={contentRef}
-        contentInView={entryIsHero ? contentInView : true}
-      >
+      <TheatreContent ref={contentRef} contentInView={contentInView}>
         <QuoteText style={{ marginBottom: 40 }}>
           Esplanade has always been a place for everyone.
         </QuoteText>
@@ -142,7 +139,7 @@ const TheatreComp = ({ entryIsHero }) => {
       <YoutubeFrameWrapper>
         <YoutubeFrame
           ref={videoRef}
-          videoInView={entryIsHero ? videoInView : true}
+          videoInView={videoInView}
           title="theatre-intro-youtube"
           src="https://www.youtube.com/embed/p8muUyKAqSM"
           frameBorder="0"

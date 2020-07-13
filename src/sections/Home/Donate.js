@@ -217,7 +217,7 @@ const Option = styled.button`
   padding: 8% 6%;
 `;
 
-const DonateComp = ({ entryIsHero }) => {
+const DonateComp = () => {
   const [contentRef, contentInView] = useInView({
     threshold: 0.3,
     triggerOnce: true,
@@ -231,10 +231,7 @@ const DonateComp = ({ entryIsHero }) => {
   return (
     <Donate id="donate">
       <DonateTitleBar position="left">donate</DonateTitleBar>
-      <DonateContent
-        ref={contentRef}
-        contentInView={entryIsHero ? contentInView : true}
-      >
+      <DonateContent ref={contentRef} contentInView={contentInView}>
         <Text>
           The Esplanade Co Ltd is a registered charity and not-for-profit
           organisation. Therefore, we depend greatly on the generous and
@@ -263,10 +260,7 @@ const DonateComp = ({ entryIsHero }) => {
         </StepsText>
       </DonateContent>
       <DonationPanelWrapper>
-        <DonationPanel
-          ref={panelRef}
-          panelInView={entryIsHero ? panelInView : true}
-        >
+        <DonationPanel ref={panelRef} panelInView={panelInView}>
           <PanelTopText>Help us build #thenextstage.</PanelTopText>
           <OptionsRow>
             {["10", "20", "50", "90"].map((val) => (

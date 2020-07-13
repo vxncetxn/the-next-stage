@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-import { TwitterTweetEmbed } from "react-twitter-embed";
+import InstagramEmbed from "react-instagram-embed";
 
 const SingleCol = styled.div`
   display: none;
@@ -27,26 +27,26 @@ const DuoCol = styled.div`
   }
 `;
 
-const SocialsColComp = ({ tweetIdsArr, ...others }) => {
+const SocialsColComp = ({ embedUrlsArr, ...others }) => {
   return (
     <>
       <SingleCol {...others}>
-        {tweetIdsArr.map((tweetId) => (
-          <TwitterTweetEmbed tweetId={tweetId} />
+        {embedUrlsArr.map((url) => (
+          <InstagramEmbed url={url} hideCaption />
         ))}
       </SingleCol>
       <DuoCol {...others}>
         <div>
-          {tweetIdsArr.flatMap((tweetId, idx) => {
+          {embedUrlsArr.flatMap((url, idx) => {
             if (idx % 2 === 0) {
-              return <TwitterTweetEmbed tweetId={tweetId} idx={idx} />;
+              return <InstagramEmbed url={url} />;
             }
           })}
         </div>
         <div>
-          {tweetIdsArr.flatMap((tweetId, idx) => {
+          {embedUrlsArr.flatMap((url, idx) => {
             if (idx % 2 === 1) {
-              return <TwitterTweetEmbed tweetId={tweetId} idx={idx} />;
+              return <InstagramEmbed url={url} />;
             }
           })}
         </div>

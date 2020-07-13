@@ -239,7 +239,7 @@ const ImageFour = styled.div`
   }
 `;
 
-const CauseComp = ({ entryIsHero }) => {
+const CauseComp = () => {
   const [contentRef, contentInView] = useInView({
     threshold: 0.35,
     triggerOnce: true,
@@ -251,10 +251,7 @@ const CauseComp = ({ entryIsHero }) => {
 
   return (
     <Cause id="cause">
-      <CauseContent
-        ref={contentRef}
-        contentInView={entryIsHero ? contentInView : true}
-      >
+      <CauseContent ref={contentRef} contentInView={contentInView}>
         <QuoteText style={{ marginBottom: 40 }}>
           a platform through which we can reach out to the communities
         </QuoteText>
@@ -282,10 +279,7 @@ const CauseComp = ({ entryIsHero }) => {
       </CauseContent>
       <CauseTitleBar position="right">the cause</CauseTitleBar>
       <ImageGroupWrapper>
-        <ImageGroup
-          ref={imageGroupRef}
-          imageGroupInView={entryIsHero ? imageGroupInView : true}
-        >
+        <ImageGroup ref={imageGroupRef} imageGroupInView={imageGroupInView}>
           <ImageOne />
           <ImageTwo />
           <ImageThree />
