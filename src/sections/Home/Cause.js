@@ -12,6 +12,18 @@ const Cause = styled.section`
   display: flex;
 `;
 
+const CauseTitleBar = styled(SectionTitleBar)`
+  padding-top: calc(18vw + 100px);
+
+  @media (max-width: 896px) {
+    padding-top: calc((28.125vw - 28.125px) + 50px);
+  }
+
+  @media (max-width: 600px) {
+    padding-top: calc((28.125vw - 11.25px) + 50px);
+  }
+`;
+
 const CauseContent = styled.div`
   padding: calc(18vw + 100px) 100px 420px 100px;
 
@@ -268,9 +280,7 @@ const CauseComp = ({ entryIsHero }) => {
           .
         </Text>
       </CauseContent>
-      <SectionTitleBar position="right" paddingTop="350px">
-        the cause
-      </SectionTitleBar>
+      <CauseTitleBar position="right">the cause</CauseTitleBar>
       <ImageGroupWrapper>
         <ImageGroup
           ref={imageGroupRef}

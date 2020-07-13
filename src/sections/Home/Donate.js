@@ -17,6 +17,22 @@ const Donate = styled.section`
   display: flex;
 `;
 
+const DonateTitleBar = styled(SectionTitleBar)`
+  padding-top: 390px;
+
+  @media (max-width: 1200px) {
+    padding-top: 340px;
+  }
+
+  @media (max-width: 896px) {
+    padding-top: calc(((100vw - 100px) / 4) + 70px);
+  }
+
+  @media (max-width: 600px) {
+    padding-top: calc(((100vw - 40px) / 4) + 70px);
+  }
+`;
+
 const DonateContent = styled.div`
   padding: 390px 100px calc(225px + 100px) 100px;
 
@@ -214,9 +230,7 @@ const DonateComp = ({ entryIsHero }) => {
 
   return (
     <Donate id="donate">
-      <SectionTitleBar position="left" paddingTop="380px">
-        donate
-      </SectionTitleBar>
+      <DonateTitleBar position="left">donate</DonateTitleBar>
       <DonateContent
         ref={contentRef}
         contentInView={entryIsHero ? contentInView : true}

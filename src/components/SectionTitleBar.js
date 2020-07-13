@@ -10,7 +10,7 @@ const SectionTitleBar = styled.div`
       ? "flex-start"
       : null};
   align-items: flex-start;
-  padding-top: ${(props) => (props.paddingTop ? props.paddingTop : "40px")};
+  padding-top: 40px;
   flex-basis: 30%;
   flex-grow: 0;
   flex-shrink: 0;
@@ -25,13 +25,9 @@ const SectionTitle = styled.h2`
   font-family: var(--font-primary);
   font-size: 100px;
   color: var(--color-text);
-  writing-mode: ${(props) =>
-    props.position === "left"
-      ? "sideways-lr"
-      : props.position === "right"
-      ? "vertical-lr"
-      : null};
-
+  writing-mode: vertical-lr;
+  transform: ${(props) =>
+    props.position === "left" ? "rotate(-180deg)" : null};
   @media (max-width: 1200px) {
     font-size: 90px;
   }
@@ -45,9 +41,9 @@ const SectionTitle = styled.h2`
   }
 `;
 
-const SectionTitleBarComp = ({ children, position, paddingTop, ...others }) => {
+const SectionTitleBarComp = ({ children, position, ...others }) => {
   return (
-    <SectionTitleBar position={position} paddingTop={paddingTop} {...others}>
+    <SectionTitleBar position={position} {...others}>
       <SectionTitle position={position}>{children}</SectionTitle>
     </SectionTitleBar>
   );

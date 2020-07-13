@@ -17,6 +17,18 @@ const Socials = styled.section`
   display: flex;
 `;
 
+const SocialsTitleBar = styled(SectionTitleBar)`
+  padding-top: calc(225px + 100px);
+
+  @media (max-width: 1200px) {
+    padding-top: calc(197.5px + 100px);
+  }
+
+  @media (max-width: 896px) {
+    padding-top: calc(197.5px + 50px);
+  }
+`;
+
 const SocialsContent = styled.div`
   width: 70%;
   padding: calc(225px + 100px) 100px 50px 100px;
@@ -170,9 +182,7 @@ const SocialsComp = ({ entryIsHero }) => {
         </Text>
         <SocialsCol tweetIdsArr={tweetIdsArr} />
       </SocialsContent>
-      <SectionTitleBar position="right" paddingTop="320px">
-        socials
-      </SectionTitleBar>
+      <SocialsTitleBar position="right">socials</SocialsTitleBar>
     </Socials>
   );
 };
