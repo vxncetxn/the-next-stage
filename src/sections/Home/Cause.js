@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { useInView } from "react-intersection-observer";
+// import { useInView } from "react-intersection-observer";
 
 import SectionTitleBar from "../../components/SectionTitleBar";
 import Text from "../../components/Text";
@@ -100,21 +100,21 @@ const ImageGroup = styled.div`
     margin-right: 20px;
   }
 
-  & > *:first-child {
-    transition: transform 0.6s ease-out, opacity 0.6s ease-out;
-  }
+  // & > *:first-child {
+  //   transition: transform 0.6s ease-out, opacity 0.6s ease-out;
+  // }
 
-  & > *:nth-child(2) {
-    transition: transform 0.6s ease-out 0.3s, opacity 0.6s ease-out 0.3s;
-  }
+  // & > *:nth-child(2) {
+  //   transition: transform 0.6s ease-out 0.3s, opacity 0.6s ease-out 0.3s;
+  // }
 
-  & > *:nth-child(3) {
-    transition: transform 0.6s ease-out 0.6s, opacity 0.6s ease-out 0.6s;
-  }
+  // & > *:nth-child(3) {
+  //   transition: transform 0.6s ease-out 0.6s, opacity 0.6s ease-out 0.6s;
+  // }
 
-  & > *:nth-child(4) {
-    transition: transform 0.6s ease-out 0.9s, opacity 0.6s ease-out 0.9s;
-  }
+  // & > *:nth-child(4) {
+  //   transition: transform 0.6s ease-out 0.9s, opacity 0.6s ease-out 0.9s;
+  // }
 
   ${(props) =>
     props.imageGroupInView
@@ -160,13 +160,13 @@ const ImageOne = styled.div`
   background-size: cover;
   background-blend-mode: saturation;
   background-position: center;
+  transition: transform 0.2s linear;
 
   &:hover {
-    // transition: transform 0.2s linear;
     background-image: url(${require("../../assets/images/image-one.jpg")});
     background-blend-mode: normal;
     z-index: 999;
-    // transform: scale(1.1);
+    transform: scale(1.1);
   }
 `;
 
@@ -183,13 +183,13 @@ const ImageTwo = styled.div`
   background-size: cover;
   background-blend-mode: saturation;
   background-position: center;
+  transition: transform 0.2s linear;
 
   &:hover {
-    // transition: transform 0.2s linear;
     background-image: url(${require("../../assets/images/image-two.jpg")});
     background-blend-mode: normal;
     z-index: 999;
-    // transform: scale(1.1);
+    transform: scale(1.1);
   }
 `;
 
@@ -206,13 +206,13 @@ const ImageThree = styled.div`
   background-size: cover;
   background-blend-mode: saturation;
   background-position: center;
+  transition: transform 0.2s linear;
 
   &:hover {
-    // transition: transform 0.2s linear;
     background-image: url(${require("../../assets/images/image-three.jpg")});
     background-blend-mode: normal;
     z-index: 999;
-    // transform: scale(1.1);
+    transform: scale(1.1);
   }
 `;
 
@@ -229,29 +229,29 @@ const ImageFour = styled.div`
   background-size: cover;
   background-blend-mode: saturation;
   background-position: center;
+  transition: transform 0.2s linear;
 
   &:hover {
-    // transition: transform 0.2s linear;
     background-image: url(${require("../../assets/images/image-four.jpg")});
     background-blend-mode: normal;
     z-index: 999;
-    // transform: scale(1.1);
+    transform: scale(1.1);
   }
 `;
 
 const CauseComp = () => {
-  const [contentRef, contentInView] = useInView({
-    threshold: 0.35,
-    triggerOnce: true,
-  });
-  const [imageGroupRef, imageGroupInView] = useInView({
-    threshold: 0.5,
-    triggerOnce: true,
-  });
+  // const [contentRef, contentInView] = useInView({
+  //   threshold: 0.35,
+  //   triggerOnce: true,
+  // });
+  // const [imageGroupRef, imageGroupInView] = useInView({
+  //   threshold: 0.5,
+  //   triggerOnce: true,
+  // });
 
   return (
     <Cause id="cause">
-      <CauseContent ref={contentRef} contentInView={contentInView}>
+      <CauseContent contentInView={true}>
         <QuoteText style={{ marginBottom: 40 }}>
           a platform through which we can reach out to the communities
         </QuoteText>
@@ -279,7 +279,7 @@ const CauseComp = () => {
       </CauseContent>
       <CauseTitleBar position="right">the cause</CauseTitleBar>
       <ImageGroupWrapper>
-        <ImageGroup ref={imageGroupRef} imageGroupInView={imageGroupInView}>
+        <ImageGroup imageGroupInView={true}>
           <ImageOne />
           <ImageTwo />
           <ImageThree />

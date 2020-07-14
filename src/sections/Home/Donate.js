@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled, { keyframes } from "styled-components";
-import { useInView } from "react-intersection-observer";
+// import { useInView } from "react-intersection-observer";
 
 import SectionTitleBar from "../../components/SectionTitleBar";
 import Text from "../../components/Text";
@@ -218,20 +218,20 @@ const Option = styled.button`
 `;
 
 const DonateComp = () => {
-  const [contentRef, contentInView] = useInView({
-    threshold: 0.3,
-    triggerOnce: true,
-  });
-  const [panelRef, panelInView] = useInView({
-    threshold: 0.3,
-    triggerOnce: true,
-  });
+  // const [contentRef, contentInView] = useInView({
+  //   threshold: 0.3,
+  //   triggerOnce: true,
+  // });
+  // const [panelRef, panelInView] = useInView({
+  //   threshold: 0.3,
+  //   triggerOnce: true,
+  // });
   const [option, setOption] = useState("10");
 
   return (
     <Donate id="donate">
       <DonateTitleBar position="left">donate</DonateTitleBar>
-      <DonateContent ref={contentRef} contentInView={contentInView}>
+      <DonateContent contentInView={true}>
         <Text>
           The Esplanade Co Ltd is a registered charity and not-for-profit
           organisation. Therefore, we depend greatly on the generous and
@@ -260,7 +260,7 @@ const DonateComp = () => {
         </StepsText>
       </DonateContent>
       <DonationPanelWrapper>
-        <DonationPanel ref={panelRef} panelInView={panelInView}>
+        <DonationPanel panelInView={true}>
           <PanelTopText>Help us build #thenextstage.</PanelTopText>
           <OptionsRow>
             {["10", "20", "50", "90"].map((val) => (

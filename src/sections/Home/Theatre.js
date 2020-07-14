@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { useInView } from "react-intersection-observer";
+// import { useInView } from "react-intersection-observer";
 import { LiteYouTubeEmbed } from "react-lite-youtube-embed";
 
 import SectionTitleBar from "../../components/SectionTitleBar";
@@ -97,19 +97,19 @@ const YoutubeFrameWrapper = styled.div`
 // `;
 
 const TheatreComp = () => {
-  const [contentRef, contentInView] = useInView({
-    threshold: 0.2,
-    triggerOnce: true,
-  });
-  const [videoRef, videoInView] = useInView({
-    threshold: 0.3,
-    triggerOnce: true,
-  });
+  // const [contentRef, contentInView] = useInView({
+  //   threshold: 0.2,
+  //   triggerOnce: true,
+  // });
+  // const [videoRef, videoInView] = useInView({
+  //   threshold: 0.3,
+  //   triggerOnce: true,
+  // });
 
   return (
     <Theatre id="theatre">
       <SectionTitleBar position="left">the theatre</SectionTitleBar>
-      <TheatreContent ref={contentRef} contentInView={contentInView}>
+      <TheatreContent contentInView={true}>
         <QuoteText style={{ marginBottom: 40 }}>
           Esplanade has always been a place for everyone.
         </QuoteText>

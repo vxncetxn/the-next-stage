@@ -1,8 +1,7 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styled, { keyframes } from "styled-components";
-import { useInView } from "react-intersection-observer";
 
-import Demo from "../../Demo";
+// import Demo from "../../Demo";
 
 const Flow = keyframes`
   to {
@@ -26,8 +25,6 @@ const HeroContent = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
-  // border: 1px solid red;
 
   & p {
     margin-left: 15px;
@@ -57,9 +54,6 @@ const HeroAnim = styled.div`
   position: relative;
   height: 100%;
   width: 60%;
-  // background-color: skyblue;
-
-  // border: 1px solid red;
 
   & .img-row {
     position: absolute;
@@ -129,26 +123,13 @@ const HeroTitle = styled.h1`
 `;
 
 const HeroComp = () => {
-  const [heroRef, heroInView] = useInView({
-    threshold: 0.95,
-    triggerOnce: true,
-  });
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
   return (
-    <Hero id="main" ref={heroRef}>
+    <Hero id="main">
       <HeroContent>
         <HeroTitleGroup>
           <HeroTitle className="hero-title">the</HeroTitle>
-          <HeroTitle className="hero-title" /*style={{ marginTop: "-100px" }}*/>
-            next
-          </HeroTitle>
-          <HeroTitle className="hero-title" /*style={{ marginTop: "-90px" }}*/>
-            stage
-          </HeroTitle>
+          <HeroTitle className="hero-title">next</HeroTitle>
+          <HeroTitle className="hero-title">stage</HeroTitle>
         </HeroTitleGroup>
       </HeroContent>
       <HeroAnim></HeroAnim>
