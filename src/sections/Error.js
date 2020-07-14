@@ -43,8 +43,6 @@ const ErrorTitle = styled.h1`
 `;
 
 const ErrorText = styled(Text)`
-  padding: 0 100px;
-  font-size: 24px;
   text-align: center;
 `;
 
