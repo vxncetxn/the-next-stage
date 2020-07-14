@@ -79,6 +79,7 @@ const SecondaryRow = styled.div`
   display: flex;
   flex-direction: horizontal;
   justify-content: space-between;
+  align-items: center;
 
   @media (max-width: 896px) {
     flex-wrap: wrap-reverse;
@@ -142,17 +143,11 @@ const LogosGroup = styled.div`
   margin-top: 20px;
 
   & img {
-    height: 50px;
+    height: 70px;
   }
 
   & a + a {
     margin-left: 20px;
-  }
-
-  @media (max-width: 600px) {
-    & img {
-      height: 40px;
-    }
   }
 `;
 
@@ -261,13 +256,13 @@ const FooterComp = () => {
           <LogosGroup>
             <A href="https://www.esplanade.com/">
               <img
-                src={require("../assets/images/esplanade-logo-white.png")}
+                src={require("../assets/images/esplanade-logo.png")}
                 alt="Esplanade logo"
               />
             </A>
             <A href="https://www.sutd.edu.sg/">
               <img
-                src={require("../assets/images/sutd-logo-white.png")}
+                src={require("../assets/images/sutd-logo.png")}
                 alt="SUTD logo"
               />
             </A>

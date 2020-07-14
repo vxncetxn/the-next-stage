@@ -75,8 +75,16 @@ const Navbar = styled.div`
 `;
 
 const Logo = styled.img`
-  width: 60px;
+  height: 70px;
   transform: translateY(3px);
+
+  @media (max-width: 896px) {
+    height: 60px;
+  }
+
+  @media (max-width: 600px) {
+    height: 50px;
+  }
 `;
 
 const NavbarComp = ({ setHamburgerOpen }) => {
@@ -114,7 +122,7 @@ const NavbarComp = ({ setHamburgerOpen }) => {
         >
           <A href="https://www.esplanade.com/">
             <Logo
-              src={require("../assets/images/esplanade-logo-white.png")}
+              src={require("../assets/images/esplanade-logo.png")}
               alt="Esplanade logo"
             />
           </A>
