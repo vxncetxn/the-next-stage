@@ -114,7 +114,7 @@ const NavbarComp = ({ setHamburgerOpen }) => {
   }, []);
 
   return (
-    <Navbar atPageTop={atPageTop}>
+    <Navbar atPageTop={pathname === "/" ? atPageTop : false}>
       <ul>
         <li
           style={{ marginRight: "auto" }}
@@ -139,7 +139,9 @@ const NavbarComp = ({ setHamburgerOpen }) => {
           })
         ) : (
           <li>
-            <Link to="/">Back To Homepage</Link>
+            <Link to="/" onClick={() => window.scrollTo(0, 0)}>
+              Back To Homepage
+            </Link>
           </li>
         )}
         <li>

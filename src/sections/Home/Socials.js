@@ -155,7 +155,10 @@ const SocialsComp = () => {
         <Hashtag>thenextstage</Hashtag>
         <Text style={{ marginBottom: 50 }}>
           Use this hashtag on Instagram and you might find yourself featured
-          here! 😎
+          here!{" "}
+          <span role="img" aria-label="emoji of smiling head with sunglasses">
+            😎
+          </span>
         </Text>
         {contentInView ? <SocialsCol embedUrlsArr={embedUrlsArr} /> : null}
       </SocialsContent>

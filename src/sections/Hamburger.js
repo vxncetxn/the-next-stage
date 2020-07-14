@@ -1,5 +1,7 @@
 import React from "react";
 import styled, { keyframes } from "styled-components";
+import { useLocation } from "react-router-dom";
+import { HashLink as Link } from "react-router-hash-link";
 
 import { ReactComponent as CloseIcon } from "../assets/icons/close.svg";
 import { ReactComponent as FacebookIcon } from "../assets/icons/facebook.svg";
@@ -99,6 +101,8 @@ const SocialsRow = styled.div`
 `;
 
 const HamburgerComp = ({ setHamburgerOpen }) => {
+  const pathname = useLocation().pathname;
+
   return (
     <Hamburger>
       <CloseButton
@@ -108,50 +112,33 @@ const HamburgerComp = ({ setHamburgerOpen }) => {
         <CloseIcon />
       </CloseButton>
       <Menu>
-        <MenuItem idx={0}>
-          <button
-            onClick={() => {
-              setHamburgerOpen(false);
-              scrollToElement("theatre");
-            }}
-          >
-            theatre
-          </button>
-        </MenuItem>
-        <MenuItem idx={1}>
-          <button
-            onClick={() => {
-              setHamburgerOpen(false);
-              scrollToElement("cause");
-            }}
-          >
-            cause
-          </button>
-        </MenuItem>
-        <MenuItem idx={2}>
-          <button
-            onClick={() => {
-              setHamburgerOpen(false);
-              scrollToElement("donate");
-            }}
-          >
-            donate
-          </button>
-        </MenuItem>
-        <MenuItem idx={3}>
-          <button
-            onClick={() => {
-              setHamburgerOpen(false);
-              scrollToElement("socials");
-            }}
-          >
-            socials
-          </button>
-        </MenuItem>
+        {["Theatre", "Cause", "Donate", "Socials"].map((section, idx) => {
+          return (
+            <MenuItem key={section} idx={idx}>
+              {pathname === "/" ? (
+                <button
+                  onClick={() => {
+                    setHamburgerOpen(false);
+                    scrollToElement(section.toLowerCase());
+                  }}
+                >
+                  {section}
+                </button>
+              ) : (
+                <Link
+                  to={`/#${section.toLowerCase()}`}
+                  onClick={() => setHamburgerOpen(false)}
+                >
+                  {section}
+                </Link>
+              )}
+            </MenuItem>
+          );
+        })}
         <MenuItem idx={4}>
           <MenuCTAButton>Donate</MenuCTAButton>
         </MenuItem>
-        <MenuItem style={{ marginTop: "auto" }} idx={5}>
+        <MenuItem idx={5} style={{ marginTop: "auto" }}>
           <SmallGreyText>Connect with us:</SmallGreyText>
           <SocialsRow>
             <A href="https://www.facebook.com/EsplanadeSG">
