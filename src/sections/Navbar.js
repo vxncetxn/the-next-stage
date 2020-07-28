@@ -140,7 +140,7 @@ const NavbarComp = ({ setHamburgerOpen }) => {
         ) : (
           <li>
             <Link to="/" onClick={() => window.scrollTo(0, 0)}>
-              Back To Homepage
+              Back To Home Page
             </Link>
           </li>
         )}

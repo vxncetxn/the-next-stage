@@ -174,7 +174,7 @@ const FooterComp = () => {
     <Footer>
       <PrimaryRow>
         <LinkColumn>
-          <li>Site</li>
+          <li>Home Page</li>
           {["Theatre", "Cause", "Donate", "Socials"].map((section) => {
             return (
               <li key={section}>
@@ -193,6 +193,9 @@ const FooterComp = () => {
         </LinkColumn>
         <LinkColumn>
           <li>Others</li>
+          <li>
+            <Link to="/gallery">Gallery</Link>
+          </li>
           <li>
             <Link to="/faqs">FAQs</Link>
           </li>

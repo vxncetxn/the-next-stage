@@ -20,6 +20,9 @@ const Meta = () => {
     case "/privacy-policy":
       location = "Privacy Policy";
       break;
+    case "/gallery":
+      location = "Gallery";
+      break;
     default:
       location = "Page Not Found";
   }
