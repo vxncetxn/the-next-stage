@@ -19,6 +19,8 @@ const Faqs = lazy(() => import("./sections/Faqs"));
 const Press = lazy(() => import("./sections/Press"));
 const Tncs = lazy(() => import("./sections/Tncs"));
 const Privacy = lazy(() => import("./sections/Privacy"));
+const Gallery = lazy(() => import("./sections/Gallery"));
+const Magic = lazy(() => import("./sections/Magic"));
 const Error = lazy(() => import("./sections/Error"));
 
 const Container = styled.div`
@@ -93,6 +95,12 @@ function App() {
               </Route>
               <Route path="/privacy-policy">
                 <Privacy />
+              </Route>
+              <Route path="/gallery">
+                <Gallery />
+              </Route>
+              <Route path="/magic">
+                <Magic />
               </Route>
               <Route path="*" state="404">
                 <Error />
