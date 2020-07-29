@@ -16,6 +16,7 @@ const MagicTitleBar = styled(SectionTitleBar)`
 
 const MagicContent = styled.div`
   padding: 150px 100px 50px 100px;
+  width: 100%;
 
   @media (max-width: 1200px) {
     padding: 150px 75px 50px 75px;
@@ -37,8 +38,8 @@ const MagicComp = () => {
 
   return (
     <Magic>
-      <MagicTitleBar position="left">Magic</MagicTitleBar>
       <MagicContent></MagicContent>
+      <MagicTitleBar position="right">your artefact</MagicTitleBar>
     </Magic>
   );
 };

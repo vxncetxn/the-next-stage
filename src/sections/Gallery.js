@@ -70,7 +70,7 @@ const Count = styled.p`
 
 const GalleryComp = () => {
   const [total, setTotal] = useState(171);
-  const [artefacts, setArtefacts] = useState([...Array(10).keys()]);
+  const [artefacts, setArtefacts] = useState([...Array(3).keys()]);
   const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
@@ -79,7 +79,7 @@ const GalleryComp = () => {
 
   return (
     <Gallery>
-      <GalleryTitleBar position="left">Gallery</GalleryTitleBar>
+      <GalleryTitleBar position="left">gallery</GalleryTitleBar>
       <GalleryContent>
         {/* <Text>
           Check out the awesome creations from all of our generous donors! If
