@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
 import SectionTitleBar from "../components/SectionTitleBar";
-import Text from "../components/Text";
-import Anchor from "../components/Anchor";
+// import Text from "../components/Text";
+// import Anchor from "../components/Anchor";
 import GalleryItem from "../components/GalleryItem";
 import Pagination from "../components/Pagination";
 
@@ -41,7 +41,7 @@ const GalleryGrid = styled.ul`
     auto-fill,
     minmax(var(--auto-grid-min-size), 1fr)
   );
-  gap: 1rem;
+  gap: 20px;
   margin-top: 50px;
 
   @media (max-width: 896px) {
@@ -70,7 +70,32 @@ const Count = styled.p`
 
 const GalleryComp = () => {
   const [total, setTotal] = useState(171);
-  const [artefacts, setArtefacts] = useState([...Array(3).keys()]);
+  const [artefacts, setArtefacts] = useState([
+    {
+      colors: ["#ee0979", "#ff6a00"],
+      credits: { date: "23 Jul 2020", time: "08:52", name: "dzhane" },
+    },
+    {
+      colors: ["#B993D6", "#8CA6DB"],
+      credits: { date: "17 Jul 2020", time: "21:26", name: "venessa86" },
+    },
+    {
+      colors: ["#f2709c", "#ff9472"],
+      credits: { date: "20 Jul 2020", time: "17:45", name: "jathor007" },
+    },
+    {
+      colors: ["#ee0979", "#ff6a00"],
+      credits: { date: "23 Jul 2020", time: "08:52", name: "dzhane" },
+    },
+    {
+      colors: ["#B993D6", "#8CA6DB"],
+      credits: { date: "17 Jul 2020", time: "21:26", name: "venessa86" },
+    },
+    {
+      colors: ["#f2709c", "#ff9472"],
+      credits: { date: "20 Jul 2020", time: "17:45", name: "jathor007" },
+    },
+  ]);
   const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
@@ -96,7 +121,11 @@ const GalleryComp = () => {
         />
         <GalleryGrid>
           {artefacts.map((item, idx) => (
-            <GalleryItem key={idx} />
+            <GalleryItem
+              colorPoles={item.colors}
+              credits={item.credits}
+              key={idx}
+            />
           ))}
         </GalleryGrid>
       </GalleryContent>

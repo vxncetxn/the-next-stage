@@ -4,7 +4,9 @@
   "private": true,
   "dependencies": {
     "d3-interpolate": "^1.4.0",
+    "ky": "^0.23.0",
     "nice-color-palettes": "^3.0.0",
+    "randomcolor": "^0.6.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-helmet": "^6.1.0",

@@ -5,7 +5,7 @@ import { interpolateRgb } from "d3-interpolate";
 import getRandomInt from "../../helpers/getRandomInt";
 import randomChoice from "../../helpers/randomChoice";
 
-const Triangle = ({ ...others }) => {
+const Triangle = ({ colorPoles, ...others }) => {
   const triangleRef = useRef();
 
   const vertices = [
@@ -21,7 +21,7 @@ const Triangle = ({ ...others }) => {
     [3, 2, 1],
   ];
 
-  const colorIp = interpolateRgb("#00F260", "#0575E6");
+  const colorIp = interpolateRgb(colorPoles[0], colorPoles[1]);
   const colors = [
     colorIp(0),
     colorIp(0.2),
@@ -38,7 +38,7 @@ const Triangle = ({ ...others }) => {
   return (
     <mesh
       ref={triangleRef}
-      position={[getRandomInt(-6, 6), getRandomInt(-6, 6), getRandomInt(-6, 6)]}
+      position={[getRandomInt(-7, 7), getRandomInt(-7, 7), getRandomInt(-7, 7)]}
       rotation={[
         getRandomInt(0, 628) / 100,
         getRandomInt(0, 628) / 100,

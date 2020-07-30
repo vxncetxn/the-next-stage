@@ -1,23 +1,84 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
+
+import Artefact from "./artefact/Artefact";
+
+const Flow = keyframes`
+  to {
+    background-position: 200% center;
+  }
+`;
 
 const GalleryItem = styled.li`
+  position: relative;
   height: 300px;
-  padding: 5rem 1rem;
+  // padding: 5rem 1rem;
   text-align: center;
   font-size: 1.2rem;
-  background: var(--color-gradient-two);
+  // background: var(--color-gradient-two);
+  // background-color: #181b34;
   color: #ffffff;
   border-radius: 8px;
   //   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  // border: 1px solid red;
+  border: 2px solid var(--color-text);
 
   @media (max-width: 896px) {
     height: 200px;
   }
 `;
 
-const GalleryItemComp = () => {
-  return <GalleryItem />;
+const Credits = styled.div`
+  position: absolute;
+  left: 25px;
+  bottom: 16px;
+  font-family: var(--font-secondary);
+  font-size: 14px;
+  color: var(--color-text);
+  text-align: left;
+
+  & > .big-credits {
+    font-family: var(--font-primary);
+    font-size: 24px;
+    margin-top: 10px;
+
+    & > span {
+      font-weight: 700;
+
+      ${(props) => `background: linear-gradient(
+        150deg,
+        ${props.colorPoles[0]} 20%,
+        ${props.colorPoles[1]} 40%,
+        ${props.colorPoles[1]} 60%,
+        ${props.colorPoles[0]} 80%
+      );
+      background-size: 200% auto;`}
+
+      color: white;
+      background-clip: text;
+      text-fill-color: transparent;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+
+      animation: ${Flow} linear infinite;
+      animation-duration: 2s;
+    }
+  }
+`;
+
+const GalleryItemComp = ({ colorPoles, credits }) => {
+  return (
+    <GalleryItem>
+      <Artefact colorPoles={colorPoles} />
+      <Credits colorPoles={colorPoles}>
+        <p>{credits.date}</p>
+        <p>{credits.time}</p>
+        <p className="big-credits">
+          by <span>{credits.name}</span>
+        </p>
+      </Credits>
+    </GalleryItem>
+  );
 };
 
 export default GalleryItemComp;

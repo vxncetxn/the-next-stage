@@ -3,25 +3,29 @@ import { Helmet } from "react-helmet";
 import { useLocation } from "react-router-dom";
 
 const Meta = () => {
-  const pathname = useLocation().pathname;
+  const pathname = useLocation().pathname.split("/")[1];
+  console.log(pathname);
   var location;
   switch (pathname) {
-    case "/":
+    case "":
       break;
-    case "/faqs":
+    case "faqs":
       location = "FAQs";
       break;
-    case "/press-room":
+    case "press-room":
       location = "Press Room";
       break;
-    case "/terms-and-conditions":
+    case "terms-and-conditions":
       location = "Terms & Conditions";
       break;
-    case "/privacy-policy":
+    case "privacy-policy":
       location = "Privacy Policy";
       break;
-    case "/gallery":
+    case "gallery":
       location = "Gallery";
+      break;
+    case "✨THANKYOU✨":
+      location = "Your Artefact";
       break;
     default:
       location = "Page Not Found";

@@ -1,5 +1,4 @@
 import React, { useRef } from "react";
-import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { Canvas, useFrame, extend, useThree } from "react-three-fiber";
 
@@ -20,6 +19,7 @@ const Controls = () => {
   return (
     <orbitControls
       autoRotate
+      enableZoom={false}
       maxPolarAngle={Math.PI / 3}
       minPolarAngle={Math.PI / 3}
       ref={orbitRef}
@@ -28,26 +28,23 @@ const Controls = () => {
   );
 };
 
-const Artefact = () => {
+const Artefact = ({ colorPoles }) => {
   return (
-    <div style={{ width: "100%", height: 600, border: "1px solid red" }}>
-      <Canvas
-        camera={{ position: [0, 0, 20] }}
-        onCreated={({ gl }) => {
-          gl.shadowMap.enabled = true;
-          gl.shadowMap.type = THREE.PCFSoftShadowMap;
-        }}
-      >
-        <ambientLight />
-        <spotLight position={[0, 5, 10]} penumbra={1} castShadow />
-        <Controls />
-        <group>
-          {range(20, 0).map((n) => (
-            <Triangle key={n} />
-          ))}
-        </group>
-      </Canvas>
-    </div>
+    <Canvas
+      camera={{ position: [0, 0, 20] }}
+      onCreated={({ gl }) => {
+        gl.setPixelRatio(window.devicePixelRatio);
+      }}
+    >
+      <ambientLight />
+      <spotLight position={[0, 5, 10]} penumbra={1} castShadow />
+      <Controls />
+      <group>
+        {range(20, 0).map((n) => (
+          <Triangle key={n} colorPoles={colorPoles} />
+        ))}
+      </group>
+    </Canvas>
   );
 };
 

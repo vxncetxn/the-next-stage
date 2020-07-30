@@ -104,7 +104,7 @@ function App() {
               {/* <Route path="/✨💓 THANKYOU ✨💓">
                 <Magic />
               </Route> */}
-              <Route path="/✨THANKYOU✨">
+              <Route path="/✨THANKYOU✨/:magic">
                 <Magic />
               </Route>
               <Route path="/trial">
