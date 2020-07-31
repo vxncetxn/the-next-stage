@@ -1,0 +1,34 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Donor {
+  id        String     @default(cuid()) @id
+  email     String     @unique
+  nickname  String
+  magic     Magic?
+  artefacts Artefact[]
+  updatedAt DateTime   @updatedAt
+}
+
+model Magic {
+  id        String   @default(cuid()) @id
+  donor     Donor    @relation(fields: [donorId], references: [id])
+  donorId   String
+  updatedAt DateTime @updatedAt
+}
+
+model Artefact {
+  id        String   @default(cuid()) @id
+  donor     Donor    @relation(fields: [donorId], references: [id])
+  donorId   String
+  updatedAt DateTime @updatedAt
+}
