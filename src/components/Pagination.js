@@ -15,7 +15,7 @@ const Pagination = styled.div`
   font-size: 24px;
   color: var(--color-text);
   padding-bottom: 8px;
-  border-bottom: 1px solid var(--color-text);
+  border-bottom: 2px solid var(--color-text);
 
   & > * + * {
     margin-left: 10px;
@@ -52,6 +52,12 @@ const PagButton = styled.button`
           animation: ${Flow} 4s linear infinite;
         `
       : null}
+
+  &:disabled {
+    color: var(--color-grey);
+    text-decoration: line-through;
+    cursor: not-allowed;
+  }
 `;
 
 const PaginationComp = ({
@@ -98,12 +104,22 @@ const PaginationComp = ({
 
     return buttonsArr;
   };
-  const goToNextPage = () => setCurrentPage(currentPage + 1);
-  const goToPreviousPage = () => setCurrentPage(currentPage - 1);
+  const goToNextPage = () => {
+    if (currentPage + 1 <= totalPages) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+  const goToPreviousPage = () => {
+    if (currentPage - 1 > 0) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
 
   return (
     <Pagination {...others}>
-      <PagButton onClick={goToPreviousPage}>prev</PagButton>
+      <PagButton onClick={goToPreviousPage} disabled={currentPage === 1}>
+        prev
+      </PagButton>
       {getPagNumsArr().map((num) => {
         if (num === "...") {
           return <span>...</span>;
@@ -118,7 +134,9 @@ const PaginationComp = ({
           );
         }
       })}
-      <PagButton onClick={goToNextPage}>next</PagButton>
+      <PagButton onClick={goToNextPage} disabled={currentPage === totalPages}>
+        next
+      </PagButton>
     </Pagination>
   );
 };

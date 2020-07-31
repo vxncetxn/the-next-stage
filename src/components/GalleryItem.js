@@ -16,12 +16,19 @@ const GalleryItem = styled.li`
   text-align: center;
   font-size: 1.2rem;
   // background: var(--color-gradient-two);
-  // background-color: #181b34;
+  background-color: var(--color-element);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
   color: #ffffff;
   border-radius: 8px;
   //   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
   // border: 1px solid red;
-  border: 2px solid var(--color-text);
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: border 0.3s ease-out;
+
+  &:hover {
+    border: 2px solid var(--color-text);
+  }
 
   @media (max-width: 896px) {
     height: 200px;

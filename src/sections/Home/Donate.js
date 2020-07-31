@@ -149,7 +149,7 @@ const DonationPanel = styled.div`
   padding: calc(20px + 3%) calc(10px + 6%);
   width: 800px;
   height: 450px;
-  background-color: #181b34;
+  background-color: var(--color-element);
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
   font-family: var(--font-secondary);
   color: var(--color-text);

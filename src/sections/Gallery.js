@@ -41,7 +41,7 @@ const GalleryGrid = styled.ul`
     auto-fill,
     minmax(var(--auto-grid-min-size), 1fr)
   );
-  gap: 20px;
+  gap: 30px;
   margin-top: 50px;
 
   @media (max-width: 896px) {
@@ -69,7 +69,7 @@ const Count = styled.p`
 `;
 
 const GalleryComp = () => {
-  const [total, setTotal] = useState(171);
+  const [total, setTotal] = useState(55);
   const [artefacts, setArtefacts] = useState([
     {
       colors: ["#ee0979", "#ff6a00"],
@@ -115,7 +115,7 @@ const GalleryComp = () => {
         <Count>{total} artefacts:</Count>
         <Pagination
           style={{ marginTop: 20 }}
-          totalPages={Math.ceil(total / 10)}
+          totalPages={Math.ceil(total / 6)}
           currentPage={currentPage}
           setCurrentPage={setCurrentPage}
         />

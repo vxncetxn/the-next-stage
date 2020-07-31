@@ -23,8 +23,7 @@ const Defaults = createGlobalStyle`
 
       --color-background: #101223;
       --color-text: #ffffff;
-      // --color-background: #f2f2f2;
-      // --color-text: #525f7f;
+      --color-element: #181b34;
       --color-gradient-one: #ee0979;
       --color-gradient-two: #ff6a00;
       // --color-gradient-one: #00f260;
