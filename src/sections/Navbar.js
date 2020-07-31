@@ -89,22 +89,20 @@ const Logo = styled.img`
 
 const NavbarComp = ({ setHamburgerOpen }) => {
   const pathname = useLocation().pathname;
-  const [atPageTop, setAtPageTop] = useState(window.scrollY < 600);
+  const [atPageTop, setAtPageTop] = useState(true);
 
   useEffect(() => {
     let last_known_scroll_position = 0;
     let ticking = false;
 
-    function doSomething(scroll_pos) {
-      setAtPageTop(scroll_pos < 600);
-    }
+    setAtPageTop(window.scrollY < window.innerHeight * 0.85);
 
     window.addEventListener("scroll", function (e) {
       last_known_scroll_position = window.scrollY;
 
       if (!ticking) {
         window.requestAnimationFrame(function () {
-          doSomething(last_known_scroll_position);
+          setAtPageTop(last_known_scroll_position < window.innerHeight * 0.85);
           ticking = false;
         });
 

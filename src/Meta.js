@@ -4,7 +4,6 @@ import { useLocation } from "react-router-dom";
 
 const Meta = () => {
   const pathname = useLocation().pathname.split("/")[1];
-  console.log(pathname);
   var location;
   switch (pathname) {
     case "":

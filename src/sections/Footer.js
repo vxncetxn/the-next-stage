@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled, { keyframes } from "styled-components";
 import { useLocation } from "react-router-dom";
 import { HashLink as Link } from "react-router-hash-link";
@@ -13,6 +13,8 @@ import { ReactComponent as PinIcon } from "../assets/icons/pin.svg";
 import PlainAnchor from "../components/PlainAnchor";
 
 import scrollToElement from "../helpers/scrollToElement";
+import validateFilled from "../helpers/validateFilled";
+import validateEmail from "../helpers/validateEmail";
 
 const A = PlainAnchor;
 
@@ -136,31 +138,44 @@ const SubscribeGroup = styled.div`
 const SubscribeInput = styled.input`
   font-family: var(--font-secondary);
   font-size: 14px;
+  color: var(--color-background);
   width: 350px;
   padding: 10px 100px 10px 8px;
   border-radius: 5px;
   background-color: var(--color-text);
   border: none;
   margin-top: 10px;
+  outline: ${(props) => (props.invalid ? "2px solid red" : null)};
 
   @media (max-width: 600px) {
     font-size: 12px;
   }
 `;
 
+const SubscribeError = styled.p`
+  display: flex;
+  align-items: flex-end;
+  color: red;
+  padding-left: 8px;
+  height: 30px;
+  // border: 1px solid green;
+`;
+
 const SubscribeButton = styled.button`
   position: absolute;
   right: 0;
-  bottom: 0;
+  bottom: 30px;
   padding: 10px 20px;
   border-radius: 0 5px 5px 0;
+  font-family: var(--font-primary);
+  font-weight: 700;
   background: rgb(129, 5, 216);
   background: linear-gradient(
     140deg,
-    #ee0979 20%,
-    #ff6a00 40%,
-    #ff6a00 60%,
-    #ee0979 80%
+    var(--color-gradient-one) 20%,
+    var(--color-gradient-two) 40%,
+    var(--color-gradient-two) 60%,
+    var(--color-gradient-one) 80%
   );
   background-size: 200% auto;
   animation: ${Flow} 2s linear infinite;
@@ -198,6 +213,7 @@ const ContactsColumn = styled.ul`
 
   & > li {
     display: flex;
+    align-items: center;
   }
 
   & > li + li {
@@ -211,6 +227,24 @@ const ContactsColumn = styled.ul`
 
 const FooterComp = () => {
   const pathname = useLocation().pathname;
+  const [subscribeVal, setSubscribeVal] = useState("");
+  const [subscribeError, setSubscribeError] = useState("");
+
+  const onSubscribeSubmit = () => {
+    if (validateFilled(subscribeVal)) {
+      if (validateEmail(subscribeVal)) {
+        setSubscribeError("");
+        setSubscribeVal("");
+        window.open(
+          `https://esplanade.us16.list-manage.com/subscribe?u=de0574ea85b2a96b18407e8d7&id=abb3f82f99&MERGE0=${subscribeVal}`
+        );
+      } else {
+        setSubscribeError("Your email is invalid.");
+      }
+    } else {
+      setSubscribeError("Your email is required.");
+    }
+  };
 
   return (
     <Footer>
@@ -274,8 +308,14 @@ const FooterComp = () => {
               name="subscribe"
               id="subscribe"
               placeholder="Your email address"
+              value={subscribeVal}
+              onChange={(e) => setSubscribeVal(e.target.value)}
+              invalid={subscribeError}
             />
-            <SubscribeButton>Submit</SubscribeButton>
+            <SubscribeError>{subscribeError}</SubscribeError>
+            <SubscribeButton onClick={onSubscribeSubmit}>
+              Submit
+            </SubscribeButton>
           </SubscribeGroup>
           <SmallGreyText style={{ marginTop: 20 }}>
             Connect with us:
