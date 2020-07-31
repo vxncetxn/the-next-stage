@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { useLocation } from "react-router-dom";
 import { HashLink as Link } from "react-router-hash-link";
 
@@ -15,6 +15,12 @@ import PlainAnchor from "../components/PlainAnchor";
 import scrollToElement from "../helpers/scrollToElement";
 
 const A = PlainAnchor;
+
+const Flow = keyframes`
+  to {
+    background-position: 200% center;
+  }
+`;
 
 const Footer = styled.footer`
   padding: 100px 100px 20px 100px;
@@ -123,9 +129,45 @@ const SocialsColumn = styled.div`
   }
 `;
 
+const SubscribeGroup = styled.div`
+  position: relative;
+`;
+
 const SubscribeInput = styled.input`
-  width: 300px;
-  height: 40px;
+  font-family: var(--font-secondary);
+  font-size: 14px;
+  width: 350px;
+  padding: 10px 100px 10px 8px;
+  border-radius: 5px;
+  background-color: var(--color-text);
+  border: none;
+  margin-top: 10px;
+
+  @media (max-width: 600px) {
+    font-size: 12px;
+  }
+`;
+
+const SubscribeButton = styled.button`
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  padding: 10px 20px;
+  border-radius: 0 5px 5px 0;
+  background: rgb(129, 5, 216);
+  background: linear-gradient(
+    140deg,
+    #ee0979 20%,
+    #ff6a00 40%,
+    #ff6a00 60%,
+    #ee0979 80%
+  );
+  background-size: 200% auto;
+  animation: ${Flow} 2s linear infinite;
+
+  &:hover {
+    animation: ${Flow} 0.3s linear infinite;
+  }
 `;
 
 const SocialsIconGroup = styled.div`
@@ -152,7 +194,7 @@ const LogosGroup = styled.div`
 `;
 
 const ContactsColumn = styled.ul`
-  width: 300px;
+  width: 350px;
 
   & > li {
     display: flex;
@@ -224,10 +266,17 @@ const FooterComp = () => {
           </li>
         </LinkColumn>
         <SocialsColumn>
-          <label htmlFor="subscribe">
-            <SmallGreyText>Keep updated with Esplanade:</SmallGreyText>
-          </label>
-          <SubscribeInput name="subscribe" id="subscribe" />
+          <SubscribeGroup>
+            <label htmlFor="subscribe">
+              <SmallGreyText>Keep updated with Esplanade:</SmallGreyText>
+            </label>
+            <SubscribeInput
+              name="subscribe"
+              id="subscribe"
+              placeholder="Your email address"
+            />
+            <SubscribeButton>Submit</SubscribeButton>
+          </SubscribeGroup>
           <SmallGreyText style={{ marginTop: 20 }}>
             Connect with us:
           </SmallGreyText>
@@ -271,7 +320,7 @@ const FooterComp = () => {
             </A>
           </LogosGroup>
         </LogosColumn>
-        <ContactsColumn style={{ width: 300 }}>
+        <ContactsColumn>
           <li>
             <MailIcon />
             <p>
