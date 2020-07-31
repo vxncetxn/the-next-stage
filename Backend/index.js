@@ -69,6 +69,46 @@ app.get("/api/magic=:key", async (req, res) => {
   }
 });
 
+app.get("/api/artefacts/count", async (req, res) => {
+  try {
+    const count = await prisma.artefact.count();
+
+    if (isNaN(count)) {
+      return res.status(404).json({
+        message: "Something went wrong.",
+      });
+    } else {
+      return res.status(200).json({ message: "Success!", count });
+    }
+  } catch (err) {
+    console.log(err);
+    return res.status(404).json({ message: "Something went wrong." });
+  }
+});
+
+app.get("/api/artefact/:id", async (req, res) => {
+  try {
+    const id = req.params.id;
+
+    const artefact = await prisma.artefact.findOne({
+      where: {
+        id,
+      },
+    });
+
+    if (!artefact) {
+      return res.status(404).json({
+        message: "Something went wrong.",
+      });
+    } else {
+      return res.status(200).json({ message: "Success!", artefact });
+    }
+  } catch (err) {
+    console.log(err);
+    return res.status(404).json({ message: "Something went wrong." });
+  }
+});
+
 app.use((err, req, res, next) => {
   console.log(err.stack);
   res.status(500).send(err.message);
