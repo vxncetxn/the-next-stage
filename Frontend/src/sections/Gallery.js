@@ -86,7 +86,7 @@ const GalleryComp = () => {
     },
   ]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [modal, setModal] = useState({ open: false, props: {} });
+  const [modal, setModal] = useState({ open: false, props: {}, idx: null });
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -119,13 +119,16 @@ const GalleryComp = () => {
                 setModal({
                   open: true,
                   props: { colorPoles: item.colors, credits: item.credits },
+                  idx,
                 })
               }
             />
           ))}
         </GalleryGrid>
       </GalleryContent>
-      <GalleryModal modal={modal} setModal={setModal} />
+      {modal.open ? (
+        <GalleryModal modal={modal} setModal={setModal} artefacts={artefacts} />
+      ) : null}
     </Gallery>
   );
 };
