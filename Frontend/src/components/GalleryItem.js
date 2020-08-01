@@ -12,16 +12,9 @@ const Flow = keyframes`
 const GalleryItem = styled.li`
   position: relative;
   height: 300px;
-  // padding: 5rem 1rem;
-  text-align: center;
-  font-size: 1.2rem;
-  // background: var(--color-gradient-two);
   background-color: var(--color-element);
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-  color: #ffffff;
   border-radius: 8px;
-  //   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-  // border: 1px solid red;
   border: 2px solid transparent;
   cursor: pointer;
   transition: border 0.3s ease-out;
@@ -73,13 +66,13 @@ const Credits = styled.div`
   }
 `;
 
-const GalleryItemComp = ({ colorPoles, credits }) => {
+const GalleryItemComp = ({ colorPoles, credits, ...others }) => {
   return (
-    <GalleryItem>
+    <GalleryItem {...others}>
       <Artefact colorPoles={colorPoles} />
       <Credits colorPoles={colorPoles}>
-        <p>{credits.date}</p>
-        <p>{credits.time}</p>
+        {/* <p>{credits.date}</p>
+        <p>{credits.time}</p> */}
         <p className="big-credits">
           by <span>{credits.name}</span>
         </p>

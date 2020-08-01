@@ -6,6 +6,7 @@ import SectionTitleBar from "../components/SectionTitleBar";
 // import Anchor from "../components/Anchor";
 import GalleryItem from "../components/GalleryItem";
 import Pagination from "../components/Pagination";
+import GalleryModal from "../components/GalleryModal";
 
 const Gallery = styled.section`
   position: relative;
@@ -83,20 +84,9 @@ const GalleryComp = () => {
       colors: ["#f2709c", "#ff9472"],
       credits: { date: "20 Jul 2020", time: "17:45", name: "jathor007" },
     },
-    {
-      colors: ["#ee0979", "#ff6a00"],
-      credits: { date: "23 Jul 2020", time: "08:52", name: "dzhane" },
-    },
-    {
-      colors: ["#B993D6", "#8CA6DB"],
-      credits: { date: "17 Jul 2020", time: "21:26", name: "venessa86" },
-    },
-    {
-      colors: ["#f2709c", "#ff9472"],
-      credits: { date: "20 Jul 2020", time: "17:45", name: "jathor007" },
-    },
   ]);
   const [currentPage, setCurrentPage] = useState(1);
+  const [modal, setModal] = useState({ open: false, props: {} });
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -125,10 +115,17 @@ const GalleryComp = () => {
               colorPoles={item.colors}
               credits={item.credits}
               key={idx}
+              onClick={() =>
+                setModal({
+                  open: true,
+                  props: { colorPoles: item.colors, credits: item.credits },
+                })
+              }
             />
           ))}
         </GalleryGrid>
       </GalleryContent>
+      <GalleryModal modal={modal} setModal={setModal} />
     </Gallery>
   );
 };

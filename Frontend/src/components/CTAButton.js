@@ -17,10 +17,10 @@ const CTAButton = styled.button`
   background: rgb(129, 5, 216);
   background: linear-gradient(
     150deg,
-    #ee0979 20%,
-    #ff6a00 40%,
-    #ff6a00 60%,
-    #ee0979 80%
+    var(--color-gradient-one) 20%,
+    var(--color-gradient-two) 40%,
+    var(--color-gradient-two) 60%,
+    var(--color-gradient-one) 80%
   );
   background-size: 200% auto;
   animation: ${Flow} 2s linear infinite;
