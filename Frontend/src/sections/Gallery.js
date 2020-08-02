@@ -100,7 +100,6 @@ const GalleryComp = () => {
           totalPages={Math.ceil(total / 6)}
           currentPage={currentPage}
           setCurrentPage={setCurrentPage}
-          maxUnits={7}
         />
         <GalleryGrid>
           {artefacts.map((item, idx) => (

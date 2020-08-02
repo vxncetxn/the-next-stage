@@ -29,6 +29,10 @@ const Pagination = styled.div`
   }
 
   @media (max-width: 600px) {
+    font-size: 18px;
+  }
+
+  @media (max-width: 414px) {
     font-size: 16px;
   }
 
@@ -63,6 +67,10 @@ const Ellipsis = styled.span`
 
   @media (max-width: 600px) {
     width: 30px;
+  }
+
+  @media (max-width: 414px) {
+    width: 28px;
   }
 `;
 
@@ -102,6 +110,10 @@ const PagButton = styled.button`
   @media (max-width: 600px) {
     width: 30px;
   }
+
+  @media (max-width: 414px) {
+    width: 28px;
+  }
 `;
 
 const PaginationComp = ({
@@ -116,14 +128,17 @@ const PaginationComp = ({
     const resizeHandler = () => {
       let units;
 
-      if (window.innerWidth <= 600) {
+      if (window.innerWidth <= 414) {
+        units = Math.floor((0.7 * window.innerWidth - 40) / 30) - 2;
+      } else if (window.innerWidth <= 600) {
         units = Math.floor((0.7 * window.innerWidth - 40) / 32) - 2;
       } else if (window.innerWidth <= 896) {
         units = Math.floor((0.7 * window.innerWidth - 100) / 44) - 2;
       } else if (window.innerWidth <= 1200) {
         units = Math.floor((0.7 * window.innerWidth - 150) / 58) - 2;
       } else {
-        units = Math.floor((0.7 * window.innerWidth - 200) / 65) - 2;
+        units =
+          Math.floor((0.7 * Math.min(1440, window.innerWidth) - 200) / 65) - 2;
       }
 
       setMaxUnits(Math.max(5, units));

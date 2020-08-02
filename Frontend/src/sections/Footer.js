@@ -149,6 +149,7 @@ const SubscribeInput = styled.input`
 
   @media (max-width: 600px) {
     font-size: 12px;
+    width: 320px;
   }
 `;
 
@@ -158,7 +159,6 @@ const SubscribeError = styled.p`
   color: red;
   padding-left: 8px;
   height: 30px;
-  // border: 1px solid green;
 `;
 
 const SubscribeButton = styled.button`
@@ -179,6 +179,10 @@ const SubscribeButton = styled.button`
   );
   background-size: 200% auto;
   animation: ${Flow} 2s linear infinite;
+
+  @media (max-width: 600px) {
+    padding: 10.5px 20px;
+  }
 
   &:hover {
     animation: ${Flow} 0.3s linear infinite;
@@ -210,6 +214,10 @@ const LogosGroup = styled.div`
 
 const ContactsColumn = styled.ul`
   width: 350px;
+
+  @media (max-width: 600px) {
+    width: 320px;
+  }
 
   & > li {
     display: flex;

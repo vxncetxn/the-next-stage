@@ -28,24 +28,32 @@ const GalleryItem = styled.li`
   }
 `;
 
-const Credits = styled.div`
+const Title = styled.div`
   position: absolute;
   left: 25px;
   bottom: 16px;
-  font-family: var(--font-secondary);
-  font-size: 14px;
+  font-family: var(--font-primary);
+  font-size: 24px;
   color: var(--color-text);
-  text-align: left;
 
-  & > .big-credits {
-    font-family: var(--font-primary);
-    font-size: 24px;
-    margin-top: 10px;
+  @media (max-width: 1200px) {
+    font-size: 22px;
+  }
 
-    & > span {
-      font-weight: 700;
+  @media (max-width: 896px) {
+    font-size: 20px;
+    left: 18px;
+    bottom: 10px;
+  }
 
-      ${(props) => `background: linear-gradient(
+  @media (max-width: 600px) {
+    font-size: 18px;
+  }
+
+  & > span {
+    font-weight: 700;
+
+    ${(props) => `background: linear-gradient(
         150deg,
         ${props.colorPoles[0]} 20%,
         ${props.colorPoles[1]} 40%,
@@ -54,15 +62,13 @@ const Credits = styled.div`
       );
       background-size: 200% auto;`}
 
-      color: white;
-      background-clip: text;
-      text-fill-color: transparent;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-fill-color: transparent;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 
-      animation: ${Flow} linear infinite;
-      animation-duration: 2s;
-    }
+    animation: ${Flow} linear infinite;
+    animation-duration: 2s;
   }
 `;
 
@@ -70,13 +76,9 @@ const GalleryItemComp = ({ colorPoles, credits, ...others }) => {
   return (
     <GalleryItem {...others}>
       <Artefact colorPoles={colorPoles} />
-      <Credits colorPoles={colorPoles}>
-        {/* <p>{credits.date}</p>
-        <p>{credits.time}</p> */}
-        <p className="big-credits">
-          by <span>{credits.name}</span>
-        </p>
-      </Credits>
+      <Title colorPoles={colorPoles}>
+        by <span>{credits.name}</span>
+      </Title>
     </GalleryItem>
   );
 };

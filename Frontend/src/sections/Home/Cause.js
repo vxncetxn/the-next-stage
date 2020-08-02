@@ -277,7 +277,7 @@ const CauseComp = () => {
           .
         </Text>
       </CauseContent>
-      <CauseTitleBar position="right">the cause</CauseTitleBar>
+      <CauseTitleBar position="right">cause</CauseTitleBar>
       <ImageGroupWrapper>
         <ImageGroup imageGroupInView={true}>
           <ImageOne />

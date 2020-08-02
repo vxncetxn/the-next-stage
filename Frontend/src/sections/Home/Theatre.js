@@ -108,7 +108,7 @@ const TheatreComp = () => {
 
   return (
     <Theatre id="theatre">
-      <SectionTitleBar position="left">the theatre</SectionTitleBar>
+      <SectionTitleBar position="left">theatre</SectionTitleBar>
       <TheatreContent contentInView={true}>
         <QuoteText style={{ marginBottom: 40 }}>
           Esplanade has always been a place for everyone.
