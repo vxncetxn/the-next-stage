@@ -50,23 +50,24 @@ const Pagination = styled.div`
 `;
 
 const Ellipsis = styled.span`
-  padding: 2px 12px;
+  width: 55px;
+  text-align: center;
 
   @media (max-width: 1200px) {
-    padding: 2px 10px;
+    width: 50px;
   }
 
   @media (max-width: 896px) {
-    padding: 2px 10px;
+    width: 40px;
   }
 
   @media (max-width: 600px) {
-    padding: 2px 6px;
+    width: 30px;
   }
 `;
 
 const PagButton = styled.button`
-  padding: 2px 12px;
+  width: 55px;
   border-radius: 20px;
 
   ${(props) =>
@@ -91,15 +92,15 @@ const PagButton = styled.button`
   }
 
   @media (max-width: 1200px) {
-    padding: 2px 10px;
+    width: 50px;
   }
 
   @media (max-width: 896px) {
-    padding: 2px 10px;
+    width: 40px;
   }
 
   @media (max-width: 600px) {
-    padding: 2px 6px;
+    width: 30px;
   }
 `;
 
@@ -113,13 +114,19 @@ const PaginationComp = ({
 
   useEffect(() => {
     const resizeHandler = () => {
-      if (window.innerWidth < 896) {
-        setMaxUnits(5);
-      } else if (window.innerWidth < 1200) {
-        setMaxUnits(7);
+      let units;
+
+      if (window.innerWidth <= 600) {
+        units = Math.floor((0.7 * window.innerWidth - 40) / 32) - 2;
+      } else if (window.innerWidth <= 896) {
+        units = Math.floor((0.7 * window.innerWidth - 100) / 44) - 2;
+      } else if (window.innerWidth <= 1200) {
+        units = Math.floor((0.7 * window.innerWidth - 150) / 58) - 2;
       } else {
-        setMaxUnits(9);
+        units = Math.floor((0.7 * window.innerWidth - 200) / 65) - 2;
       }
+
+      setMaxUnits(Math.max(5, units));
     };
 
     resizeHandler();
