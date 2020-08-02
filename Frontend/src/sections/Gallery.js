@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
 import SectionTitleBar from "../components/SectionTitleBar";
-// import Text from "../components/Text";
-// import Anchor from "../components/Anchor";
 import GalleryItem from "../components/GalleryItem";
 import Pagination from "../components/Pagination";
 import GalleryModal from "../components/GalleryModal";
@@ -70,7 +68,7 @@ const Count = styled.p`
 `;
 
 const GalleryComp = () => {
-  const [total, setTotal] = useState(55);
+  const [total, setTotal] = useState(550);
   const [artefacts, setArtefacts] = useState([
     {
       colors: ["#ee0979", "#ff6a00"],
@@ -96,18 +94,13 @@ const GalleryComp = () => {
     <Gallery>
       <GalleryTitleBar position="left">gallery</GalleryTitleBar>
       <GalleryContent>
-        {/* <Text>
-          Check out the awesome creations from all of our generous donors! If
-          you haven't donated yet and too would like to contribute to this
-          ever-growing gallery, we would greatly appreciate your{" "}
-          <Anchor>donations</Anchor>. ❤️
-        </Text> */}
         <Count>{total} artefacts:</Count>
         <Pagination
           style={{ marginTop: 20 }}
           totalPages={Math.ceil(total / 6)}
           currentPage={currentPage}
           setCurrentPage={setCurrentPage}
+          maxUnits={7}
         />
         <GalleryGrid>
           {artefacts.map((item, idx) => (

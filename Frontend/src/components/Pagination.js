@@ -1,5 +1,8 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled, { keyframes, css } from "styled-components";
+
+import { ReactComponent as LeftArrowIcon } from "../assets/icons/left-arrow.svg";
+import { ReactComponent as RightArrowIcon } from "../assets/icons/right-arrow.svg";
 
 import range from "../helpers/range";
 
@@ -17,10 +20,6 @@ const Pagination = styled.div`
   padding-bottom: 8px;
   border-bottom: 2px solid var(--color-text);
 
-  & > * + * {
-    margin-left: 10px;
-  }
-
   @media (max-width: 1200px) {
     font-size: 22px;
   }
@@ -30,7 +29,39 @@ const Pagination = styled.div`
   }
 
   @media (max-width: 600px) {
-    font-size: 18px;
+    font-size: 16px;
+  }
+
+  & > * + * {
+    margin-left: 10px;
+
+    @media (max-width: 1200px) {
+      margin-left: 8px;
+    }
+
+    @media (max-width: 896px) {
+      margin-left: 4px;
+    }
+
+    @media (max-width: 600px) {
+      margin-left: 2px;
+    }
+  }
+`;
+
+const Ellipsis = styled.span`
+  padding: 2px 12px;
+
+  @media (max-width: 1200px) {
+    padding: 2px 10px;
+  }
+
+  @media (max-width: 896px) {
+    padding: 2px 10px;
+  }
+
+  @media (max-width: 600px) {
+    padding: 2px 6px;
   }
 `;
 
@@ -58,6 +89,18 @@ const PagButton = styled.button`
     text-decoration: line-through;
     cursor: not-allowed;
   }
+
+  @media (max-width: 1200px) {
+    padding: 2px 10px;
+  }
+
+  @media (max-width: 896px) {
+    padding: 2px 10px;
+  }
+
+  @media (max-width: 600px) {
+    padding: 2px 6px;
+  }
 `;
 
 const PaginationComp = ({
@@ -66,9 +109,25 @@ const PaginationComp = ({
   setCurrentPage,
   ...others
 }) => {
+  const [maxUnits, setMaxUnits] = useState(5);
+
+  useEffect(() => {
+    const resizeHandler = () => {
+      if (window.innerWidth < 896) {
+        setMaxUnits(5);
+      } else if (window.innerWidth < 1200) {
+        setMaxUnits(7);
+      } else {
+        setMaxUnits(9);
+      }
+    };
+
+    resizeHandler();
+    window.addEventListener("resize", resizeHandler);
+  }, []);
+
   const getPagNumsArr = () => {
     let buttonsArr = [];
-    const maxUnits = 9;
     const maxContUnits = maxUnits - 2;
 
     if (totalPages > maxUnits + 1) {
@@ -118,24 +177,26 @@ const PaginationComp = ({
   return (
     <Pagination {...others}>
       <PagButton onClick={goToPreviousPage} disabled={currentPage === 1}>
-        prev
+        {/* prev */}
+        <LeftArrowIcon width="14" height="14" />
       </PagButton>
       {getPagNumsArr().map((num) => {
         if (num === "...") {
-          return <span>...</span>;
+          return <Ellipsis>..</Ellipsis>;
         } else {
           return (
             <PagButton
               onClick={() => setCurrentPage(num)}
               selected={currentPage === num}
             >
-              {num}
+              {num.toString().padStart(2, "0")}
             </PagButton>
           );
         }
       })}
       <PagButton onClick={goToNextPage} disabled={currentPage === totalPages}>
-        next
+        {/* next */}
+        <RightArrowIcon width="14" height="14" />
       </PagButton>
     </Pagination>
   );
