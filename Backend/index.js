@@ -194,6 +194,14 @@ app.get("/api/artefact/:id", async (req, res) => {
       where: {
         id,
       },
+      include: {
+        donor: {
+          select: {
+            nickname: true,
+            amount: true,
+          },
+        },
+      },
     });
 
     if (!artefact) {

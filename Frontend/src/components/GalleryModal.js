@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { createPortal } from "react-dom";
 import styled, { keyframes } from "styled-components";
+import { useHistory } from "react-router-dom";
 
 import { ReactComponent as LeftArrowIcon } from "../assets/icons/left-arrow.svg";
 import { ReactComponent as RightArrowIcon } from "../assets/icons/right-arrow.svg";
@@ -240,6 +241,8 @@ const Share = styled.div`
 `;
 
 const GalleryModalComp = ({ modal, setModal, artefacts, ...others }) => {
+  const history = useHistory();
+
   useLockBodyScroll();
 
   const {
@@ -276,18 +279,24 @@ const GalleryModalComp = ({ modal, setModal, artefacts, ...others }) => {
     <>
       {createPortal(
         <Container {...others}>
-          <LeftButton onClick={goToPreviousItem} disabled={idx === 0}>
+          <LeftButton
+            onClick={goToPreviousItem}
+            disabled={idx === null || idx === 0}
+          >
             <LeftArrowIcon />
           </LeftButton>
           <RightButton
             onClick={goToNextItem}
-            disabled={idx === artefacts.length - 1}
+            disabled={idx === null || idx === artefacts.length - 1}
           >
             <RightArrowIcon />
           </RightButton>
           <Modal>
             <CloseButton
-              onClick={() => setModal({ open: false, props: {}, idx: null })}
+              onClick={() => {
+                setModal({ open: false, props: {}, idx: null });
+                history.push("/gallery");
+              }}
               aria-label="Close artefact modal"
             >
               <CloseIcon />

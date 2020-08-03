@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import ky from "ky";
-import { useLocation } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
+
+import useQuery from "../helpers/useQuery";
 
 import SectionTitleBar from "../components/SectionTitleBar";
 import GalleryItem from "../components/GalleryItem";
@@ -70,9 +72,9 @@ const Count = styled.p`
 `;
 
 const GalleryComp = () => {
-  var paramsString = useLocation().search;
-  var searchParams = new URLSearchParams(paramsString);
-  const pageQuery = searchParams.get("page");
+  const artefactId = useParams().id;
+  const pageQuery = useQuery().get("page");
+  const history = useHistory();
 
   const [total, setTotal] = useState(550);
   const [artefacts, setArtefacts] = useState([]);
@@ -87,6 +89,29 @@ const GalleryComp = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
+    const fetchArtefact = async () => {
+      try {
+        const fetchedArtefact = await ky
+          .get(`http://localhost:3001/api/artefact/${artefactId}`)
+          .json();
+
+        setModal({
+          open: true,
+          artefact: fetchedArtefact.data,
+          idx: null,
+        });
+      } catch (err) {
+        console.log(err);
+        history.push("/gallery");
+      }
+    };
+
+    if (artefactId) {
+      fetchArtefact();
+    }
   }, []);
 
   useEffect(() => {
@@ -122,13 +147,14 @@ const GalleryComp = () => {
               nickname={item.donor.nickname}
               form={item.form}
               key={idx}
-              onClick={() =>
+              onClick={() => {
                 setModal({
                   open: true,
                   artefact: item,
                   idx,
-                })
-              }
+                });
+                history.push(`/gallery/${item.id}`);
+              }}
             />
           ))}
         </GalleryGrid>

@@ -23,8 +23,6 @@ const Gallery = lazy(() => import("./sections/Gallery"));
 const Magic = lazy(() => import("./sections/Magic"));
 const Error = lazy(() => import("./sections/Error"));
 
-const Artefact = lazy(() => import("./components/artefact/Artefact"));
-
 const Container = styled.div`
   max-width: 1440px;
   margin: 0 auto 0 auto;
@@ -98,7 +96,7 @@ function App() {
               <Route path="/privacy-policy">
                 <Privacy />
               </Route>
-              <Route path="/gallery">
+              <Route path="/gallery/:id?">
                 <Gallery />
               </Route>
               {/* <Route path="/✨💓 THANKYOU ✨💓">
@@ -106,9 +104,6 @@ function App() {
               </Route> */}
               <Route path="/✨THANKYOU✨/:magic">
                 <Magic />
-              </Route>
-              <Route path="/trial">
-                <Artefact />
               </Route>
               <Route path="*" state="404">
                 <Error />
