@@ -28,10 +28,11 @@ model Magic {
 }
 
 model Artefact {
-  id        String   @default(cuid()) @id
-  donor     Donor    @relation(fields: [donorId], references: [id])
-  donorId   String
-  form      String
-  message   String
-  updatedAt DateTime @updatedAt
+  id         String   @default(cuid()) @id
+  donor      Donor    @relation(fields: [donorId], references: [id])
+  donorId    String
+  form       String
+  colorPoles String
+  message    String
+  updatedAt  DateTime @updatedAt
 }

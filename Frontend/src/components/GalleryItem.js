@@ -72,12 +72,12 @@ const Title = styled.div`
   }
 `;
 
-const GalleryItemComp = ({ donor, form, ...others }) => {
+const GalleryItemComp = ({ nickname, form, ...others }) => {
   return (
     <GalleryItem {...others}>
       <Artefact form={form} />
       <Title colorPoles={["#ee0979", "#ff6a00"]}>
-        by <span>{donor.nickname}</span>
+        by <span>{nickname}</span>
       </Title>
     </GalleryItem>
   );

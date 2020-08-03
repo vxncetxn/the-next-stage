@@ -4,8 +4,6 @@ import { Canvas, useFrame, extend, useThree } from "react-three-fiber";
 
 import Triangle from "./Triangle";
 
-import range from "../../helpers/range";
-
 extend({ OrbitControls });
 
 const Controls = () => {
@@ -43,8 +41,8 @@ const Artefact = ({ form, ...others }) => {
       <spotLight position={[0, 5, 10]} penumbra={1} castShadow />
       <Controls />
       <group>
-        {range(20, 0).map((n) => (
-          <Triangle key={n} triangleForm={JSON.stringify(trianglesArr[n])} />
+        {trianglesArr.map((triangleForm, idx) => (
+          <Triangle key={idx} triangleForm={JSON.stringify(triangleForm)} />
         ))}
       </group>
     </Canvas>

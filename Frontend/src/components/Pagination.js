@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled, { keyframes, css } from "styled-components";
+import { useHistory } from "react-router-dom";
 
 import { ReactComponent as LeftArrowIcon } from "../assets/icons/left-arrow.svg";
 import { ReactComponent as RightArrowIcon } from "../assets/icons/right-arrow.svg";
@@ -122,6 +123,8 @@ const PaginationComp = ({
   setCurrentPage,
   ...others
 }) => {
+  const history = useHistory();
+
   const [maxUnits, setMaxUnits] = useState(5);
 
   useEffect(() => {
@@ -188,11 +191,13 @@ const PaginationComp = ({
   const goToNextPage = () => {
     if (currentPage + 1 <= totalPages) {
       setCurrentPage(currentPage + 1);
+      history.push(`/gallery?page=${currentPage + 1}`);
     }
   };
   const goToPreviousPage = () => {
     if (currentPage - 1 > 0) {
       setCurrentPage(currentPage - 1);
+      history.push(`/gallery?page=${currentPage - 1}`);
     }
   };
 
@@ -208,7 +213,10 @@ const PaginationComp = ({
         } else {
           return (
             <PagButton
-              onClick={() => setCurrentPage(num)}
+              onClick={() => {
+                setCurrentPage(num);
+                history.push(`/gallery?page=${num}`);
+              }}
               selected={currentPage === num}
             >
               {num.toString().padStart(2, "0")}

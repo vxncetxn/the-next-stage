@@ -136,7 +136,8 @@ app.post("/api/artefact", async (req, res) => {
 
     const artefact = await prisma.artefact.create({
       data: {
-        form: form,
+        form,
+        colorPoles: JSON.stringify(colorPoles),
         message,
         donor: {
           connect: { id: donorId },
@@ -157,8 +158,12 @@ app.post("/api/artefact", async (req, res) => {
 });
 
 app.get("/api/artefact", async (req, res) => {
+  const page = req.query.page;
+
   try {
     const artefacts = await prisma.artefact.findMany({
+      skip: (page - 1) * 6,
+      take: 6,
       include: {
         donor: {
           select: {

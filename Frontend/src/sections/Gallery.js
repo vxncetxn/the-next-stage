@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import ky from "ky";
+import { useLocation } from "react-router-dom";
 
 import SectionTitleBar from "../components/SectionTitleBar";
 import GalleryItem from "../components/GalleryItem";
@@ -69,23 +70,15 @@ const Count = styled.p`
 `;
 
 const GalleryComp = () => {
+  var paramsString = useLocation().search;
+  var searchParams = new URLSearchParams(paramsString);
+  const pageQuery = searchParams.get("page");
+
   const [total, setTotal] = useState(550);
-  // const [artefacts, setArtefacts] = useState([
-  //   {
-  //     colors: ["#ee0979", "#ff6a00"],
-  //     credits: { date: "23 Jul 2020", time: "08:52", name: "dzhane" },
-  //   },
-  //   {
-  //     colors: ["#B993D6", "#8CA6DB"],
-  //     credits: { date: "17 Jul 2020", time: "21:26", name: "venessa86" },
-  //   },
-  //   {
-  //     colors: ["#f2709c", "#ff9472"],
-  //     credits: { date: "20 Jul 2020", time: "17:45", name: "jathor007" },
-  //   },
-  // ]);
   const [artefacts, setArtefacts] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(
+    pageQuery ? parseInt(pageQuery, 10) : 1
+  );
   const [modal, setModal] = useState({
     open: false,
     artefact: null,
@@ -100,10 +93,9 @@ const GalleryComp = () => {
     const fetchArtefacts = async () => {
       try {
         const fetchedArtefacts = await ky
-          .get("http://localhost:3001/api/artefact")
+          .get(`http://localhost:3001/api/artefact?page=${currentPage}`)
           .json();
 
-        console.log(fetchedArtefacts.data);
         setArtefacts(fetchedArtefacts.data);
       } catch (err) {
         console.log(err);
@@ -111,7 +103,7 @@ const GalleryComp = () => {
     };
 
     fetchArtefacts();
-  }, []);
+  }, [currentPage]);
 
   return (
     <Gallery>
@@ -127,7 +119,7 @@ const GalleryComp = () => {
         <GalleryGrid>
           {artefacts.map((item, idx) => (
             <GalleryItem
-              donor={item.donor}
+              nickname={item.donor.nickname}
               form={item.form}
               key={idx}
               onClick={() =>
