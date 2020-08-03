@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import ky from "ky";
 
 import SectionTitleBar from "../components/SectionTitleBar";
 import GalleryItem from "../components/GalleryItem";
@@ -69,25 +70,47 @@ const Count = styled.p`
 
 const GalleryComp = () => {
   const [total, setTotal] = useState(550);
-  const [artefacts, setArtefacts] = useState([
-    {
-      colors: ["#ee0979", "#ff6a00"],
-      credits: { date: "23 Jul 2020", time: "08:52", name: "dzhane" },
-    },
-    {
-      colors: ["#B993D6", "#8CA6DB"],
-      credits: { date: "17 Jul 2020", time: "21:26", name: "venessa86" },
-    },
-    {
-      colors: ["#f2709c", "#ff9472"],
-      credits: { date: "20 Jul 2020", time: "17:45", name: "jathor007" },
-    },
-  ]);
+  // const [artefacts, setArtefacts] = useState([
+  //   {
+  //     colors: ["#ee0979", "#ff6a00"],
+  //     credits: { date: "23 Jul 2020", time: "08:52", name: "dzhane" },
+  //   },
+  //   {
+  //     colors: ["#B993D6", "#8CA6DB"],
+  //     credits: { date: "17 Jul 2020", time: "21:26", name: "venessa86" },
+  //   },
+  //   {
+  //     colors: ["#f2709c", "#ff9472"],
+  //     credits: { date: "20 Jul 2020", time: "17:45", name: "jathor007" },
+  //   },
+  // ]);
+  const [artefacts, setArtefacts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [modal, setModal] = useState({ open: false, props: {}, idx: null });
+  const [modal, setModal] = useState({
+    open: false,
+    artefact: null,
+    idx: null,
+  });
 
   useEffect(() => {
     window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
+    const fetchArtefacts = async () => {
+      try {
+        const fetchedArtefacts = await ky
+          .get("http://localhost:3001/api/artefact")
+          .json();
+
+        console.log(fetchedArtefacts.data);
+        setArtefacts(fetchedArtefacts.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    fetchArtefacts();
   }, []);
 
   return (
@@ -104,13 +127,13 @@ const GalleryComp = () => {
         <GalleryGrid>
           {artefacts.map((item, idx) => (
             <GalleryItem
-              colorPoles={item.colors}
-              credits={item.credits}
+              donor={item.donor}
+              form={item.form}
               key={idx}
               onClick={() =>
                 setModal({
                   open: true,
-                  props: { colorPoles: item.colors, credits: item.credits },
+                  artefact: item,
                   idx,
                 })
               }

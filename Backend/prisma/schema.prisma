@@ -11,12 +11,13 @@ generator client {
 }
 
 model Donor {
-  id        String     @default(cuid()) @id
-  email     String     @unique
+  id        String    @default(cuid()) @id
+  email     String    @unique
   nickname  String
+  amount    Float
   magic     Magic?
-  artefacts Artefact[]
-  updatedAt DateTime   @updatedAt
+  artefact  Artefact?
+  updatedAt DateTime  @updatedAt
 }
 
 model Magic {
@@ -30,5 +31,7 @@ model Artefact {
   id        String   @default(cuid()) @id
   donor     Donor    @relation(fields: [donorId], references: [id])
   donorId   String
+  form      String
+  message   String
   updatedAt DateTime @updatedAt
 }

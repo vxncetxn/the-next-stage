@@ -28,7 +28,9 @@ const Controls = () => {
   );
 };
 
-const Artefact = ({ colorPoles, ...others }) => {
+const Artefact = ({ form, ...others }) => {
+  const trianglesArr = JSON.parse(form);
+
   return (
     <Canvas
       camera={{ position: [0, 0, 20] }}
@@ -42,7 +44,7 @@ const Artefact = ({ colorPoles, ...others }) => {
       <Controls />
       <group>
         {range(20, 0).map((n) => (
-          <Triangle key={n} colorPoles={colorPoles} />
+          <Triangle key={n} triangleForm={JSON.stringify(trianglesArr[n])} />
         ))}
       </group>
     </Canvas>

@@ -14,6 +14,7 @@ import PlainAnchor from "../components/PlainAnchor";
 import Text from "../components/Text";
 
 import useLockBodyScroll from "../helpers/useLockBodyScroll";
+import getMonthName from "../helpers/getMonthName";
 
 const A = PlainAnchor;
 
@@ -242,18 +243,21 @@ const GalleryModalComp = ({ modal, setModal, artefacts, ...others }) => {
   useLockBodyScroll();
 
   const {
-    props: { colorPoles, credits },
+    artefact: {
+      form,
+      message,
+      donor: { nickname, amount },
+      updatedAt,
+    },
     idx,
   } = modal;
+  const createDate = new Date(updatedAt);
 
   const goToNextItem = () => {
     if (idx + 1 <= artefacts.length - 1) {
       setModal({
         open: true,
-        props: {
-          colorPoles: artefacts[idx + 1].colors,
-          credits: artefacts[idx + 1].credits,
-        },
+        artefact: artefacts[idx + 1],
         idx: idx + 1,
       });
     }
@@ -262,10 +266,7 @@ const GalleryModalComp = ({ modal, setModal, artefacts, ...others }) => {
     if (idx - 1 >= 0) {
       setModal({
         open: true,
-        props: {
-          colorPoles: artefacts[idx - 1].colors,
-          credits: artefacts[idx - 1].credits,
-        },
+        artefact: artefacts[idx - 1],
         idx: idx - 1,
       });
     }
@@ -291,27 +292,23 @@ const GalleryModalComp = ({ modal, setModal, artefacts, ...others }) => {
             >
               <CloseIcon />
             </CloseButton>
-            <Artefact colorPoles={colorPoles} />
+            <Artefact form={form} />
             <Content>
-              <Title colorPoles={colorPoles}>
-                by <span>{credits.name}</span>
+              <Title colorPoles={["#ee0979", "#ff6a00"]}>
+                by <span>{nickname}</span>
               </Title>
               <Info>
                 <InfoTime>
-                  <p>{credits.date}</p>
-                  <p>{credits.time}</p>
+                  <p>{`${createDate.getDate()} ${getMonthName(
+                    createDate.getMonth()
+                  )} ${createDate.getFullYear()}`}</p>
+                  <p>{`${
+                    createDate.getHours() + 1
+                  }:${createDate.getMinutes()}`}</p>
                 </InfoTime>
-                <InfoAmt>$200</InfoAmt>
+                <InfoAmt>${amount}</InfoAmt>
               </Info>
-              <Message>
-                Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry. Lorem Ipsum has been the industry's standard dummy
-                text ever since the 1500s, when an unknown printer took a galley
-                of type. Lorem Ipsum is simply dummy text of the printing and
-                typesetting industry. Lorem Ipsum has been the industry's
-                standard dummy text ever since the 1500s, when an unknown
-                printer took a galley of type.
-              </Message>
+              <Message>{message}</Message>
               <Share>
                 <p>Share: </p>
                 <div>

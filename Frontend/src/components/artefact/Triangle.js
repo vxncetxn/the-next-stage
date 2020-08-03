@@ -1,19 +1,10 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, memo } from "react";
 import * as THREE from "three";
-import { interpolateRgb } from "d3-interpolate";
 
-import getRandomInt from "../../helpers/getRandomInt";
-import randomChoice from "../../helpers/randomChoice";
-
-const Triangle = ({ colorPoles, ...others }) => {
+const Triangle = memo(({ triangleForm, ...others }) => {
+  const { vertices, color, position, rotation } = JSON.parse(triangleForm);
   const triangleRef = useRef();
 
-  const vertices = [
-    [0, getRandomInt(1, 3), 0],
-    [getRandomInt(-1, 1), 0, getRandomInt(2, 4)],
-    [getRandomInt(2, 4), 0, getRandomInt(-1, 1)],
-    [getRandomInt(-4, -2), 0, getRandomInt(-4, -2)],
-  ];
   const faces = [
     [0, 1, 2],
     [2, 3, 0],
@@ -21,39 +12,20 @@ const Triangle = ({ colorPoles, ...others }) => {
     [3, 2, 1],
   ];
 
-  const colorIp = interpolateRgb(colorPoles[0], colorPoles[1]);
-  const colors = [
-    colorIp(0),
-    colorIp(0.2),
-    colorIp(0.4),
-    colorIp(0.6),
-    colorIp(0.8),
-    colorIp(1),
-  ];
-
   useEffect(() => {
     triangleRef.current.geometry.computeFaceNormals();
   }, []);
 
   return (
-    <mesh
-      ref={triangleRef}
-      position={[getRandomInt(-7, 7), getRandomInt(-7, 7), getRandomInt(-7, 7)]}
-      rotation={[
-        getRandomInt(0, 628) / 100,
-        getRandomInt(0, 628) / 100,
-        getRandomInt(0, 628) / 100,
-      ]}
-      {...others}
-    >
+    <mesh ref={triangleRef} position={position} rotation={rotation} {...others}>
       <geometry
         attach="geometry"
         vertices={vertices.map((v) => new THREE.Vector3(...v))}
         faces={faces.map((f) => new THREE.Face3(...f))}
       ></geometry>
-      <meshStandardMaterial attach="material" color={randomChoice(colors)} />
+      <meshStandardMaterial attach="material" color={color} />
     </mesh>
   );
-};
+});
 
 export default Triangle;

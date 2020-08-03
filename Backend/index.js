@@ -6,6 +6,8 @@ const jwt = require("express-jwt");
 const jwtDecode = require("jwt-decode");
 const { PrismaClient } = require("@prisma/client");
 
+const { createArtefactForm } = require("./utils");
+
 require("dotenv").config();
 
 const PORT = process.env.PORT || 3001;
@@ -41,12 +43,13 @@ const requireAuth = jwt({
 
 app.post("/api/donor", async (req, res) => {
   try {
-    const { email, nickname } = req.body;
+    const { email, nickname, amount } = req.body;
 
     const donor = await prisma.donor.create({
       data: {
         email,
         nickname,
+        amount,
         magic: {
           create: {},
         },
@@ -127,18 +130,17 @@ app.delete("/api/donor/:id", async (req, res) => {
 
 app.post("/api/artefact", async (req, res) => {
   try {
-    const { something, somethingTwo } = req.body;
+    const { donorId, colorPoles, message } = req.body;
+
+    const form = createArtefactForm(colorPoles);
 
     const artefact = await prisma.artefact.create({
       data: {
-        email,
-        nickname,
-        magic: {
-          create: {},
+        form: form,
+        message,
+        donor: {
+          connect: { id: donorId },
         },
-      },
-      include: {
-        magic: true,
       },
     });
 
@@ -156,7 +158,16 @@ app.post("/api/artefact", async (req, res) => {
 
 app.get("/api/artefact", async (req, res) => {
   try {
-    const artefacts = await prisma.artefact.findMany({ skip: 6, take: 6 });
+    const artefacts = await prisma.artefact.findMany({
+      include: {
+        donor: {
+          select: {
+            nickname: true,
+            amount: true,
+          },
+        },
+      },
+    });
 
     return res.status(200).json({ data: artefacts });
   } catch (err) {
