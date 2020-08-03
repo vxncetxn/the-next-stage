@@ -11,6 +11,7 @@ import { ReactComponent as InstagramIcon } from "../assets/icons/instagram.svg";
 
 import Artefact from "./artefact/Artefact";
 import PlainAnchor from "../components/PlainAnchor";
+import Text from "../components/Text";
 
 import useLockBodyScroll from "../helpers/useLockBodyScroll";
 
@@ -57,6 +58,11 @@ const ArrowButton = styled.button`
 
   & > svg {
     display: ${(props) => (props.disabled ? "none" : "block")};
+
+    @media (max-width: 896px) {
+      width: 30px;
+      height: 30px;
+    }
   }
 `;
 
@@ -77,19 +83,26 @@ const Modal = styled.div`
   background-color: var(--color-element);
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
   border-radius: 8px;
+
+  @media (max-width: 896px) {
+    flex-direction: column;
+    height: 90%;
+  }
 `;
 
 const CloseButton = styled.button`
   position: absolute;
   top: 30px;
   right: 50px;
+  z-index: 999;
 
-  @media (max-width: 600px) {
-    right: 20px;
+  @media (max-width: 896px) {
+    top: 25px;
+    right: 25px;
   }
 `;
 
-const ContentCol = styled.div`
+const Content = styled.div`
   display: flex;
   flex-direction: column;
   width: 70%;
@@ -97,11 +110,27 @@ const ContentCol = styled.div`
   margin: 50px 0;
   font-family: var(--font-primary);
   color: var(--color-text);
-
   border-left: 0.5px solid var(--color-text);
+
+  @media (max-width: 1200px) {
+    padding: 0 45px;
+  }
+
+  @media (max-width: 896px) {
+    width: 100%;
+    height: 60%;
+    flex: none;
+    margin: 0;
+    padding: 0 40px 30px 40px;
+    border-left: none;
+  }
+
+  @media (max-width: 600px) {
+    padding: 0 30px 30px 30px;
+  }
 `;
 
-const ContentTitle = styled.p`
+const Title = styled.p`
   font-size: 32px;
 
   & > span {
@@ -124,28 +153,75 @@ const ContentTitle = styled.p`
     animation: ${Flow} linear infinite;
     animation-duration: 2s;
   }
+
+  @media (max-width: 1200px) {
+    font-size: 30px;
+  }
+
+  @media (max-width: 896px) {
+    font-size: 28px;
+  }
+
+  @media (max-width: 600px) {
+    font-size: 26px;
+  }
 `;
 
-const ContentInfo = styled.div`
-  font-size: 14px;
+const Info = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-top: 15px;
 `;
 
-const ContentMsg = styled.p`
-  margin-top: 30px;
-  font-family: var(--font-secondary);
-  font-size: 18px;
-  line-height: 1.7;
+const InfoTime = styled.div`
+  font-size: 14px;
+
+  @media (max-width: 896px) {
+    font-size: 12px;
+  }
+
+  @media (max-width: 600px) {
+    font-size: 10px;
+  }
 `;
 
-const ContentShare = styled.div`
+const InfoAmt = styled.p`
+  font-size: 28px;
+
+  @media (max-width: 896px) {
+    font-size: 24px;
+  }
+
+  @media (max-width: 600px) {
+    font-size: 20px;
+  }
+`;
+
+const Message = styled(Text)`
+  margin-top: 30px;
+  height: 45%;
+  line-height: 1.7;
+  overflow: scroll;
+
+  @media (max-width: 896px) {
+    height: 40%;
+  }
+`;
+
+const Share = styled.div`
   display: flex;
   flex-direction: column;
   font-size: 14px;
   margin-top: auto;
+
+  @media (max-width: 896px) {
+    font-size: 12px;
+  }
+
+  @media (max-width: 600px) {
+    font-size: 10px;
+  }
 
   & > div {
     margin-top: 10px;
@@ -153,6 +229,12 @@ const ContentShare = styled.div`
 
   & > div > * + * {
     margin-left: 20px;
+  }
+
+  & svg {
+    @media (max-width: 896px) {
+      width: 30px;
+    }
   }
 `;
 
@@ -210,26 +292,27 @@ const GalleryModalComp = ({ modal, setModal, artefacts, ...others }) => {
               <CloseIcon />
             </CloseButton>
             <Artefact colorPoles={colorPoles} />
-            <ContentCol>
-              <ContentTitle colorPoles={colorPoles}>
+            <Content>
+              <Title colorPoles={colorPoles}>
                 by <span>{credits.name}</span>
-              </ContentTitle>
-              <ContentInfo>
-                <div>
+              </Title>
+              <Info>
+                <InfoTime>
                   <p>{credits.date}</p>
                   <p>{credits.time}</p>
-                </div>
-                <div>
-                  <p style={{ fontSize: 28 }}>$200</p>
-                </div>
-              </ContentInfo>
-              <ContentMsg>
+                </InfoTime>
+                <InfoAmt>$200</InfoAmt>
+              </Info>
+              <Message>
                 Lorem Ipsum is simply dummy text of the printing and typesetting
                 industry. Lorem Ipsum has been the industry's standard dummy
                 text ever since the 1500s, when an unknown printer took a galley
-                of type.
-              </ContentMsg>
-              <ContentShare>
+                of type. Lorem Ipsum is simply dummy text of the printing and
+                typesetting industry. Lorem Ipsum has been the industry's
+                standard dummy text ever since the 1500s, when an unknown
+                printer took a galley of type.
+              </Message>
+              <Share>
                 <p>Share: </p>
                 <div>
                   <A
@@ -251,8 +334,8 @@ const GalleryModalComp = ({ modal, setModal, artefacts, ...others }) => {
                     <InstagramIcon />
                   </A>
                 </div>
-              </ContentShare>
-            </ContentCol>
+              </Share>
+            </Content>
           </Modal>
         </Container>,
         document.body

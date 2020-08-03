@@ -28,13 +28,14 @@ const Controls = () => {
   );
 };
 
-const Artefact = ({ colorPoles }) => {
+const Artefact = ({ colorPoles, ...others }) => {
   return (
     <Canvas
       camera={{ position: [0, 0, 20] }}
       onCreated={({ gl }) => {
         gl.setPixelRatio(window.devicePixelRatio);
       }}
+      {...others}
     >
       <ambientLight />
       <spotLight position={[0, 5, 10]} penumbra={1} castShadow />
