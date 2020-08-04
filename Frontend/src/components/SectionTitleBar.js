@@ -29,6 +29,11 @@ const SectionTitle = styled.h2`
   writing-mode: vertical-lr;
   transform: ${(props) =>
     props.position === "left" ? "rotate(-180deg)" : null};
+  cursor: default;
+
+  &::selection {
+    background-color: none;
+  }
 
   @media (max-width: 1200px) {
     font-size: 90px;

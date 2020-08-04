@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { useLocation, useHistory } from "react-router-dom";
 import ky from "ky";
 
@@ -9,6 +9,14 @@ import SectionTitleBar from "../components/SectionTitleBar";
 import Text from "../components/Text";
 import Anchor from "../components/Anchor";
 import Shim from "../components/Shim";
+import Block from "../components/form/Block";
+import CTAButton from "../components/CTAButton";
+
+const Flow = keyframes`
+  to {
+    background-position: 200% center;
+  }
+`;
 
 const Magic = styled.section`
   position: relative;
@@ -56,6 +64,20 @@ const TextShim = styled(Shim)`
   width: 100%;
   height: 20px;
   margin-bottom: 15px;
+`;
+
+const FormContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-top: 100px;
+
+  & > * + * {
+    margin-top: 100px;
+  }
+`;
+
+const SubmitButton = styled(CTAButton)`
+  align-self: flex-end;
 `;
 
 const MagicComp = () => {
@@ -106,6 +128,36 @@ const MagicComp = () => {
               exhibition. The digital artefact will be uniquely generated from
               your responses below, have fun! 🥳
             </Text>
+            <FormContent>
+              <Block
+                type="input"
+                labelText="choose a nickname*"
+                sublabelText="Do note that this will be the name publicly featured in the
+              gallery entry, so if you are shy, remember to use an anonymous
+              name!"
+                step={1}
+                placeholder="nickname"
+              />
+              <Block
+                type="input"
+                labelText="give a shoutout"
+                sublabelText="Do note that this will be the name publicly featured in the
+              gallery entry, so if you are shy, remember to use an anonymous
+              name!"
+                step={2}
+                placeholder="artist name"
+              />
+              <Block
+                type="textarea"
+                labelText="write a message*"
+                sublabelText="Do note that this will be the name publicly featured in the
+              gallery entry, so if you are shy, remember to use an anonymous
+              name!"
+                step={3}
+                placeholder="message"
+              />
+              <SubmitButton>Submit</SubmitButton>
+            </FormContent>
           </>
         ) : (
           <>
@@ -125,7 +177,7 @@ const MagicComp = () => {
           </>
         )}
       </MagicContent>
-      <MagicTitleBar position="right">artefact</MagicTitleBar>
+      <MagicTitleBar position="right">thank you</MagicTitleBar>
     </Magic>
   );
 };
