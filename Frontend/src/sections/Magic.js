@@ -53,7 +53,7 @@ const MagicComp = () => {
     const fetchDonor = async () => {
       try {
         const fetchedDonor = await ky
-          .get(`http://localhost:3001/api/magic=${key}`)
+          .get(`https://the-next-stage.herokuapp.com/api/magic/${key}`)
           .json();
         setDonor(fetchedDonor.donor);
       } catch (err) {

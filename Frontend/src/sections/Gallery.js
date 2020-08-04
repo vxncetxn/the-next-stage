@@ -95,7 +95,9 @@ const GalleryComp = () => {
     const fetchArtefact = async () => {
       try {
         const fetchedArtefact = await ky
-          .get(`http://localhost:3001/api/artefact/${artefactId}`)
+          .get(
+            `https://the-next-stage.herokuapp.com/api/artefact/${artefactId}`
+          )
           .json();
 
         setModal({
@@ -118,7 +120,9 @@ const GalleryComp = () => {
     const fetchArtefacts = async () => {
       try {
         const fetchedArtefacts = await ky
-          .get(`http://localhost:3001/api/artefact?page=${currentPage}`)
+          .get(
+            `https://the-next-stage.herokuapp.com/api/artefact?page=${currentPage}`
+          )
           .json();
 
         setArtefacts(fetchedArtefacts.data);
