@@ -69,7 +69,7 @@ const MagicComp = () => {
       <MagicContent>
         {/* {donor ? <Welcome>Welcome {donor.name},</Welcome> : null} */}
       </MagicContent>
-      <MagicTitleBar position="right">your artefact</MagicTitleBar>
+      <MagicTitleBar position="right">artefact</MagicTitleBar>
     </Magic>
   );
 };

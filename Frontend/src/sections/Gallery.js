@@ -4,9 +4,11 @@ import ky from "ky";
 import { useParams, useHistory } from "react-router-dom";
 
 import useQuery from "../helpers/useQuery";
+import range from "../helpers/range";
 
 import SectionTitleBar from "../components/SectionTitleBar";
 import GalleryItem from "../components/GalleryItem";
+import GalleryItemShim from "../components/GalleryItemShim";
 import Pagination from "../components/Pagination";
 import GalleryModal from "../components/GalleryModal";
 
@@ -146,21 +148,23 @@ const GalleryComp = () => {
           setCurrentPage={setCurrentPage}
         />
         <GalleryGrid>
-          {artefacts.map((item, idx) => (
-            <GalleryItem
-              nickname={item.donor.nickname}
-              form={item.form}
-              key={idx}
-              onClick={() => {
-                setModal({
-                  open: true,
-                  artefact: item,
-                  idx,
-                });
-                history.push(`/gallery/${item.id}`);
-              }}
-            />
-          ))}
+          {artefacts.length
+            ? artefacts.map((item, idx) => (
+                <GalleryItem
+                  nickname={item.donor.nickname}
+                  form={item.form}
+                  key={idx}
+                  onClick={() => {
+                    setModal({
+                      open: true,
+                      artefact: item,
+                      idx,
+                    });
+                    history.push(`/gallery/${item.id}`);
+                  }}
+                />
+              ))
+            : range(6).map(() => <GalleryItemShim />)}
         </GalleryGrid>
       </GalleryContent>
       {modal.open ? (
