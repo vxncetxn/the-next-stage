@@ -8,7 +8,7 @@ import range from "../helpers/range";
 
 import SectionTitleBar from "../components/SectionTitleBar";
 import GalleryItem from "../components/GalleryItem";
-import GalleryItemShim from "../components/GalleryItemShim";
+import Shim from "../components/Shim";
 import Pagination from "../components/Pagination";
 import GalleryModal from "../components/GalleryModal";
 
@@ -52,6 +52,12 @@ const GalleryGrid = styled.ul`
   @media (max-width: 896px) {
     --auto-grid-min-size: 200px;
   }
+`;
+
+const GalleryItemShim = styled(Shim)`
+  border-radius: 8px;
+  height: 300px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
 `;
 
 const Count = styled.p`

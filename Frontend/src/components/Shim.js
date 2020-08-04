@@ -12,9 +12,6 @@ const Shimmer = keyframes`
 `;
 
 const GalleryItemShim = styled.div`
-  height: 300px;
-  border-radius: 8px;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
   background: linear-gradient(
     to right,
     var(--color-element) 4%,
@@ -25,8 +22,8 @@ const GalleryItemShim = styled.div`
   animation: ${Shimmer} 2s infinite;
 `;
 
-const GalleryItemShimComp = () => {
-  return <GalleryItemShim />;
+const GalleryItemShimComp = ({ ...others }) => {
+  return <GalleryItemShim {...others} />;
 };
 
 export default GalleryItemShimComp;

@@ -3,9 +3,12 @@ import styled from "styled-components";
 import { useLocation, useHistory } from "react-router-dom";
 import ky from "ky";
 
+import range from "../helpers/range";
+
 import SectionTitleBar from "../components/SectionTitleBar";
 import Text from "../components/Text";
-// import Anchor from "../components/Anchor";
+import Anchor from "../components/Anchor";
+import Shim from "../components/Shim";
 
 const Magic = styled.section`
   position: relative;
@@ -33,10 +36,26 @@ const MagicContent = styled.div`
   }
 `;
 
-const Welcome = styled.p`
+const Hello = styled.p`
   font-family: var(--font-primary);
   font-size: 48px;
+  line-height: 1;
   color: var(--color-text);
+  margin-bottom: 50px;
+`;
+
+const HelloShim = styled(Shim)`
+  border-radius: 4px;
+  width: 40%;
+  height: 45px;
+  margin-bottom: 60px;
+`;
+
+const TextShim = styled(Shim)`
+  border-radius: 4px;
+  width: 100%;
+  height: 20px;
+  margin-bottom: 15px;
 `;
 
 const MagicComp = () => {
@@ -55,7 +74,7 @@ const MagicComp = () => {
         const fetchedDonor = await ky
           .get(`https://the-next-stage.herokuapp.com/api/magic/${key}`)
           .json();
-        setDonor(fetchedDonor.donor);
+        setDonor(fetchedDonor.data);
       } catch (err) {
         history.push("/404");
       }
@@ -67,7 +86,44 @@ const MagicComp = () => {
   return (
     <Magic>
       <MagicContent>
-        {/* {donor ? <Welcome>Welcome {donor.name},</Welcome> : null} */}
+        {donor ? (
+          <>
+            <Hello>hello {donor.nickname},</Hello>
+            <Text>
+              Thank you so much for your generous donation to{" "}
+              <i>The Next Stage</i>. Your contributions will no doubt allow
+              Esplanade to use the upcoming SingTel Waterfront Theatre as a
+              platform to empower our local arts scene and also to continue in
+              our tireless mission to bring about transformative arts
+              experiences to our communities.
+            </Text>
+            <br />
+            <br />
+            <Text>
+              As part of our campaign, we invite you to create a unique digital
+              artefact which will be featured in the online{" "}
+              <Anchor>public gallery</Anchor> and also the eventual AR
+              exhibition. The digital artefact will be uniquely generated from
+              your responses below, have fun! 🥳
+            </Text>
+          </>
+        ) : (
+          <>
+            <HelloShim />
+            {range(4).map(() => {
+              return (
+                <>
+                  <TextShim />
+                  <TextShim />
+                  <TextShim />
+                  <TextShim />
+                  <br />
+                  <br />
+                </>
+              );
+            })}
+          </>
+        )}
       </MagicContent>
       <MagicTitleBar position="right">artefact</MagicTitleBar>
     </Magic>
