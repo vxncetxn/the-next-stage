@@ -1,6 +1,8 @@
 import React, { lazy, Suspense, useState, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import styled from "styled-components";
+import { ReactQueryConfigProvider } from "react-query";
+import { ReactQueryDevtools } from "react-query-devtools";
 
 import Defaults from "./Defaults";
 import Meta from "./Meta";
@@ -47,6 +49,12 @@ function App() {
   //   document.querySelector(".cursor-ring").classList.toggle("timing");
   // });
 
+  const queryConfig = {
+    queries: {
+      refetchOnWindowFocus: false,
+    },
+  };
+
   let vh = window.innerHeight * 0.01;
   document.documentElement.style.setProperty("--vh", `${vh}px`);
   window.addEventListener("resize", () => {
@@ -65,7 +73,7 @@ function App() {
   }, [hamburgerOpen]);
 
   return (
-    <>
+    <ReactQueryConfigProvider config={queryConfig}>
       <Defaults />
       {/* <Cursor /> */}
       <Router>
@@ -113,7 +121,8 @@ function App() {
         </Container>
         <Footer />
       </Router>
-    </>
+      <ReactQueryDevtools initialIsOpen />
+    </ReactQueryConfigProvider>
   );
 }
 

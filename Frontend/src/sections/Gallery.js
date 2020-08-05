@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import ky from "ky";
 import { useParams, useHistory } from "react-router-dom";
+import { useQuery, usePaginatedQuery } from "react-query";
 
-import useQuery from "../helpers/useQuery";
+import useURLQuery from "../helpers/useURLQuery";
 import range from "../helpers/range";
+
+import fetchTotal from "../fetch/fetchTotal";
+import fetchArtefacts from "../fetch/fetchArtefacts";
+import fetchArtefact from "../fetch/fetchArtefact";
 
 import SectionTitleBar from "../components/SectionTitleBar";
 import GalleryItem from "../components/GalleryItem";
@@ -81,11 +85,9 @@ const Count = styled.p`
 
 const GalleryComp = () => {
   const artefactId = useParams().id;
-  const pageQuery = useQuery().get("page");
+  const pageQuery = useURLQuery().get("page");
   const history = useHistory();
 
-  const [total, setTotal] = useState(0);
-  const [artefacts, setArtefacts] = useState([]);
   const [currentPage, setCurrentPage] = useState(
     pageQuery ? parseInt(pageQuery, 10) : 1
   );
@@ -95,69 +97,32 @@ const GalleryComp = () => {
     idx: null,
   });
 
+  const { status: totalStatus, data: total } = useQuery("total", fetchTotal, {
+    initialData: 0,
+    initialStale: true,
+  });
+  const {} = useQuery("artefact", () => fetchArtefact(artefactId), {
+    onSuccess: (artefact) => {
+      if (artefact) {
+        setModal({
+          open: true,
+          artefact,
+          idx: null,
+        });
+      }
+    },
+  });
+  const {
+    status: artefactsStatus,
+    resolvedData: artefacts,
+    latestData: latestArtefacts,
+  } = usePaginatedQuery(["artefacts", currentPage], () =>
+    fetchArtefacts(currentPage)
+  );
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-
-  useEffect(() => {
-    const fetchTotal = async () => {
-      try {
-        const fetchedTotal = await ky
-          .get(`https://the-next-stage.herokuapp.com/api/artefacts/count`)
-          .json();
-
-        setTotal(fetchedTotal.data);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-
-    fetchTotal();
-  }, []);
-
-  useEffect(() => {
-    const fetchArtefact = async () => {
-      try {
-        const fetchedArtefact = await ky
-          .get(
-            `https://the-next-stage.herokuapp.com/api/artefact/${artefactId}`
-          )
-          .json();
-
-        setModal({
-          open: true,
-          artefact: fetchedArtefact.data,
-          idx: null,
-        });
-      } catch (err) {
-        console.log(err);
-        history.push("/gallery");
-      }
-    };
-
-    if (artefactId) {
-      fetchArtefact();
-    }
-  }, []);
-
-  useEffect(() => {
-    const fetchArtefacts = async () => {
-      try {
-        setArtefacts([]);
-        const fetchedArtefacts = await ky
-          .get(
-            `https://the-next-stage.herokuapp.com/api/artefact?page=${currentPage}`
-          )
-          .json();
-
-        setArtefacts(fetchedArtefacts.data);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-
-    fetchArtefacts();
-  }, [currentPage]);
 
   return (
     <Gallery>
@@ -171,7 +136,7 @@ const GalleryComp = () => {
           setCurrentPage={setCurrentPage}
         />
         <GalleryGrid>
-          {artefacts.length
+          {artefacts
             ? artefacts.map((item, idx) => (
                 <GalleryItem
                   nickname={item.donor.nickname}
