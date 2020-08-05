@@ -24,6 +24,7 @@ const Sublabel = styled(Text)`
 
 const BlockComp = ({
   type,
+  pos,
   labelText,
   sublabelText,
   step,

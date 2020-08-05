@@ -8,7 +8,7 @@ const Flow = keyframes`
 `;
 
 const Label = styled.label`
-position: relative;
+  position: relative;
   display: block;
   font-family: var(--font-secondary);
   font-size: 48px;
@@ -56,7 +56,7 @@ position: relative;
   }
 `;
 
-const LabelComp = ({ step, children, ...others }) => {
+const LabelComp = ({ pos, step, children, ...others }) => {
   return (
     <Label step={step} {...others}>
       {children}

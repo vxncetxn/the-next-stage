@@ -24,7 +24,7 @@ const Meta = () => {
       location = "Gallery";
       break;
     case "✨THANKYOU✨":
-      location = "Your Artefact";
+      location = "✨THANKYOU✨";
       break;
     default:
       location = "Page Not Found";

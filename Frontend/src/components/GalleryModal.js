@@ -248,6 +248,7 @@ const GalleryModalComp = ({ modal, setModal, artefacts, ...others }) => {
   const {
     artefact: {
       form,
+      colorPoles,
       message,
       donor: { nickname, amount },
       updatedAt,
@@ -303,7 +304,7 @@ const GalleryModalComp = ({ modal, setModal, artefacts, ...others }) => {
             </CloseButton>
             <Artefact form={form} />
             <Content>
-              <Title colorPoles={["#ee0979", "#ff6a00"]}>
+              <Title colorPoles={JSON.parse(colorPoles)}>
                 by <span>{nickname}</span>
               </Title>
               <Info>

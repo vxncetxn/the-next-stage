@@ -84,7 +84,7 @@ const GalleryComp = () => {
   const pageQuery = useQuery().get("page");
   const history = useHistory();
 
-  const [total, setTotal] = useState(550);
+  const [total, setTotal] = useState(0);
   const [artefacts, setArtefacts] = useState([]);
   const [currentPage, setCurrentPage] = useState(
     pageQuery ? parseInt(pageQuery, 10) : 1
@@ -97,6 +97,22 @@ const GalleryComp = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
+    const fetchTotal = async () => {
+      try {
+        const fetchedTotal = await ky
+          .get(`https://the-next-stage.herokuapp.com/api/artefacts/count`)
+          .json();
+
+        setTotal(fetchedTotal.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    fetchTotal();
   }, []);
 
   useEffect(() => {
@@ -127,6 +143,7 @@ const GalleryComp = () => {
   useEffect(() => {
     const fetchArtefacts = async () => {
       try {
+        setArtefacts([]);
         const fetchedArtefacts = await ky
           .get(
             `https://the-next-stage.herokuapp.com/api/artefact?page=${currentPage}`
@@ -159,6 +176,7 @@ const GalleryComp = () => {
                 <GalleryItem
                   nickname={item.donor.nickname}
                   form={item.form}
+                  colorPoles={item.colorPoles}
                   key={idx}
                   onClick={() => {
                     setModal({

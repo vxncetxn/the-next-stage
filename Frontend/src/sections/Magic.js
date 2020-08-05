@@ -131,6 +131,7 @@ const MagicComp = () => {
             <FormContent>
               <Block
                 type="input"
+                pos="left"
                 labelText="choose a nickname*"
                 sublabelText="Do note that this will be the name publicly featured in the
               gallery entry, so if you are shy, remember to use an anonymous
@@ -140,6 +141,7 @@ const MagicComp = () => {
               />
               <Block
                 type="input"
+                pos="right"
                 labelText="give a shoutout"
                 sublabelText="Do note that this will be the name publicly featured in the
               gallery entry, so if you are shy, remember to use an anonymous
@@ -148,6 +150,7 @@ const MagicComp = () => {
                 placeholder="artist name"
               />
               <Block
+                pos="left"
                 type="textarea"
                 labelText="write a message*"
                 sublabelText="Do note that this will be the name publicly featured in the

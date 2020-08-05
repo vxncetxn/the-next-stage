@@ -18,8 +18,8 @@ const Input = styled.input`
 
   &:focus {
     outline: transparent;
-    border-bottom: 2px solid var(--color-gradient-one);
     border-right: 2px solid var(--color-gradient-one);
+    border-bottom: 2px solid var(--color-gradient-one);
   }
 `;
 
