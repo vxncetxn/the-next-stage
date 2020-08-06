@@ -78,6 +78,55 @@ const Defaults = createGlobalStyle`
     .timing {
       animation: ${Time} 3s linear forwards, ${Expand} 0.2s 3s linear forwards;
     }
+
+    .loader {
+      font-size: 20px;
+      position: relative;
+      width: 70px;
+      height: 10px;
+    }
+    
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 0.5em;
+      background: var(--color-text);
+      position: absolute;
+      animation-duration: 0.5s;
+      animation-timing-function: ease;
+      animation-iteration-count: infinite;
+    }
+    
+    .dot1, .dot2 {
+      left: 0;
+    }
+    
+    .dot3 { left: 1.5em; }
+    
+    .dot4 { left: 3em; }
+    
+    @keyframes reveal {
+      from { transform: scale(0.001); }
+      to { transform: scale(1); }
+    }
+    
+    @keyframes slide {
+      to { transform: translateX(1.5em) }
+    }
+    
+    
+    .dot1 {
+      animation-name: reveal;
+    }
+    
+    .dot2, .dot3 {
+      animation-name: slide;
+    }
+    
+    .dot4 {
+      animation-name: reveal;
+      animation-direction: reverse; /* thx @HugoGiraudel */
+    }
 `;
 
 export default Defaults;

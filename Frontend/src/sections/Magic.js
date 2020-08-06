@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useLocation, useHistory } from "react-router-dom";
-import { useQuery } from "react-query";
+import { useQuery, useMutation, queryCache } from "react-query";
 import ky from "ky";
 
 import fetchDonor from "../fetch/fetchDonor";
+import postArtefact from "../fetch/postArtefact";
 
 import range from "../helpers/range";
 
@@ -13,6 +14,9 @@ import Text from "../components/Text";
 import Anchor from "../components/Anchor";
 import Shim from "../components/Shim";
 import Block from "../components/form/Block";
+import Input from "../components/form/Input";
+import DuoInput from "../components/form/DuoInput";
+import Textarea from "../components/form/Textarea";
 import CTAButton from "../components/CTAButton";
 
 const Magic = styled.section`
@@ -75,7 +79,12 @@ const Form = styled.form`
 `;
 
 const SubmitButton = styled(CTAButton)`
+  min-width: 140px;
+  min-height: 50px;
   align-self: flex-end;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const SubmitError = styled(Text)`
@@ -95,6 +104,9 @@ const MagicComp = () => {
 
   const [nickname, setNickname] = useState("");
   const [nicknameError, setNicknameError] = useState("");
+  const [artist, setArtist] = useState("");
+  const [artistLink, setArtistLink] = useState("");
+  const [artistError, setArtistError] = useState("");
   const [message, setMessage] = useState("");
   const [messageError, setMessageError] = useState("");
   const [submitError, setSubmitError] = useState("");
@@ -102,12 +114,18 @@ const MagicComp = () => {
   const { status: donorStatus, data: donor } = useQuery("donor", () =>
     fetchDonor(key)
   );
+  const [submit, { status: submitStatus }] = useMutation(
+    () => postArtefact({ nickname, shoutout: { artist, artistLink }, message }),
+    {
+      onSuccess: () => queryCache.invalidateQueries("donor"),
+    }
+  );
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-  const submitHandler = (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
 
     let hasError = false;
@@ -119,12 +137,18 @@ const MagicComp = () => {
       setMessageError("*A message is required.");
       hasError = true;
     }
+    if (artistLink && !artist) {
+      setArtistError(
+        "*An artist name is required if you have filled in an artist link."
+      );
+      hasError = true;
+    }
 
     if (hasError) {
-      setSubmitError("*Some of the required fields have not been filled.");
+      setSubmitError("*Some of the fields have errors.");
     } else {
-      console.log(nickname, message);
-      // ky.post("https://example.com", { json: { foo: true } }).json();
+      // console.log(nickname, message);
+      submit();
     }
   };
 
@@ -138,8 +162,8 @@ const MagicComp = () => {
               Thank you so much for your generous donation to{" "}
               <i>The Next Stage</i>. Your contributions will no doubt allow
               Esplanade to use the upcoming SingTel Waterfront Theatre as a
-              platform to empower our local arts scene and also to continue in
-              our tireless mission to bring about transformative arts
+              platform to empower the local arts scene and also to continue in
+              their tireless mission to bring about transformative arts
               experiences to our communities.
             </Text>
             <br />
@@ -147,47 +171,67 @@ const MagicComp = () => {
             <Text>
               As part of our campaign, we invite you to create a unique digital
               artefact which will be featured in the online{" "}
-              <Anchor>public gallery</Anchor> and also the eventual AR
-              exhibition. The digital artefact will be uniquely generated from
-              your responses below, have fun! 🥳
+              <Anchor>public gallery</Anchor>. The digital artefact will be
+              uniquely generated from your responses below, have fun! 🥳
             </Text>
             <Form>
               <Block
-                type="input"
-                value={nickname}
-                onChange={(e) => setNickname(e.target.value)}
                 error={nicknameError}
                 labelText="choose a nickname*"
                 sublabelText="Do note that this will be the name publicly featured in the
               gallery entry, so if you are shy, remember to use an anonymous
               name!"
                 step={1}
-                placeholder="nickname"
-              />
+              >
+                <Input
+                  value={nickname}
+                  onChange={(e) => setNickname(e.target.value)}
+                  placeholder="nickname"
+                />
+              </Block>
               <Block
-                type="input"
-                pos="right"
+                error={artistError}
                 labelText="give a shoutout"
                 sublabelText="Do note that this will be the name publicly featured in the
               gallery entry, so if you are shy, remember to use an anonymous
               name!"
                 step={2}
-                placeholder="artist name"
-              />
+              >
+                <DuoInput
+                  valueTop={artist}
+                  onChangeTop={(e) => setArtist(e.target.value)}
+                  placeholderTop="artist name"
+                  valueBottom={artistLink}
+                  onChangeBottom={(e) => setArtistLink(e.target.value)}
+                  placeholderBottom="artist link"
+                />
+              </Block>
               <Block
-                type="textarea"
-                value={message}
-                onChange={(e) => setMessage(e.target.value)}
                 error={messageError}
                 labelText="write a message*"
                 sublabelText="Do note that this will be the name publicly featured in the
               gallery entry, so if you are shy, remember to use an anonymous
               name!"
                 step={3}
-                placeholder="message"
-              />
+              >
+                <Textarea
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
+                  placeholder="message"
+                />
+              </Block>
+              {/* <span class="loadingspinner" /> */}
               <SubmitButton onClick={(e) => submitHandler(e)}>
-                Submit
+                {submitStatus === "loading" ? (
+                  <div class="loader">
+                    <div class="dot dot1"></div>
+                    <div class="dot dot2"></div>
+                    <div class="dot dot3"></div>
+                    <div class="dot dot4"></div>
+                  </div>
+                ) : (
+                  "Submit"
+                )}
               </SubmitButton>
               <SubmitError>{submitError}</SubmitError>
             </Form>

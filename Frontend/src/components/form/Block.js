@@ -2,8 +2,6 @@ import React from "react";
 import styled from "styled-components";
 
 import Label from "./Label";
-import Input from "./Input";
-import Textarea from "./Textarea";
 import Text from "../Text";
 
 const Block = styled.div`
@@ -12,6 +10,7 @@ const Block = styled.div`
   }
 
   & > input,
+  & > div,
   & > textarea {
     margin-top: 50px;
   }
@@ -33,25 +32,18 @@ const ErrorText = styled(Text)`
 `;
 
 const BlockComp = ({
-  type,
-  value,
-  onChange,
   error,
   labelText,
   sublabelText,
   step,
-  placeholder,
+  children,
   ...others
 }) => {
   return (
     <Block {...others}>
       <Label step={step}>{labelText}</Label>
       <Sublabel>{sublabelText}</Sublabel>
-      {type === "input" ? (
-        <Input value={value} onChange={onChange} placeholder={placeholder} />
-      ) : type === "textarea" ? (
-        <Textarea value={value} onChange={onChange} placeholder={placeholder} />
-      ) : null}
+      {children}
       <ErrorText>{error}</ErrorText>
     </Block>
   );
