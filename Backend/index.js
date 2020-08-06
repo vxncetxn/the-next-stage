@@ -187,7 +187,8 @@ app.get("/api/artefact", async (req, res) => {
       include: {
         donor: {
           select: {
-            nickname: true,
+            firstName: true,
+            lastName: true,
             amount: true,
           },
         },

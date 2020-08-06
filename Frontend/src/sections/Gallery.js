@@ -156,7 +156,7 @@ const GalleryComp = () => {
           {artefacts
             ? artefacts.map((artefact, idx) => (
                 <GalleryItem
-                  nickname={artefact.donor.nickname}
+                  nickname={artefact.nickname}
                   form={artefact.form}
                   colorPoles={artefact.colorPoles}
                   key={idx}

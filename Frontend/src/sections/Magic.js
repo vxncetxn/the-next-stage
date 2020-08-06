@@ -158,7 +158,7 @@ const MagicComp = () => {
       <MagicContent>
         {donor ? (
           <>
-            <Hello>hello {donor.nickname},</Hello>
+            <Hello>hello {donor.firstName},</Hello>
             <Text>
               Thank you so much for your generous donation to{" "}
               <i>The Next Stage</i>. Your contributions will no doubt allow
