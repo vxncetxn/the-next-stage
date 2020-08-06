@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useLocation, useHistory } from "react-router-dom";
+import { useQuery } from "react-query";
 import ky from "ky";
+
+import fetchDonor from "../fetch/fetchDonor";
 
 import range from "../helpers/range";
 
@@ -60,12 +63,13 @@ const TextShim = styled(Shim)`
   margin-bottom: 15px;
 `;
 
-const FormContent = styled.div`
+const Form = styled.form`
   display: flex;
   flex-direction: column;
   margin-top: 100px;
 
-  & > * + * {
+  & > div + div,
+  & > div + button {
     margin-top: 100px;
   }
 `;
@@ -74,30 +78,55 @@ const SubmitButton = styled(CTAButton)`
   align-self: flex-end;
 `;
 
+const SubmitError = styled(Text)`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  font-size: 14px;
+  color: red;
+  text-align: right;
+  height: 50px;
+`;
+
 const MagicComp = () => {
   const pathname = useLocation().pathname;
   const key = pathname.slice(12);
   const history = useHistory();
-  const [donor, setDonor] = useState(null);
+
+  const [nickname, setNickname] = useState("");
+  const [nicknameError, setNicknameError] = useState("");
+  const [message, setMessage] = useState("");
+  const [messageError, setMessageError] = useState("");
+  const [submitError, setSubmitError] = useState("");
+
+  const { status: donorStatus, data: donor } = useQuery("donor", () =>
+    fetchDonor(key)
+  );
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-  useEffect(() => {
-    const fetchDonor = async () => {
-      try {
-        const fetchedDonor = await ky
-          .get(`https://the-next-stage.herokuapp.com/api/magic/${key}`)
-          .json();
-        setDonor(fetchedDonor.data);
-      } catch (err) {
-        history.push("/404");
-      }
-    };
+  const submitHandler = (e) => {
+    e.preventDefault();
 
-    fetchDonor();
-  }, []);
+    let hasError = false;
+    if (!nickname) {
+      setNicknameError("*A nickname is required.");
+      hasError = true;
+    }
+    if (!message) {
+      setMessageError("*A message is required.");
+      hasError = true;
+    }
+
+    if (hasError) {
+      setSubmitError("*Some of the required fields have not been filled.");
+    } else {
+      console.log(nickname, message);
+      // ky.post("https://example.com", { json: { foo: true } }).json();
+    }
+  };
 
   return (
     <Magic>
@@ -122,10 +151,12 @@ const MagicComp = () => {
               exhibition. The digital artefact will be uniquely generated from
               your responses below, have fun! 🥳
             </Text>
-            <FormContent>
+            <Form>
               <Block
                 type="input"
-                pos="left"
+                value={nickname}
+                onChange={(e) => setNickname(e.target.value)}
+                error={nicknameError}
                 labelText="choose a nickname*"
                 sublabelText="Do note that this will be the name publicly featured in the
               gallery entry, so if you are shy, remember to use an anonymous
@@ -144,8 +175,10 @@ const MagicComp = () => {
                 placeholder="artist name"
               />
               <Block
-                pos="left"
                 type="textarea"
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
+                error={messageError}
                 labelText="write a message*"
                 sublabelText="Do note that this will be the name publicly featured in the
               gallery entry, so if you are shy, remember to use an anonymous
@@ -153,8 +186,11 @@ const MagicComp = () => {
                 step={3}
                 placeholder="message"
               />
-              <SubmitButton>Submit</SubmitButton>
-            </FormContent>
+              <SubmitButton onClick={(e) => submitHandler(e)}>
+                Submit
+              </SubmitButton>
+              <SubmitError>{submitError}</SubmitError>
+            </Form>
           </>
         ) : (
           <>

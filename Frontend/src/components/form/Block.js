@@ -22,9 +22,21 @@ const Sublabel = styled(Text)`
   color: var(--color-grey);
 `;
 
+const ErrorText = styled(Text)`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  font-size: 14px;
+  color: red;
+  text-align: right;
+  height: 40px;
+`;
+
 const BlockComp = ({
   type,
-  pos,
+  value,
+  onChange,
+  error,
   labelText,
   sublabelText,
   step,
@@ -36,10 +48,11 @@ const BlockComp = ({
       <Label step={step}>{labelText}</Label>
       <Sublabel>{sublabelText}</Sublabel>
       {type === "input" ? (
-        <Input placeholder={placeholder} />
+        <Input value={value} onChange={onChange} placeholder={placeholder} />
       ) : type === "textarea" ? (
-        <Textarea placeholder={placeholder} />
+        <Textarea value={value} onChange={onChange} placeholder={placeholder} />
       ) : null}
+      <ErrorText>{error}</ErrorText>
     </Block>
   );
 };
