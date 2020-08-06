@@ -185,8 +185,9 @@ const MagicComp = () => {
                 <Text>
                   As part of our campaign, we invite you to create a unique
                   digital artefact which will be featured in the online{" "}
-                  <Anchor>public gallery</Anchor>. The digital artefact will be
-                  uniquely generated from your responses below, have fun! 🥳
+                  <Anchor to="/gallery">public gallery</Anchor>. The digital
+                  artefact will be uniquely generated from your responses below,
+                  have fun! 🥳
                 </Text>
                 <Form>
                   <Block

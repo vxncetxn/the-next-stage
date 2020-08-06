@@ -4,6 +4,7 @@ import styled, { keyframes } from "styled-components";
 
 import SectionTitleBar from "../../components/SectionTitleBar";
 import Text from "../../components/Text";
+import Anchor from "../../components/Anchor";
 import CTAButton from "../../components/CTAButton";
 
 const Flow = keyframes`
@@ -233,30 +234,34 @@ const DonateComp = () => {
       <DonateTitleBar position="left">donate</DonateTitleBar>
       <DonateContent contentInView={true}>
         <Text>
-          The Esplanade Co Ltd is a registered charity and not-for-profit
-          organisation. Therefore, we depend greatly on the generous and
-          forthcoming contributions of each and every one of our donors,
-          sponsors and volunteers to persist in our mission to promote the arts
-          to the wider community. Hence, we urge you to make a personal
-          contribution to <i>The Next Stage</i> and to make the incentive to do
-          so even greater, we have prepared a unique donation campaign where you
-          can create a virtual art memento which will eventually be showcased in
-          an AR exhibition when the theatre opens!
+          Esplanade — Theatres on the Bay is operated by The Esplanade Co Ltd
+          (TECL) which is a not-for-profit organisation, a registered Charity
+          and an Institution of a Public Character. Therefore, they depend
+          greatly on the generous contributions of each and every one of their
+          donors, sponsors and volunteers to persist in their mission to promote
+          the arts to the wider community.
           <br></br>
+          <br></br>
+          Hence, we urge you to make a personal contribution to{" "}
+          <i>The Next Stage</i> and to make the incentive to do so even greater,
+          we have prepared a unique donation campaign where you can create a
+          virtual art memento which will be showcased in our online{" "}
+          <Anchor to="/gallery">public gallery</Anchor>. This memento will serve
+          to commemorate your generous contributions to our campaign.<br></br>
           <br></br>
           The following steps detail the process for the donation campaign:
         </Text>
         <StepsText step="1">
-          Make a donation on Giving.sg - a minimum donation of S$10 is required.
+          Make a donation to Esplanade on Giving.sg - a minimum donation of S$10
+          is required.
         </StepsText>
         <StepsText step="2">
           After you have successfully donated, a link will be sent to your email
-          allowing you to create your very own virtual art memento!
+          allowing you to create your very own virtual art memento.
         </StepsText>
         <StepsText step="3">
-          The virtual art memento will eventually be featured in an AR
-          exhibition to be held in conjunction with the opening of the theatre -
-          see your memento in the real world!
+          See and experience your virtual art memento - along with those from
+          other donors - in our online public gallery!
         </StepsText>
       </DonateContent>
       <DonationPanelWrapper>

@@ -114,27 +114,27 @@ const TheatreComp = () => {
           Esplanade has always been a place for everyone.
         </QuoteText>
         <Text>
-          <i>The Next Stage</i> is a fundraising initiative jointly organised by{" "}
-          <Anchor href="https://www.esplanade.com/">
-            The Esplanade Co Ltd
-          </Anchor>{" "}
-          and students from the{" "}
+          <i>The Next Stage</i> is a fundraising initiative organised by
+          students from the{" "}
           <Anchor href="https://www.sutd.edu.sg/">
             Singapore University of Technology and Design
-          </Anchor>
-          . We are moving into our next phase of growth as an arts centre and
-          are building a new semi-flexible 550-seat venue along our busy
-          waterfront. We broke ground for the theatre's construction on 18th
-          June 2019 and it is targeted for completion in 2022.
+          </Anchor>{" "}
+          in collaboration with{" "}
+          <Anchor href="https://www.esplanade.com/">
+            Esplanade — Theatres on the Bay
+          </Anchor>{" "}
+          for the upcoming 550-seat Singtel Waterfront Theatre. Esplanade broke
+          ground for the theatre's construction on 18th June 2019 and it is
+          currently slated for completion in 2022.
           <br></br>
           <br></br>
-          The new theatre will help to fill the gap between our existing large
-          2000-seat venues and smaller studio spaces, so that community, youth
-          and arts groups who have done well in smaller venues and are ready for
-          larger audiences can use our new theatre as a stepping stone towards
-          these aspirations. We also want to use our new theatre as a platform
-          for us to commission, produce and present more productions that tell
-          uniquely Singapore and Asian stories.
+          The new theatre will help to fill the gap between Esplanade's existing
+          large 2000-seat venues and smaller studio spaces, so that community,
+          youth and arts groups who have done well in smaller venues and are
+          ready for larger audiences can use it as a stepping stone towards
+          these aspirations. It is also intended as a platform for Esplanade to
+          commission, produce and present more productions that tell uniquely
+          Singapore and Asian stories.
         </Text>
       </TheatreContent>
       <YoutubeFrameWrapper>

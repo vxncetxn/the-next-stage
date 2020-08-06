@@ -256,21 +256,20 @@ const CauseComp = () => {
           a platform through which we can reach out to the communities
         </QuoteText>
         <Text>
-          At Esplanade, we believe that the arts transforms lives. We've
-          witnessed how the arts can help build confidence, heal broken spirits
-          and bring people together. Therefore, our theatres, including the new
-          Singtel Waterfront Theatre, are not merely buildings - they are
-          platforms from which we can reach out to the communities and bring
-          them transformative and meaningful experiences through the arts.
+          As an arts centre for everyone, Esplanade also creates opportunities
+          for seniors, youth, children and underserved communities to experience
+          the arts. Therefore, Esplanade's theatres, including the new Singtel
+          Waterfront Theatre, are not merely buildings - they are platforms to
+          reach out to the communities and bring them transformative and
+          meaningful experiences through the medium of arts.
           <br></br>
           <br></br>
-          Ever since our inception, Esplanade has been active in bringing such
-          arts experiences to over 10000 beneficiaries in Singapore, including
-          seniors, children, youth and those with special needs. Your generous
-          support for the new theatre will enable us to further such meaningful
-          causes and outreach efforts and extend it to the generations ahead of
-          us. To find out even more about our community engagement efforts,
-          please refer to{" "}
+          Ever since their inception, Esplanade has been active in bringing such
+          arts experiences to over 10000 beneficiaries in Singapore. Your
+          generous support for the new theatre will enable them to further such
+          meaningful causes and outreach efforts and extend it to the
+          generations ahead of us. To find out even more about Esplanade's
+          community engagement efforts, please refer to{" "}
           <Anchor href="https://www.esplanade.com/about-us/community-engagement">
             this link
           </Anchor>

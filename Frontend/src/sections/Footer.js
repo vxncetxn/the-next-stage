@@ -326,7 +326,7 @@ const FooterComp = () => {
             </SubscribeButton>
           </SubscribeGroup>
           <SmallGreyText style={{ marginTop: 20 }}>
-            Connect with us:
+            Connect with Esplanade:
           </SmallGreyText>
           <SocialsIconGroup>
             <A
@@ -352,7 +352,7 @@ const FooterComp = () => {
       </PrimaryRow>
       <SecondaryRow>
         <LogosColumn>
-          <SmallGreyText>A fundraising initiative by:</SmallGreyText>
+          <SmallGreyText>In collaboration with:</SmallGreyText>
           <LogosGroup>
             <A href="https://www.esplanade.com/">
               <img

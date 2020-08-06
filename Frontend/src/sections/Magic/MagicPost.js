@@ -81,10 +81,10 @@ const MagicPost = ({ donor, ...others }) => {
   return (
     <>
       <Text>
-        As part of our campaign, you have also created a unique digital memento
-        that signifies these contributions that you have made - we hope you like
-        it! You can now either view your digital memento on this page below or
-        in the online <Anchor>public gallery</Anchor>.
+        As part of our campaign, you have also created a unique virtual memento
+        that commemorates these contributions that you have made - we hope you
+        like it! You can now either view your virtual memento on this page below
+        or in the online <Anchor to="/gallery">public gallery</Anchor>.
       </Text>
       <Viewer
         onClick={() =>

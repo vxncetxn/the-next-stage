@@ -21,19 +21,20 @@ const Navbar = styled.div`
 
   & > ul {
     display: flex;
+    justify-content: flex-end;
     align-items: center;
-    padding: 15px 100px;
+    padding: 30px 100px;
 
     @media (max-width: 1200px) {
-      padding: 15px 75px;
+      padding: 30px 75px;
     }
 
     @media (max-width: 896px) {
-      padding: 15px 50px;
+      padding: 30px 50px;
     }
 
     @media (max-width: 600px) {
-      padding: 15px 20px;
+      padding: 30px 20px;
     }
   }
 
@@ -59,7 +60,7 @@ const Navbar = styled.div`
     margin-left: 40px;
   }
 
-  & > ul > li:not(:first-child) {
+  & > ul > li {
     @media (max-width: 896px) {
       display: none;
     }
@@ -74,18 +75,18 @@ const Navbar = styled.div`
   }
 `;
 
-const Logo = styled.img`
-  height: 70px;
-  transform: translateY(3px);
+// const Logo = styled.img`
+//   height: 70px;
+//   transform: translateY(3px);
 
-  @media (max-width: 896px) {
-    height: 60px;
-  }
+//   @media (max-width: 896px) {
+//     height: 60px;
+//   }
 
-  @media (max-width: 600px) {
-    height: 50px;
-  }
-`;
+//   @media (max-width: 600px) {
+//     height: 50px;
+//   }
+// `;
 
 const NavbarComp = ({ setHamburgerOpen }) => {
   const pathname = useLocation().pathname;
@@ -114,7 +115,7 @@ const NavbarComp = ({ setHamburgerOpen }) => {
   return (
     <Navbar atPageTop={pathname === "/" ? atPageTop : false}>
       <ul>
-        <li
+        {/* <li
           style={{ marginRight: "auto" }}
           aria-label="Go to Esplanade homepage"
         >
@@ -124,17 +125,22 @@ const NavbarComp = ({ setHamburgerOpen }) => {
               alt="Esplanade logo"
             />
           </A>
-        </li>
+        </li> */}
         {pathname === "/" ? (
-          ["theatre", "cause", "donate", "socials"].map((section) => {
-            return (
-              <li key={section}>
-                <button onClick={() => scrollToElement(section)}>
-                  {section}
-                </button>
-              </li>
-            );
-          })
+          <>
+            {["theatre", "cause", "donate", "socials"].map((section) => {
+              return (
+                <li key={section}>
+                  <button onClick={() => scrollToElement(section)}>
+                    {section}
+                  </button>
+                </li>
+              );
+            })}
+            <li>
+              <Link to="/gallery">gallery</Link>
+            </li>
+          </>
         ) : (
           <li>
             <Link to="/" onClick={() => window.scrollTo(0, 0)}>
