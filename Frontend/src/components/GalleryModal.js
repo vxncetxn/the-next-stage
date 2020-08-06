@@ -6,8 +6,7 @@ import { ReactComponent as LeftArrowIcon } from "../assets/icons/left-arrow.svg"
 import { ReactComponent as RightArrowIcon } from "../assets/icons/right-arrow.svg";
 import { ReactComponent as CloseIcon } from "../assets/icons/close.svg";
 import { ReactComponent as FacebookIcon } from "../assets/icons/facebook.svg";
-import { ReactComponent as YoutubeIcon } from "../assets/icons/youtube.svg";
-import { ReactComponent as InstagramIcon } from "../assets/icons/instagram.svg";
+import { ReactComponent as TwitterIcon } from "../assets/icons/twitter.svg";
 
 import Artefact from "./artefact/Artefact";
 import PlainAnchor from "../components/PlainAnchor";
@@ -249,10 +248,12 @@ const GalleryModalComp = ({
   useLockBodyScroll();
 
   const {
+    id,
     form,
     colorPoles,
     message,
-    donor: { nickname, amount },
+    nickname,
+    donor: { amount },
     updatedAt,
   } = content;
   const createDate = new Date(updatedAt);
@@ -299,22 +300,16 @@ const GalleryModalComp = ({
                 <p>Share: </p>
                 <div>
                   <A
-                    href="https://www.facebook.com/EsplanadeSG"
-                    aria-label="Go to Esplanade's Facebook page"
+                    href={`https://www.facebook.com/sharer/sharer.php?u=https://thenextstage.sg/gallery/${id}&t=Share on Facebook`}
+                    aria-label="Share your memento on Facebook"
                   >
                     <FacebookIcon />
                   </A>
                   <A
-                    href="https://www.youtube.com/user/EsplanadeSG"
-                    aria-label="Go to Esplanade's Youtube page"
+                    href={`https://twitter.com/share?text=Check out my virtual memento ✨ at&url=https://thenextstage.sg/gallery/${id}&hashtags=thenextstage,esplanade,arts`}
+                    aria-label="Share your memento on Twitter"
                   >
-                    <YoutubeIcon />
-                  </A>
-                  <A
-                    href="https://www.instagram.com/esplanadesingapore/"
-                    aria-label="Go to Esplanade's Instagram page"
-                  >
-                    <InstagramIcon />
+                    <TwitterIcon />
                   </A>
                 </div>
               </Share>

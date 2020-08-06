@@ -89,12 +89,12 @@ const MagicPost = ({ donor, ...others }) => {
       <Viewer
         onClick={() =>
           setContent({
-            donor: { nickname: donor.nickname, amount: donor.amount },
+            donor: { amount: donor.amount },
             ...donor.artefact,
           })
         }
       >
-        <Artefact form={donor.artefact.form} />
+        <Artefact form={donor.artefact.form} interactive={false} />
       </Viewer>
       {content ? (
         <GalleryModal content={content} closeHandler={closeModal} />
