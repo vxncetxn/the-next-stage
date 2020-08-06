@@ -13,7 +13,8 @@ generator client {
 model Donor {
   id        String    @default(cuid()) @id
   email     String    @unique
-  nickname  String
+  firstName String
+  lastName  String
   amount    Float
   magic     Magic?
   artefact  Artefact?
@@ -33,6 +34,7 @@ model Artefact {
   donorId    String
   form       String
   colorPoles String
+  nickname   String
   message    String
   updatedAt  DateTime @updatedAt
 }
