@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { useLocation, useHistory } from "react-router-dom";
 import { useQuery, useMutation, queryCache } from "react-query";
-import ky from "ky";
 
 import fetchDonor from "../fetch/fetchDonor";
 import postArtefact from "../fetch/postArtefact";
 
 import range from "../helpers/range";
+
+import MagicPost from "./Magic/MagicPost";
 
 import SectionTitleBar from "../components/SectionTitleBar";
 import Text from "../components/Text";
@@ -168,73 +169,79 @@ const MagicComp = () => {
             </Text>
             <br />
             <br />
-            <Text>
-              As part of our campaign, we invite you to create a unique digital
-              artefact which will be featured in the online{" "}
-              <Anchor>public gallery</Anchor>. The digital artefact will be
-              uniquely generated from your responses below, have fun! 🥳
-            </Text>
-            <Form>
-              <Block
-                error={nicknameError}
-                labelText="choose a nickname*"
-                sublabelText="Do note that this will be the name publicly featured in the
-              gallery entry, so if you are shy, remember to use an anonymous
-              name!"
-                step={1}
-              >
-                <Input
-                  value={nickname}
-                  onChange={(e) => setNickname(e.target.value)}
-                  placeholder="nickname"
-                />
-              </Block>
-              <Block
-                error={artistError}
-                labelText="give a shoutout"
-                sublabelText="Do note that this will be the name publicly featured in the
-              gallery entry, so if you are shy, remember to use an anonymous
-              name!"
-                step={2}
-              >
-                <DuoInput
-                  valueTop={artist}
-                  onChangeTop={(e) => setArtist(e.target.value)}
-                  placeholderTop="artist name"
-                  valueBottom={artistLink}
-                  onChangeBottom={(e) => setArtistLink(e.target.value)}
-                  placeholderBottom="artist link"
-                />
-              </Block>
-              <Block
-                error={messageError}
-                labelText="write a message*"
-                sublabelText="Do note that this will be the name publicly featured in the
-              gallery entry, so if you are shy, remember to use an anonymous
-              name!"
-                step={3}
-              >
-                <Textarea
-                  value={message}
-                  onChange={(e) => setMessage(e.target.value)}
-                  placeholder="message"
-                />
-              </Block>
-              {/* <span class="loadingspinner" /> */}
-              <SubmitButton onClick={(e) => submitHandler(e)}>
-                {submitStatus === "loading" ? (
-                  <div class="loader">
-                    <div class="dot dot1"></div>
-                    <div class="dot dot2"></div>
-                    <div class="dot dot3"></div>
-                    <div class="dot dot4"></div>
-                  </div>
-                ) : (
-                  "Submit"
-                )}
-              </SubmitButton>
-              <SubmitError>{submitError}</SubmitError>
-            </Form>
+            {donor.artefact ? (
+              <MagicPost donor={donor} />
+            ) : (
+              <>
+                <Text>
+                  As part of our campaign, we invite you to create a unique
+                  digital artefact which will be featured in the online{" "}
+                  <Anchor>public gallery</Anchor>. The digital artefact will be
+                  uniquely generated from your responses below, have fun! 🥳
+                </Text>
+                <Form>
+                  <Block
+                    error={nicknameError}
+                    labelText="choose a nickname*"
+                    sublabelText="Do note that this will be the name publicly featured in the
+                gallery entry, so if you are shy, remember to use an anonymous
+                name!"
+                    step={1}
+                  >
+                    <Input
+                      value={nickname}
+                      onChange={(e) => setNickname(e.target.value)}
+                      placeholder="nickname"
+                    />
+                  </Block>
+                  <Block
+                    error={artistError}
+                    labelText="give a shoutout"
+                    sublabelText="Do note that this will be the name publicly featured in the
+                gallery entry, so if you are shy, remember to use an anonymous
+                name!"
+                    step={2}
+                  >
+                    <DuoInput
+                      valueTop={artist}
+                      onChangeTop={(e) => setArtist(e.target.value)}
+                      placeholderTop="artist name"
+                      valueBottom={artistLink}
+                      onChangeBottom={(e) => setArtistLink(e.target.value)}
+                      placeholderBottom="artist link"
+                    />
+                  </Block>
+                  <Block
+                    error={messageError}
+                    labelText="write a message*"
+                    sublabelText="Do note that this will be the name publicly featured in the
+                gallery entry, so if you are shy, remember to use an anonymous
+                name!"
+                    step={3}
+                  >
+                    <Textarea
+                      value={message}
+                      onChange={(e) => setMessage(e.target.value)}
+                      placeholder="message"
+                    />
+                  </Block>
+                  {/* <span class="loadingspinner" /> */}
+                  <SubmitButton onClick={(e) => submitHandler(e)}>
+                    {submitStatus === "loading" ? (
+                      <div class="loader">
+                        <div class="dot dot1"></div>
+                        <div class="dot dot2"></div>
+                        <div class="dot dot3"></div>
+                        <div class="dot dot4"></div>
+                      </div>
+                    ) : (
+                      "Submit"
+                    )}
+                  </SubmitButton>
+                  <SubmitError>{submitError}</SubmitError>
+                </Form>
+              </>
+            )}
           </>
         ) : (
           <>
