@@ -80,7 +80,11 @@ app.get("/api/magic/:key", async (req, res) => {
         id: key,
       },
       include: {
-        donor: true,
+        donor: {
+          include: {
+            artefact: true,
+          },
+        },
       },
     });
 
