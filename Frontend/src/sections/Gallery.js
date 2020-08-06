@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useParams, useHistory } from "react-router-dom";
-import { useQuery, usePaginatedQuery } from "react-query";
+import { useQuery, usePaginatedQuery, queryCache } from "react-query";
 
 import useURLQuery from "../helpers/useURLQuery";
 import range from "../helpers/range";
@@ -88,27 +88,19 @@ const GalleryComp = () => {
   const pageQuery = useURLQuery().get("page");
   const history = useHistory();
 
-  const [currentPage, setCurrentPage] = useState(
-    pageQuery ? parseInt(pageQuery, 10) : 1
-  );
-  const [modal, setModal] = useState({
-    open: false,
-    artefact: null,
-    idx: null,
-  });
+  const [page, setPage] = useState(pageQuery ? parseInt(pageQuery, 10) : 1);
+  const [content, setContent] = useState(null);
+  const [contentIdx, setContentIdx] = useState(-1);
 
   const { status: totalStatus, data: total } = useQuery("total", fetchTotal, {
     initialData: 0,
     initialStale: true,
   });
-  const {} = useQuery("artefact", () => fetchArtefact(artefactId), {
+  useQuery("artefact", () => fetchArtefact(artefactId), {
+    enabled: !!artefactId,
     onSuccess: (artefact) => {
       if (artefact) {
-        setModal({
-          open: true,
-          artefact,
-          idx: null,
-        });
+        setContent(artefact);
       }
     },
   });
@@ -116,13 +108,38 @@ const GalleryComp = () => {
     status: artefactsStatus,
     resolvedData: artefacts,
     latestData: latestArtefacts,
-  } = usePaginatedQuery(["artefacts", currentPage], () =>
-    fetchArtefacts(currentPage)
-  );
+  } = usePaginatedQuery(["artefacts", page], () => fetchArtefacts(page));
+
+  useEffect(() => {
+    if (page + 1 <= Math.ceil(total / 6)) {
+      queryCache.prefetchQuery(["artefacts", page + 1], () =>
+        fetchArtefacts(page + 1)
+      );
+    }
+  }, [page, total]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  const closeModal = () => {
+    setContent(null);
+    history.push(`/gallery?page=${page}`);
+  };
+  const goToNextItem = (idx) => {
+    if (idx + 1 <= artefacts.length - 1) {
+      setContentIdx(idx + 1);
+      setContent(artefacts[idx + 1]);
+      history.push(`/gallery/${artefacts[idx + 1].id}`);
+    }
+  };
+  const goToPreviousItem = (idx) => {
+    if (idx - 1 >= 0) {
+      setContentIdx(idx - 1);
+      setContent(artefacts[idx - 1]);
+      history.push(`/gallery/${artefacts[idx - 1].id}`);
+    }
+  };
 
   return (
     <Gallery>
@@ -132,32 +149,36 @@ const GalleryComp = () => {
         <Pagination
           style={{ marginTop: 20 }}
           totalPages={Math.ceil(total / 6)}
-          currentPage={currentPage}
-          setCurrentPage={setCurrentPage}
+          page={page}
+          setPage={setPage}
         />
         <GalleryGrid>
           {artefacts
-            ? artefacts.map((item, idx) => (
+            ? artefacts.map((artefact, idx) => (
                 <GalleryItem
-                  nickname={item.donor.nickname}
-                  form={item.form}
-                  colorPoles={item.colorPoles}
+                  nickname={artefact.donor.nickname}
+                  form={artefact.form}
+                  colorPoles={artefact.colorPoles}
                   key={idx}
                   onClick={() => {
-                    setModal({
-                      open: true,
-                      artefact: item,
-                      idx,
-                    });
-                    history.push(`/gallery/${item.id}`);
+                    setContentIdx(idx);
+                    setContent(artefact);
+                    history.push(`/gallery/${artefact.id}`);
                   }}
                 />
               ))
             : range(6).map(() => <GalleryItemShim />)}
         </GalleryGrid>
       </GalleryContent>
-      {modal.open ? (
-        <GalleryModal modal={modal} setModal={setModal} artefacts={artefacts} />
+      {content ? (
+        <GalleryModal
+          content={content}
+          closeHandler={closeModal}
+          nextHandler={goToNextItem}
+          prevHandler={goToPreviousItem}
+          idx={contentIdx}
+          contents={artefacts}
+        />
       ) : null}
     </Gallery>
   );

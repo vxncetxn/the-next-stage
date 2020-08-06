@@ -117,12 +117,7 @@ const PagButton = styled.button`
   }
 `;
 
-const PaginationComp = ({
-  totalPages,
-  currentPage,
-  setCurrentPage,
-  ...others
-}) => {
+const PaginationComp = ({ totalPages, page, setPage, ...others }) => {
   const history = useHistory();
 
   const [maxUnits, setMaxUnits] = useState(5);
@@ -159,10 +154,10 @@ const PaginationComp = ({
       const leftLimit = maxContUnits;
       const rightLimit = totalPages - (maxContUnits - 1);
 
-      if (currentPage < leftLimit) {
+      if (page < leftLimit) {
         buttonsArr = range(maxContUnits, 1);
         buttonsArr.push("...", totalPages);
-      } else if (currentPage > rightLimit) {
+      } else if (page > rightLimit) {
         buttonsArr.push(1, "...");
         buttonsArr = buttonsArr.concat(
           range(maxContUnits, totalPages - maxUnits + 1 + 2)
@@ -170,12 +165,12 @@ const PaginationComp = ({
       } else {
         buttonsArr.push(1, "...");
         buttonsArr = buttonsArr.concat(
-          range(maxUnits - 4, currentPage - Math.floor((maxUnits - 4) / 2))
+          range(maxUnits - 4, page - Math.floor((maxUnits - 4) / 2))
         );
         buttonsArr.push("...", totalPages);
       }
     } else if (totalPages === maxUnits + 1) {
-      if (currentPage >= maxContUnits) {
+      if (page >= maxContUnits) {
         buttonsArr.push(1, "...");
         buttonsArr = buttonsArr.concat(range(maxContUnits, 4));
       } else {
@@ -189,21 +184,21 @@ const PaginationComp = ({
     return buttonsArr;
   };
   const goToNextPage = () => {
-    if (currentPage + 1 <= totalPages) {
-      setCurrentPage(currentPage + 1);
-      history.push(`/gallery?page=${currentPage + 1}`);
+    if (page + 1 <= totalPages) {
+      setPage(page + 1);
+      history.push(`/gallery?page=${page + 1}`);
     }
   };
   const goToPreviousPage = () => {
-    if (currentPage - 1 > 0) {
-      setCurrentPage(currentPage - 1);
-      history.push(`/gallery?page=${currentPage - 1}`);
+    if (page - 1 > 0) {
+      setPage(page - 1);
+      history.push(`/gallery?page=${page - 1}`);
     }
   };
 
   return (
     <Pagination {...others}>
-      <PagButton onClick={goToPreviousPage} disabled={currentPage === 1}>
+      <PagButton onClick={goToPreviousPage} disabled={page === 1}>
         {/* prev */}
         <LeftArrowIcon width="14" height="14" />
       </PagButton>
@@ -214,17 +209,17 @@ const PaginationComp = ({
           return (
             <PagButton
               onClick={() => {
-                setCurrentPage(num);
+                setPage(num);
                 history.push(`/gallery?page=${num}`);
               }}
-              selected={currentPage === num}
+              selected={page === num}
             >
               {num.toString().padStart(2, "0")}
             </PagButton>
           );
         }
       })}
-      <PagButton onClick={goToNextPage} disabled={currentPage === totalPages}>
+      <PagButton onClick={goToNextPage} disabled={page === totalPages}>
         {/* next */}
         <RightArrowIcon width="14" height="14" />
       </PagButton>

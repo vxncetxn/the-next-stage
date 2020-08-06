@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
 import { useLocation, useHistory } from "react-router-dom";
 import ky from "ky";
 
@@ -11,12 +11,6 @@ import Anchor from "../components/Anchor";
 import Shim from "../components/Shim";
 import Block from "../components/form/Block";
 import CTAButton from "../components/CTAButton";
-
-const Flow = keyframes`
-  to {
-    background-position: 200% center;
-  }
-`;
 
 const Magic = styled.section`
   position: relative;

@@ -1,7 +1,6 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { createPortal } from "react-dom";
 import styled, { keyframes } from "styled-components";
-import { useHistory } from "react-router-dom";
 
 import { ReactComponent as LeftArrowIcon } from "../assets/icons/left-arrow.svg";
 import { ReactComponent as RightArrowIcon } from "../assets/icons/right-arrow.svg";
@@ -59,8 +58,6 @@ const ArrowButton = styled.button`
   top: 0;
 
   & > svg {
-    display: ${(props) => (props.disabled ? "none" : "block")};
-
     @media (max-width: 896px) {
       width: 30px;
       height: 30px;
@@ -240,64 +237,43 @@ const Share = styled.div`
   }
 `;
 
-const GalleryModalComp = ({ modal, setModal, artefacts, ...others }) => {
-  const history = useHistory();
-
+const GalleryModalComp = ({
+  content,
+  closeHandler,
+  nextHandler,
+  prevHandler,
+  idx,
+  contents,
+  ...others
+}) => {
   useLockBodyScroll();
 
   const {
-    artefact: {
-      form,
-      colorPoles,
-      message,
-      donor: { nickname, amount },
-      updatedAt,
-    },
-    idx,
-  } = modal;
+    form,
+    colorPoles,
+    message,
+    donor: { nickname, amount },
+    updatedAt,
+  } = content;
   const createDate = new Date(updatedAt);
-
-  const goToNextItem = () => {
-    if (idx + 1 <= artefacts.length - 1) {
-      setModal({
-        open: true,
-        artefact: artefacts[idx + 1],
-        idx: idx + 1,
-      });
-    }
-  };
-  const goToPreviousItem = () => {
-    if (idx - 1 >= 0) {
-      setModal({
-        open: true,
-        artefact: artefacts[idx - 1],
-        idx: idx - 1,
-      });
-    }
-  };
 
   return (
     <>
       {createPortal(
         <Container {...others}>
-          <LeftButton
-            onClick={goToPreviousItem}
-            disabled={idx === null || idx === 0}
-          >
-            <LeftArrowIcon />
-          </LeftButton>
-          <RightButton
-            onClick={goToNextItem}
-            disabled={idx === null || idx === artefacts.length - 1}
-          >
-            <RightArrowIcon />
-          </RightButton>
+          {prevHandler && idx - 1 >= 0 ? (
+            <LeftButton onClick={() => prevHandler(idx)}>
+              <LeftArrowIcon />
+            </LeftButton>
+          ) : null}
+          {nextHandler && idx + 1 <= contents.length - 1 ? (
+            <RightButton onClick={() => nextHandler(idx)}>
+              <RightArrowIcon />
+            </RightButton>
+          ) : null}
           <Modal>
             <CloseButton
-              onClick={() => {
-                setModal({ open: false, props: {}, idx: null });
-                history.push("/gallery");
-              }}
+              onClick={closeHandler}
               aria-label="Close artefact modal"
             >
               <CloseIcon />
