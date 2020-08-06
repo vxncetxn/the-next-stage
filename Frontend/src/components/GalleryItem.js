@@ -75,7 +75,7 @@ const Title = styled.div`
 const GalleryItemComp = ({ nickname, form, colorPoles, ...others }) => {
   return (
     <GalleryItem {...others}>
-      <Artefact form={form} />
+      <Artefact form={form} interactive={false} />
       <Title colorPoles={JSON.parse(colorPoles)}>
         by <span>{nickname}</span>
       </Title>

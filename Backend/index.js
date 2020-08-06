@@ -8,6 +8,8 @@ const { PrismaClient } = require("@prisma/client");
 
 const { randomChoice, createArtefactForm } = require("./utils");
 
+console.log(createArtefactForm(["#ee0979", "#ff6a00"]));
+
 require("dotenv").config();
 
 const PORT = process.env.PORT || 3001;

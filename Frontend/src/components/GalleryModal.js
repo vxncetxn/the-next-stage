@@ -278,7 +278,7 @@ const GalleryModalComp = ({
             >
               <CloseIcon />
             </CloseButton>
-            <Artefact form={form} />
+            <Artefact form={form} interactive={true} />
             <Content>
               <Title colorPoles={JSON.parse(colorPoles)}>
                 by <span>{nickname}</span>

@@ -1,5 +1,4 @@
 import React, { useRef } from "react";
-// import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { Canvas, useFrame, extend, useThree } from "react-three-fiber";
 import { OrbitControls } from "three";
 
@@ -7,7 +6,7 @@ import Triangle from "./Triangle";
 
 extend({ OrbitControls });
 
-const Controls = () => {
+const Controls = ({ interactive }) => {
   const orbitRef = useRef();
   const { camera, gl } = useThree();
 
@@ -18,6 +17,7 @@ const Controls = () => {
   return (
     <orbitControls
       autoRotate
+      enabled={interactive}
       enableZoom={false}
       maxPolarAngle={Math.PI / 3}
       minPolarAngle={Math.PI / 3}
@@ -27,7 +27,7 @@ const Controls = () => {
   );
 };
 
-const Artefact = ({ form, ...others }) => {
+const Artefact = ({ form, interactive, ...others }) => {
   const trianglesArr = JSON.parse(form);
 
   return (
@@ -40,7 +40,7 @@ const Artefact = ({ form, ...others }) => {
     >
       <ambientLight />
       <spotLight position={[0, 5, 10]} penumbra={1} castShadow />
-      <Controls />
+      <Controls interactive={interactive} />
       <group>
         {trianglesArr.map((triangleForm, idx) => (
           <Triangle key={idx} triangleForm={JSON.stringify(triangleForm)} />

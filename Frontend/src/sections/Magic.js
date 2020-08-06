@@ -116,9 +116,18 @@ const MagicComp = () => {
     fetchDonor(key)
   );
   const [submit, { status: submitStatus }] = useMutation(
-    () => postArtefact({ nickname, shoutout: { artist, artistLink }, message }),
+    () =>
+      postArtefact({
+        donorId: donor.id,
+        nickname,
+        // shoutout: { artist, artistLink },
+        message,
+      }),
     {
-      onSuccess: () => queryCache.invalidateQueries("donor"),
+      onSuccess: () => {
+        queryCache.invalidateQueries("donor");
+        window.scrollTo(0, 0);
+      },
     }
   );
 
