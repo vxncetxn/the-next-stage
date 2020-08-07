@@ -96,19 +96,21 @@ const GalleryComp = () => {
     initialData: 0,
     initialStale: true,
   });
-  useQuery("artefact", () => fetchArtefact(artefactId), {
-    enabled: !!artefactId,
-    onSuccess: (artefact) => {
-      if (artefact) {
-        setContent(artefact);
-      }
-    },
-  });
+
   const {
     status: artefactsStatus,
     resolvedData: artefacts,
     latestData: latestArtefacts,
   } = usePaginatedQuery(["artefacts", page], () => fetchArtefacts(page));
+
+  useQuery("artefact", () => fetchArtefact(artefactId), {
+    enabled: !!artefactId,
+    onSuccess: (artefact) => {
+      if (artefact) {
+        setTimeout(() => setContent(artefact), 500);
+      }
+    },
+  });
 
   useEffect(() => {
     if (page + 1 <= Math.ceil(total / 6)) {

@@ -121,7 +121,7 @@ function App() {
         </Container>
         <Footer />
       </Router>
-      <ReactQueryDevtools initialIsOpen />
+      {/* <ReactQueryDevtools initialIsOpen /> */}
     </ReactQueryConfigProvider>
   );
 }

@@ -207,9 +207,9 @@ const MagicComp = () => {
                   <Block
                     error={artistError}
                     labelText="give a shoutout"
-                    sublabelText="Do note that this will be the name publicly featured in the
-                gallery entry, so if you are shy, remember to use an anonymous
-                name!"
+                    sublabelText="The new Singtel Waterfront Theatre aims to enable our local arts 
+                    community, so take this chance to shout out and dedicate your donation to a 
+                    talented local act that we should definitely not miss out!"
                     step={2}
                   >
                     <DuoInput
@@ -224,9 +224,8 @@ const MagicComp = () => {
                   <Block
                     error={messageError}
                     labelText="write a message*"
-                    sublabelText="Do note that this will be the name publicly featured in the
-                gallery entry, so if you are shy, remember to use an anonymous
-                name!"
+                    sublabelText="Write some words of encouragement and support for our local arts 
+                    community - we are sure that they would love to hear from your heart!"
                     step={3}
                   >
                     <Textarea

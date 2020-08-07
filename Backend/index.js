@@ -137,22 +137,23 @@ app.delete("/api/donor/:id", async (req, res) => {
 
 app.post("/api/artefact", async (req, res) => {
   try {
-    const { donorId, nickname, message } = req.body;
+    const { donorId, colorPoles, nickname, message } = req.body;
 
-    const gradients = [
-      ["#16BFFD", "#CB3066"],
-      ["#4CA1AF", "#C4E0E5"],
-      ["#834d9b", "#d04ed6"],
-      ["#5A3F37", "#2C7744"],
-      ["#4DA0B0", "#D39D38"],
-      ["#5614B0", "#DBD65C"],
-      ["#B24592", "#F15F79"],
-      ["#C02425", "#F0CB35"],
-      ["#403A3E", "#BE5869"],
-      ["#c2e59c", "#64b3f4"],
-    ];
+    // const gradients = [
+    //   ["#16BFFD", "#CB3066"],
+    //   ["#4CA1AF", "#C4E0E5"],
+    //   ["#834d9b", "#d04ed6"],
+    //   ["#5A3F37", "#2C7744"],
+    //   ["#4DA0B0", "#D39D38"],
+    //   ["#5614B0", "#DBD65C"],
+    //   ["#B24592", "#F15F79"],
+    //   ["#C02425", "#F0CB35"],
+    //   ["#403A3E", "#BE5869"],
+    //   ["#c2e59c", "#64b3f4"],
+    // ];
 
-    const colorPoles = randomChoice(gradients);
+    // const colorPoles = randomChoice(gradients);
+
     const form = createArtefactForm(colorPoles);
 
     const artefact = await prisma.artefact.create({
