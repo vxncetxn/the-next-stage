@@ -98,6 +98,18 @@ const SubmitError = styled(Text)`
   height: 50px;
 `;
 
+function randomChoice(arr) {
+  return arr[Math.floor(Math.random() * arr.length)];
+}
+
+const colors = [
+  ["#5614B0", "#DBD65C"],
+  ["#B24592", "#F15F79"],
+  ["#C02425", "#F0CB35"],
+  ["#403A3E", "#BE5869"],
+  ["#c2e59c", "#64b3f4"],
+];
+
 const MagicComp = () => {
   const pathname = useLocation().pathname;
   const key = pathname.slice(12);
@@ -119,6 +131,7 @@ const MagicComp = () => {
     () =>
       postArtefact({
         donorId: donor.id,
+        colorPoles: randomChoice(colors),
         nickname,
         // shoutout: { artist, artistLink },
         message,
