@@ -32,10 +32,11 @@ const Artefact = ({ form, interactive, ...others }) => {
 
   return (
     <Canvas
+      pixelRatio={2}
       camera={{ position: [0, 0, 20] }}
-      //   onCreated={({ gl }) => {
-      //     gl.setPixelRatio(window.devicePixelRatio);
-      //   }}
+      // onCreated={({ gl }) => {
+      //   gl.setPixelRatio(window.devicePixelRatio);
+      // }}
       {...others}
     >
       <ambientLight />

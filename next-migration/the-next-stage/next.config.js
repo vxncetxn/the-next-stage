@@ -1,7 +1,8 @@
+const withSvgr = require("next-svgr");
 const path = require("path");
 const ThreeMinifierResolver = require("@yushijinhun/three-minifier-webpack");
 
-module.exports = {
+module.exports = withSvgr({
   reactStrictMode: true,
   webpack: (config) => {
     config.plugins.push(new ThreeMinifierResolver({}));
@@ -13,4 +14,4 @@ module.exports = {
 
     return config;
   },
-};
+});
