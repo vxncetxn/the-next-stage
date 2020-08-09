@@ -1,6 +1,6 @@
-import React, { useRef } from "react";
+import { useRef } from "react";
+import OrbitControls from "orbit-controls-es6";
 import { Canvas, useFrame, extend, useThree } from "react-three-fiber";
-import { OrbitControls } from "three";
 
 import Triangle from "./Triangle";
 
@@ -33,9 +33,9 @@ const Artefact = ({ form, interactive, ...others }) => {
   return (
     <Canvas
       camera={{ position: [0, 0, 20] }}
-      // onCreated={({ gl }) => {
-      //   gl.setPixelRatio(window.devicePixelRatio);
-      // }}
+      //   onCreated={({ gl }) => {
+      //     gl.setPixelRatio(window.devicePixelRatio);
+      //   }}
       {...others}
     >
       <ambientLight />
