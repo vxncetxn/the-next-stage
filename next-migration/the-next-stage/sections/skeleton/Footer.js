@@ -267,7 +267,9 @@ const FooterSection = () => {
                     {section}
                   </button>
                 ) : (
-                  <Link href={`/#${section.toLowerCase()}`}>{section}</Link>
+                  <Link href={`/#${section.toLowerCase()}`}>
+                    <a>{section}</a>
+                  </Link>
                 )}
               </li>
             );
@@ -276,19 +278,29 @@ const FooterSection = () => {
         <LinkColumn>
           <li>Others</li>
           <li>
-            <Link href="/gallery">Gallery</Link>
+            <Link href="/gallery">
+              <a>Gallery</a>
+            </Link>
           </li>
           <li>
-            <Link href="/faqs">FAQs</Link>
+            <Link href="/faqs">
+              <a>FAQs</a>
+            </Link>
           </li>
           <li>
-            <Link href="/press-room">Press Room</Link>
+            <Link href="/press-room">
+              <a>Press Room</a>
+            </Link>
           </li>
           <li>
-            <Link href="/terms-and-conditions">Terms & Conditions</Link>
+            <Link href="/terms-and-conditions">
+              <a>Terms & Conditions</a>
+            </Link>
           </li>
           <li>
-            <Link href="/privacy-policy">Privacy Policy</Link>
+            <Link href="/privacy-policy">
+              <a>Privacy Policy</a>
+            </Link>
           </li>
         </LinkColumn>
         <LinkColumn>
