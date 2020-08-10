@@ -66,6 +66,13 @@ const Defaults = createGlobalStyle`
       color: inherit;
       text-decoration: none;
     }
+
+    iframe.instagram-media {
+      max-width: 100% !important;
+      width: 100% !important;
+      min-width: auto !important;
+      max-height: auto !important;
+    }
 `;
 
 const Container = styled.div`
