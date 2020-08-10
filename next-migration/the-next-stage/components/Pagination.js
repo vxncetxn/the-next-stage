@@ -1,15 +1,10 @@
 import { useState, useEffect } from "react";
 import styled, { keyframes, css } from "styled-components";
-// import { useHistory } from "react-router-dom";
 
 import LeftArrowIcon from "../assets/icons/left-arrow.svg";
 import RightArrowIcon from "../assets/icons/right-arrow.svg";
 
-// import range from "../helpers/range";
-
-function range(size, start = 0) {
-  return [...Array(size).keys()].map((i) => i + start);
-}
+import { range } from "../utils";
 
 const Flow = keyframes`
   to {
@@ -206,12 +201,13 @@ const PaginationComp = ({ totalPages, page, setPage, ...others }) => {
         {/* prev */}
         <LeftArrowIcon width="14" height="14" />
       </PagButton>
-      {getPagNumsArr().map((num) => {
+      {getPagNumsArr().map((num, idx) => {
         if (num === "...") {
-          return <Ellipsis>..</Ellipsis>;
+          return <Ellipsis key={idx}>..</Ellipsis>;
         } else {
           return (
             <PagButton
+              key={idx}
               onClick={() => {
                 setPage(num);
                 // history.push(`/gallery?page=${num}`);
