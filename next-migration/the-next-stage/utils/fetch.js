@@ -27,3 +27,17 @@ export function fetchDonor(key) {
     resolve(fetched.data);
   });
 }
+
+export function postArtefact(submitted) {
+  return new Promise(async (resolve) => {
+    const returned = await fetch(
+      "https://the-next-stage.herokuapp.com/api/artefact",
+      {
+        method: "POST",
+        body: JSON.stringify(submitted),
+      }
+    ).then((res) => res.json());
+
+    resolve(returned.data);
+  });
+}

@@ -1,6 +1,4 @@
-import React from "react";
 import styled from "styled-components";
-
 import InstagramEmbed from "react-instagram-embed";
 
 const SingleCol = styled.div`
