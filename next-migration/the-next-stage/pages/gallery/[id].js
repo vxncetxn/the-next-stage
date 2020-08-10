@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import styled from "styled-components";
+import Head from "next/head";
 import { useRouter } from "next/router";
 import { queryCache } from "react-query";
 
@@ -69,6 +70,22 @@ const GalleryItemPage = ({ artefact }) => {
 
   return (
     <Gallery>
+      <Head>
+        <title key="title">
+          {artefact
+            ? `Memento By ${artefact.nickname}  | The Next Stage — In Support of Esplanade`
+            : `Loading Memento  | The Next Stage — In Support of Esplanade`}
+        </title>
+        <link
+          rel="canonical"
+          href={
+            artefact
+              ? `https://thenextstage.sg/gallery/${artefact.id}`
+              : `https://thenextstage.sg/gallery}`
+          }
+          key="link"
+        />
+      </Head>
       <GalleryTitleBar position="left">gallery</GalleryTitleBar>
       <GalleryContent></GalleryContent>
       <GalleryModal content={artefact} closeHandler={closeModal} />

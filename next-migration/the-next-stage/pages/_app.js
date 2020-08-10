@@ -1,5 +1,7 @@
 import { useState } from "react";
 import styled, { createGlobalStyle } from "styled-components";
+import { useRouter } from "next/router";
+import Head from "next/head";
 import { ReactQueryConfigProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query-devtools";
 
@@ -71,10 +73,56 @@ const Container = styled.div`
 `;
 
 function MyApp({ Component, pageProps }) {
+  const pathname = useRouter().pathname;
+
+  var location;
+  switch (pathname) {
+    case "/":
+      break;
+    case "/faqs":
+      location = "FAQs";
+      break;
+    case "/press-room":
+      location = "Press Room";
+      break;
+    case "/terms-and-conditions":
+      location = "Terms & Conditions";
+      break;
+    case "/privacy-policy":
+      location = "Privacy Policy";
+      break;
+    case "/gallery":
+      location = "Gallery";
+      break;
+    case "/gallery/[id]":
+      location = "Loading Memento";
+      break;
+    case "/✨THANKYOU✨":
+      location = "✨THANKYOU✨";
+      break;
+    default:
+      location = "Page Not Found";
+  }
+
+  const title = location
+    ? `${location} | The Next Stage — In Support of Esplanade`
+    : `The Next Stage — In Support of Esplanade`;
+  const description =
+    "The Next Stage is a fundraising initiative organised by students from SUTD for Esplanade's upcoming Singtel Waterfront Theatre.";
+  const url =
+    location === "Page Not Found"
+      ? "https://thenextstage.sg/"
+      : `https://thenextstage.sg${pathname}`;
+
   const [hamburgerOpen, setHamburgerOpen] = useState(false);
 
   return (
     <ReactQueryConfigProvider config={queryConfig}>
+      <Head>
+        <title key="title">{title}</title>
+        <meta name="description" content={description} />
+        <link rel="canonical" href={url} key="link" />
+      </Head>
       <Defaults />
       <Navbar setHamburgerOpen={setHamburgerOpen} />
       {hamburgerOpen ? <Hamburger setHamburgerOpen={setHamburgerOpen} /> : null}
