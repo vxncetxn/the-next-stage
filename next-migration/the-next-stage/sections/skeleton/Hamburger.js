@@ -99,7 +99,7 @@ const SocialsRow = styled.div`
   margin-top: 20px;
 `;
 
-const HamburgerComp = ({ setHamburgerOpen }) => {
+const HamburgerSection = ({ setHamburgerOpen }) => {
   const pathname = useRouter().pathname;
 
   useLockBodyScroll();
@@ -163,4 +163,4 @@ const HamburgerComp = ({ setHamburgerOpen }) => {
   );
 };
 
-export default HamburgerComp;
+export default HamburgerSection;

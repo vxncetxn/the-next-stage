@@ -72,7 +72,7 @@ const Navbar = styled.div`
   }
 `;
 
-const NavbarComp = ({ setHamburgerOpen }) => {
+const NavbarSection = ({ setHamburgerOpen }) => {
   const pathname = useRouter().pathname;
 
   const [atPageTop, setAtPageTop] = useState(true);
@@ -130,4 +130,4 @@ const NavbarComp = ({ setHamburgerOpen }) => {
   );
 };
 
-export default NavbarComp;
+export default NavbarSection;

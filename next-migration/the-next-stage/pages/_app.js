@@ -7,6 +7,7 @@ import { ReactQueryDevtools } from "react-query-devtools";
 
 import Navbar from "../sections/skeleton/Navbar";
 import Hamburger from "../sections/skeleton/Hamburger";
+import Footer from "../sections/skeleton/Footer";
 
 require("typeface-space-mono");
 require("typeface-poppins");
@@ -129,6 +130,7 @@ function MyApp({ Component, pageProps }) {
       <Container>
         <Component {...pageProps} />
       </Container>
+      <Footer />
       <ReactQueryDevtools />
     </ReactQueryConfigProvider>
   );
