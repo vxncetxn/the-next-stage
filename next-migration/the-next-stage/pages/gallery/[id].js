@@ -55,16 +55,15 @@ export async function getStaticPaths() {
 }
 
 const GalleryItemPage = ({ artefact }) => {
-  console.log(artefact);
   const router = useRouter();
 
   useEffect(() => {
+    router.prefetch("/gallery");
     queryCache.prefetchQuery("total", () => fetchTotal());
     queryCache.prefetchQuery(["artefacts", 1], () => fetchArtefacts(1));
   }, []);
 
   const closeModal = () => {
-    router.prefetch("/gallery");
     router.push("/gallery");
   };
 

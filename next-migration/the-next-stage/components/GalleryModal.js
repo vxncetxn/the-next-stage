@@ -11,6 +11,7 @@ import { useLockBodyScroll, getMonthName } from "../utils";
 import Artefact from "./Artefact";
 import PlainAnchor from "./PlainAnchor";
 import Text from "./Text";
+import GalleryModalShim from "./GalleryModalShim";
 
 const A = PlainAnchor;
 
@@ -48,7 +49,6 @@ const Container = styled.div`
 const ArrowButton = styled.button`
   font-family: var(--font-secondary);
   color: var(--color-text);
-  font-size: 80px;
   position: absolute;
   left: 0;
   top: 0;
@@ -75,6 +75,7 @@ const Modal = styled.div`
   height: 80%;
 
   display: flex;
+  justify-content: flex-end;
   background-color: var(--color-element);
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
   border-radius: 8px;
@@ -100,7 +101,7 @@ const CloseButton = styled.button`
 const Content = styled.div`
   display: flex;
   flex-direction: column;
-  width: 70%;
+  width: 40%;
   padding: 0 60px;
   margin: 50px 0;
   font-family: var(--font-primary);
@@ -122,6 +123,15 @@ const Content = styled.div`
 
   @media (max-width: 600px) {
     padding: 0 30px 30px 30px;
+  }
+`;
+
+const ArtefactContainer = styled.div`
+  width: 60%;
+
+  @media (max-width: 896px) {
+    width: 100%;
+    height: 40%;
   }
 `;
 
@@ -252,7 +262,15 @@ const GalleryModalComp = ({
     nickname,
     donor: { amount },
     updatedAt,
-  } = content;
+  } = content ?? {
+    id: null,
+    form: null,
+    colorPoles: null,
+    message: null,
+    nickname: null,
+    donor: { amount: null },
+    updatedAt: null,
+  };
   const createDate = new Date(updatedAt);
 
   return (
@@ -271,39 +289,47 @@ const GalleryModalComp = ({
         <CloseButton onClick={closeHandler} aria-label="Close artefact modal">
           <CloseIcon />
         </CloseButton>
-        <Artefact form={form} interactive={true} />
-        <Content>
-          <Title colorPoles={JSON.parse(colorPoles)}>
-            by <span>{nickname}</span>
-          </Title>
-          <Info>
-            <InfoTime>
-              <p>{`${createDate.getDate()} ${getMonthName(
-                createDate.getMonth()
-              )} ${createDate.getFullYear()}`}</p>
-              <p>{`${createDate.getHours() + 1}:${createDate.getMinutes()}`}</p>
-            </InfoTime>
-            <InfoAmt>${amount}</InfoAmt>
-          </Info>
-          <Message>{message}</Message>
-          <Share>
-            <p>Share: </p>
-            <div>
-              <A
-                href={`https://www.facebook.com/sharer/sharer.php?u=https://thenextstage.sg/gallery/${id}&t=Share on Facebook`}
-                aria-label="Share your memento on Facebook"
-              >
-                <FacebookIcon />
-              </A>
-              <A
-                href={`https://twitter.com/share?text=Check out my virtual memento ✨ at&url=https://thenextstage.sg/gallery/${id}&hashtags=thenextstage,esplanade,arts`}
-                aria-label="Share your memento on Twitter"
-              >
-                <TwitterIcon />
-              </A>
-            </div>
-          </Share>
-        </Content>
+        <ArtefactContainer>
+          {content ? <Artefact form={form} interactive={true} /> : null}
+        </ArtefactContainer>
+        {content ? (
+          <Content>
+            <Title colorPoles={JSON.parse(colorPoles)}>
+              by <span>{nickname}</span>
+            </Title>
+            <Info>
+              <InfoTime>
+                <p>{`${createDate.getDate()} ${getMonthName(
+                  createDate.getMonth()
+                )} ${createDate.getFullYear()}`}</p>
+                <p>{`${
+                  createDate.getHours() + 1
+                }:${createDate.getMinutes()}`}</p>
+              </InfoTime>
+              <InfoAmt>${amount}</InfoAmt>
+            </Info>
+            <Message>{message}</Message>
+            <Share>
+              <p>Share: </p>
+              <div>
+                <A
+                  href={`https://www.facebook.com/sharer/sharer.php?u=https://thenextstage.sg/gallery/${id}&t=Share on Facebook`}
+                  aria-label="Share your memento on Facebook"
+                >
+                  <FacebookIcon />
+                </A>
+                <A
+                  href={`https://twitter.com/share?text=Check out my virtual memento ✨ at&url=https://thenextstage.sg/gallery/${id}&hashtags=thenextstage,esplanade,arts`}
+                  aria-label="Share your memento on Twitter"
+                >
+                  <TwitterIcon />
+                </A>
+              </div>
+            </Share>
+          </Content>
+        ) : (
+          <GalleryModalShim />
+        )}
       </Modal>
     </Container>
   );

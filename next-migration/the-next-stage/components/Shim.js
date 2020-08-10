@@ -11,7 +11,7 @@ const Shimmer = keyframes`
 `;
 
 const Shim = styled.div`
-  background: linear-gradient(
+  background-image: linear-gradient(
     to right,
     var(--color-element) 4%,
     #282d57 25%,
