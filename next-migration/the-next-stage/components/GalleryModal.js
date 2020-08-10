@@ -1,4 +1,3 @@
-import { createPortal } from "react-dom";
 import styled, { keyframes } from "styled-components";
 
 import LeftArrowIcon from "../assets/icons/left-arrow.svg";
@@ -257,66 +256,56 @@ const GalleryModalComp = ({
   const createDate = new Date(updatedAt);
 
   return (
-    <>
-      {createPortal(
-        <Container {...others}>
-          {prevHandler && idx - 1 >= 0 ? (
-            <LeftButton onClick={() => prevHandler(idx)}>
-              <LeftArrowIcon />
-            </LeftButton>
-          ) : null}
-          {nextHandler && idx + 1 <= contents.length - 1 ? (
-            <RightButton onClick={() => nextHandler(idx)}>
-              <RightArrowIcon />
-            </RightButton>
-          ) : null}
-          <Modal>
-            <CloseButton
-              onClick={closeHandler}
-              aria-label="Close artefact modal"
-            >
-              <CloseIcon />
-            </CloseButton>
-            <Artefact form={form} interactive={true} />
-            <Content>
-              <Title colorPoles={JSON.parse(colorPoles)}>
-                by <span>{nickname}</span>
-              </Title>
-              <Info>
-                <InfoTime>
-                  <p>{`${createDate.getDate()} ${getMonthName(
-                    createDate.getMonth()
-                  )} ${createDate.getFullYear()}`}</p>
-                  <p>{`${
-                    createDate.getHours() + 1
-                  }:${createDate.getMinutes()}`}</p>
-                </InfoTime>
-                <InfoAmt>${amount}</InfoAmt>
-              </Info>
-              <Message>{message}</Message>
-              <Share>
-                <p>Share: </p>
-                <div>
-                  <A
-                    href={`https://www.facebook.com/sharer/sharer.php?u=https://thenextstage.sg/gallery/${id}&t=Share on Facebook`}
-                    aria-label="Share your memento on Facebook"
-                  >
-                    <FacebookIcon />
-                  </A>
-                  <A
-                    href={`https://twitter.com/share?text=Check out my virtual memento ✨ at&url=https://thenextstage.sg/gallery/${id}&hashtags=thenextstage,esplanade,arts`}
-                    aria-label="Share your memento on Twitter"
-                  >
-                    <TwitterIcon />
-                  </A>
-                </div>
-              </Share>
-            </Content>
-          </Modal>
-        </Container>,
-        document.body
-      )}
-    </>
+    <Container {...others}>
+      {prevHandler && idx - 1 >= 0 ? (
+        <LeftButton onClick={() => prevHandler(idx)}>
+          <LeftArrowIcon />
+        </LeftButton>
+      ) : null}
+      {nextHandler && idx + 1 <= contents.length - 1 ? (
+        <RightButton onClick={() => nextHandler(idx)}>
+          <RightArrowIcon />
+        </RightButton>
+      ) : null}
+      <Modal>
+        <CloseButton onClick={closeHandler} aria-label="Close artefact modal">
+          <CloseIcon />
+        </CloseButton>
+        <Artefact form={form} interactive={true} />
+        <Content>
+          <Title colorPoles={JSON.parse(colorPoles)}>
+            by <span>{nickname}</span>
+          </Title>
+          <Info>
+            <InfoTime>
+              <p>{`${createDate.getDate()} ${getMonthName(
+                createDate.getMonth()
+              )} ${createDate.getFullYear()}`}</p>
+              <p>{`${createDate.getHours() + 1}:${createDate.getMinutes()}`}</p>
+            </InfoTime>
+            <InfoAmt>${amount}</InfoAmt>
+          </Info>
+          <Message>{message}</Message>
+          <Share>
+            <p>Share: </p>
+            <div>
+              <A
+                href={`https://www.facebook.com/sharer/sharer.php?u=https://thenextstage.sg/gallery/${id}&t=Share on Facebook`}
+                aria-label="Share your memento on Facebook"
+              >
+                <FacebookIcon />
+              </A>
+              <A
+                href={`https://twitter.com/share?text=Check out my virtual memento ✨ at&url=https://thenextstage.sg/gallery/${id}&hashtags=thenextstage,esplanade,arts`}
+                aria-label="Share your memento on Twitter"
+              >
+                <TwitterIcon />
+              </A>
+            </div>
+          </Share>
+        </Content>
+      </Modal>
+    </Container>
   );
 };
 

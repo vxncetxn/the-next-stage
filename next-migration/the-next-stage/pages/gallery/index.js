@@ -96,7 +96,7 @@ const Count = styled.p`
 //   };
 // }
 
-const GalleryComp = (/*{ total, artefacts }*/) => {
+const GalleryPage = (/*{ total, artefacts }*/) => {
   //   const artefactId = useParams().id;
   const router = useRouter();
   const pageQuery = router.query.page;
@@ -200,4 +200,4 @@ const GalleryComp = (/*{ total, artefacts }*/) => {
   );
 };
 
-export default GalleryComp;
+export default GalleryPage;
