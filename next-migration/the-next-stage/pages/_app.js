@@ -1,7 +1,19 @@
-import { createGlobalStyle } from "styled-components";
+import { useState } from "react";
+import styled, { createGlobalStyle } from "styled-components";
+import { ReactQueryConfigProvider } from "react-query";
+import { ReactQueryDevtools } from "react-query-devtools";
+
+import Navbar from "../sections/skeleton/Navbar";
+import Hamburger from "../sections/skeleton/Hamburger";
 
 require("typeface-space-mono");
 require("typeface-poppins");
+
+const queryConfig = {
+  queries: {
+    refetchOnWindowFocus: false,
+  },
+};
 
 const Defaults = createGlobalStyle`
     :root {
@@ -53,12 +65,24 @@ const Defaults = createGlobalStyle`
     }
 `;
 
+const Container = styled.div`
+  max-width: 1440px;
+  margin: 0 auto 0 auto;
+`;
+
 function MyApp({ Component, pageProps }) {
+  const [hamburgerOpen, setHamburgerOpen] = useState(false);
+
   return (
-    <>
+    <ReactQueryConfigProvider config={queryConfig}>
       <Defaults />
-      <Component {...pageProps} />
-    </>
+      <Navbar setHamburgerOpen={setHamburgerOpen} />
+      {hamburgerOpen ? <Hamburger setHamburgerOpen={setHamburgerOpen} /> : null}
+      <Container>
+        <Component {...pageProps} />
+      </Container>
+      <ReactQueryDevtools />
+    </ReactQueryConfigProvider>
   );
 }
 

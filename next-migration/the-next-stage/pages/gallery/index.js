@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useRouter } from "next/router";
 import { useQuery, usePaginatedQuery, queryCache } from "react-query";
-import { ReactQueryDevtools } from "react-query-devtools";
 
 import { range } from "../../utils";
 import { fetchTotal, fetchArtefacts } from "../../utils/fetch";
@@ -195,7 +194,6 @@ const GalleryPage = (/*{ total, artefacts }*/) => {
           contents={artefacts}
         />
       ) : null}
-      <ReactQueryDevtools />
     </Gallery>
   );
 };
