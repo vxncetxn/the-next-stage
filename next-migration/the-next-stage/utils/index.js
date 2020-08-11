@@ -4,10 +4,6 @@ export function range(size, start = 0) {
   return [...Array(size).keys()].map((i) => i + start);
 }
 
-export function scrollToElement(hash) {
-  document.querySelector(`#${hash}`).scrollIntoView({ behavior: "smooth" });
-}
-
 export function useLockBodyScroll() {
   useLayoutEffect(() => {
     const originalStyle = window.getComputedStyle(document.body).overflow;

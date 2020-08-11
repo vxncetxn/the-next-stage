@@ -5,8 +5,6 @@ import Link from "next/link";
 
 import HamburgerIcon from "../../assets/icons/hamburger.svg";
 
-import { scrollToElement } from "../../utils";
-
 import CTAButton from "../../components/CTAButton";
 
 const Navbar = styled.div`
@@ -45,30 +43,20 @@ const Navbar = styled.div`
     }
 
     @media (max-width: 896px) {
-      font-size: 14px;
+      display: none;
     }
 
-    @media (max-width: 600px) {
-      font-size: 12px;
+    &:last-child {
+      display: none;
+
+      @media (max-width: 896px) {
+        display: block;
+      }
     }
   }
 
   & > ul > li + li {
-    margin-left: 40px;
-  }
-
-  & > ul > li {
-    @media (max-width: 896px) {
-      display: none;
-    }
-  }
-
-  & > ul > li:last-child {
-    display: none;
-
-    @media (max-width: 896px) {
-      display: block;
-    }
+    margin-left: 60px;
   }
 `;
 
@@ -100,18 +88,19 @@ const NavbarSection = ({ setHamburgerOpen }) => {
   return (
     <Navbar atPageTop={pathname === "/" ? atPageTop : false}>
       <ul>
-        {["theatre", "cause", "donate", "socials"].map((section) => {
-          return (
-            <li key={section}>
-              <button onClick={() => scrollToElement(section)}>
-                {section}
-              </button>
-            </li>
-          );
-        })}
+        <li>
+          <Link href="/">
+            <a>homepage</a>
+          </Link>
+        </li>
         <li>
           <Link href="/gallery">
             <a>gallery</a>
+          </Link>
+        </li>
+        <li>
+          <Link href="/faqs">
+            <a>faqs</a>
           </Link>
         </li>
         <li>

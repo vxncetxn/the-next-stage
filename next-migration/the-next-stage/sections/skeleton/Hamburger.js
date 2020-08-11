@@ -7,7 +7,7 @@ import FacebookIcon from "../../assets/icons/facebook.svg";
 import YoutubeIcon from "../../assets/icons/youtube.svg";
 import InstagramIcon from "../../assets/icons/instagram.svg";
 
-import { scrollToElement, useLockBodyScroll } from "../../utils";
+import { useLockBodyScroll } from "../../utils";
 
 import CTAButton from "../../components/CTAButton";
 import PlainAnchor from "../../components/PlainAnchor";
@@ -70,7 +70,7 @@ const Menu = styled.ul`
   color: var(--color-text);
 
   & > li + li {
-    margin-top: 30px;
+    margin-top: 40px;
   }
 `;
 
@@ -113,38 +113,25 @@ const HamburgerSection = ({ setHamburgerOpen }) => {
         <CloseIcon />
       </CloseButton>
       <Menu>
-        {["theatre", "cause", "donate", "socials"].map((section, idx) => {
-          return (
-            <MenuItem key={section} idx={idx}>
-              {pathname === "/" ? (
-                <button
-                  onClick={() => {
-                    setHamburgerOpen(false);
-                    scrollToElement(section);
-                  }}
-                >
-                  {section}
-                </button>
-              ) : (
-                <Link
-                  href={`/#${section}`}
-                  onClick={() => setHamburgerOpen(false)}
-                >
-                  {section}
-                </Link>
-              )}
-            </MenuItem>
-          );
-        })}
-        <MenuItem idx={4}>
+        <MenuItem idx={0}>
+          <Link href="/">
+            <a onClick={() => setHamburgerOpen(false)}>homepage</a>
+          </Link>
+        </MenuItem>
+        <MenuItem idx={1}>
           <Link href="/gallery">
             <a onClick={() => setHamburgerOpen(false)}>gallery</a>
           </Link>
         </MenuItem>
-        <MenuItem idx={5}>
+        <MenuItem idx={2}>
+          <Link href="/faqs">
+            <a onClick={() => setHamburgerOpen(false)}>faqs</a>
+          </Link>
+        </MenuItem>
+        <MenuItem idx={3}>
           <MenuCTAButton>Donate</MenuCTAButton>
         </MenuItem>
-        <MenuItem idx={6} style={{ marginTop: "auto" }}>
+        <MenuItem idx={4} style={{ marginTop: "auto" }}>
           <SmallGreyText>Connect with us:</SmallGreyText>
           <SocialsRow>
             <A href="https://www.facebook.com/EsplanadeSG">

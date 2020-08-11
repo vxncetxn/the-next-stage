@@ -10,7 +10,7 @@ import MailIcon from "../../assets/icons/mail.svg";
 import PhoneIcon from "../../assets/icons/phone.svg";
 import PinIcon from "../../assets/icons/pin.svg";
 
-import { scrollToElement, validateEmail } from "../../utils";
+import { validateEmail } from "../../utils";
 
 import PlainAnchor from "../../components/PlainAnchor";
 
@@ -255,7 +255,7 @@ const FooterSection = () => {
   return (
     <Footer>
       <PrimaryRow>
-        <LinkColumn>
+        {/* <LinkColumn>
           <li>Home Page</li>
           {["Theatre", "Cause", "Donate", "Socials"].map((section) => {
             return (
@@ -274,9 +274,14 @@ const FooterSection = () => {
               </li>
             );
           })}
-        </LinkColumn>
+        </LinkColumn> */}
         <LinkColumn>
-          <li>Others</li>
+          <li>Site</li>
+          <li>
+            <Link href="/">
+              <a>Homepage</a>
+            </Link>
+          </li>
           <li>
             <Link href="/gallery">
               <a>Gallery</a>
@@ -293,13 +298,8 @@ const FooterSection = () => {
             </Link>
           </li>
           <li>
-            <Link href="/terms-and-conditions">
-              <a>Terms & Conditions</a>
-            </Link>
-          </li>
-          <li>
             <Link href="/privacy-policy">
-              <a>Privacy Policy</a>
+              <a>Terms & Policies</a>
             </Link>
           </li>
         </LinkColumn>
@@ -362,7 +362,7 @@ const FooterSection = () => {
       </PrimaryRow>
       <SecondaryRow>
         <LogosColumn>
-          <SmallGreyText>In collaboration with:</SmallGreyText>
+          <SmallGreyText>Fundraising Partners:</SmallGreyText>
           <LogosGroup>
             <A href="https://www.esplanade.com/">
               <img src={"/esplanade-logo.png"} alt="Esplanade logo" />
