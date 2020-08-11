@@ -1,7 +1,13 @@
+import { useRouter } from "next/router";
 import { useLayoutEffect } from "react";
 
 export function range(size, start = 0) {
   return [...Array(size).keys()].map((i) => i + start);
+}
+
+export function useURLQuery() {
+  const router = useRouter();
+  return new URLSearchParams(router.asPath.slice(router.pathname.length));
 }
 
 export function useLockBodyScroll() {

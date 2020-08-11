@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import { useRouter } from "next/router";
 import { useQuery, usePaginatedQuery, queryCache } from "react-query";
 
-import { range } from "../../utils";
+import { range, useURLQuery } from "../../utils";
 import { fetchTotal, fetchArtefacts } from "../../utils/fetch";
 
 import SectionTitleBar from "../../components/SectionTitleBar";
@@ -96,13 +95,11 @@ const Count = styled.p`
 // }
 
 const GalleryPage = (/*{ total, artefacts }*/) => {
-  //   const artefactId = useParams().id;
-  const router = useRouter();
-  const pageQuery = router.query.page;
+  const pageQuery = parseInt(useURLQuery().get("page"), 10);
 
-  const [page, setPage] = useState(pageQuery ? parseInt(pageQuery, 10) : 1);
+  const [page, setPage] = useState(pageQuery ? pageQuery : 1);
   const [content, setContent] = useState(null);
-  const [contentIdx, setContentIdx] = useState(-1);
+  const [contentIdx, setContentIdx] = useState(1);
 
   const { status: totalStatus, data: total } = useQuery("total", fetchTotal, {
     initialData: 0,
@@ -112,17 +109,7 @@ const GalleryPage = (/*{ total, artefacts }*/) => {
   const {
     status: artefactsStatus,
     resolvedData: artefacts,
-    latestData: latestArtefacts,
   } = usePaginatedQuery(["artefacts", page], () => fetchArtefacts(page));
-
-  //   useQuery("artefact", () => fetchArtefact(artefactId), {
-  //     enabled: !!artefactId,
-  //     onSuccess: (artefact) => {
-  //       if (artefact) {
-  //         setTimeout(() => setContent(artefact), 500);
-  //       }
-  //     },
-  //   });
 
   useEffect(() => {
     if (page + 1 <= Math.ceil(total / 6)) {
@@ -132,13 +119,9 @@ const GalleryPage = (/*{ total, artefacts }*/) => {
     }
   }, [page, total]);
 
-  //   useEffect(() => {
-  //     window.scrollTo(0, 0);
-  //   }, []);
-
   const closeModal = () => {
     setContent(null);
-    history.pushState({}, "", "/gallery");
+    history.pushState({}, "", `/gallery?page=${page}`);
   };
   const goToNextItem = (idx) => {
     if (idx + 1 <= artefacts.length - 1) {

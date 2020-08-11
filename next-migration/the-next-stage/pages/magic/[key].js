@@ -61,6 +61,7 @@ const TextShim = styled(Shim)`
 `;
 
 const MagicLinkPage = () => {
+  console.log(useRouter());
   const key = useRouter().query.key;
 
   const { status: donorStatus, data: donor } = useQuery(

@@ -117,8 +117,6 @@ const PagButton = styled.button`
 `;
 
 const PaginationComp = ({ totalPages, page, setPage, ...others }) => {
-  //   const history = useHistory();
-
   const [maxUnits, setMaxUnits] = useState(5);
 
   useEffect(() => {
@@ -185,13 +183,13 @@ const PaginationComp = ({ totalPages, page, setPage, ...others }) => {
   const goToNextPage = () => {
     if (page + 1 <= totalPages) {
       setPage(page + 1);
-      //   history.push(`/gallery?page=${page + 1}`);
+      history.pushState({}, "", `/gallery?page=${page + 1}`);
     }
   };
   const goToPreviousPage = () => {
     if (page - 1 > 0) {
       setPage(page - 1);
-      //   history.push(`/gallery?page=${page - 1}`);
+      history.pushState({}, "", `/gallery?page=${page - 1}`);
     }
   };
 
@@ -210,7 +208,7 @@ const PaginationComp = ({ totalPages, page, setPage, ...others }) => {
               key={idx}
               onClick={() => {
                 setPage(num);
-                // history.push(`/gallery?page=${num}`);
+                history.pushState({}, "", `/gallery?page=${num}`);
               }}
               selected={page === num}
             >
