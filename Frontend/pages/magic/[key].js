@@ -105,7 +105,9 @@ const MagicLinkPage = () => {
           </>
         )}
       </MagicContent>
-      <MagicTitleBar position="right">thank you</MagicTitleBar>
+      <MagicTitleBar level={1} position="right">
+        thank you
+      </MagicTitleBar>
     </Magic>
   );
 };

@@ -55,7 +55,9 @@ const YoutubeFrameWrapper = styled.div`
 const TheatreSection = () => {
   return (
     <Theatre id="theatre">
-      <SectionTitleBar position="left">theatre</SectionTitleBar>
+      <SectionTitleBar level={2} position="left">
+        theatre
+      </SectionTitleBar>
       <TheatreContent>
         <QuoteText style={{ marginBottom: 40 }}>
           Esplanade has always been a place for everyone.

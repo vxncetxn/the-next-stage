@@ -134,7 +134,9 @@ const SocialsComp = () => {
         </Text>
         {contentInView ? <SocialsCol embedUrlsArr={embedUrlsArr} /> : null}
       </SocialsContent>
-      <SocialsTitleBar position="right">socials</SocialsTitleBar>
+      <SocialsTitleBar level={2} position="right">
+        socials
+      </SocialsTitleBar>
     </Socials>
   );
 };

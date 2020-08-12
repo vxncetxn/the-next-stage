@@ -179,7 +179,9 @@ const DonateComp = () => {
 
   return (
     <Donate id="donate">
-      <DonateTitleBar position="left">donate</DonateTitleBar>
+      <DonateTitleBar level={2} position="left">
+        donate
+      </DonateTitleBar>
       <DonateContent>
         <Text>
           Esplanade — Theatres on the Bay is operated by The Esplanade Co Ltd

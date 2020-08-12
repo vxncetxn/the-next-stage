@@ -140,7 +140,9 @@ const GalleryPage = (/*{ total, artefacts }*/) => {
 
   return (
     <Gallery>
-      <GalleryTitleBar position="left">gallery</GalleryTitleBar>
+      <GalleryTitleBar level={1} position="left">
+        gallery
+      </GalleryTitleBar>
       <GalleryContent>
         <Count>{total} artefacts:</Count>
         <Pagination

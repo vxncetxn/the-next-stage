@@ -10,6 +10,8 @@ coverage/
 
 # production
 build/
+.next/
+out/
 
 # misc
 .env
@@ -29,4 +31,4 @@ migrations/
 .env.production.local
 
 # vercel
-.vercel
+.vercel/

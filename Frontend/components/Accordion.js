@@ -1,3 +1,4 @@
+import { useState } from "react";
 import styled from "styled-components";
 
 import Text from "../components/Text";
@@ -27,7 +28,7 @@ const AccordionBullet = styled.div`
     var(--color-gradient-one) 0%,
     var(--color-gradient-two) 100%
   );
-  transform: rotate(0deg);
+  transform: rotate(${(props) => (props.expanded ? "45" : "0")}deg);
   transition: transform 0.5s ease-out;
 
   @media (max-width: 1200px) {
@@ -48,12 +49,16 @@ const AccordionBullet = styled.div`
   }
 `;
 
-const AccordionTrigger = styled.span`
+const AccordionTrigger = styled.button`
+  text-align: left;
+`;
+
+const AccordionTitle = styled.span`
   font-family: var(--font-primary);
   font-size: 24px;
+  font-weight: 400;
   color: var(--color-text);
   border-bottom: 1px solid white;
-  cursor: pointer;
 
   @media (max-width: 1200px) {
     font-size: 22px;
@@ -69,41 +74,84 @@ const AccordionTrigger = styled.span`
 `;
 
 const AccordionPanel = styled.div`
-  max-height: 0;
+  max-height: ${(props) => (props.expanded ? `${props.maxHeight}` : "0")};
   overflow: hidden;
   transition: max-height 0.5s ease-out;
 `;
 
 const AccordionComp = ({ items, ...others }) => {
+  const [expandedNum, setExpandedNum] = useState(-1);
+
   return (
     <Accordion {...others}>
-      {items.map((item) => {
+      {items.map((item, idx) => {
         const maxHeight = item.maxHeight ? item.maxHeight : "100px";
+        const expanded = idx === expandedNum;
 
         return (
-          <AccordionItem>
-            <AccordionBullet />
-            <AccordionTrigger
-              onClick={(e) => {
-                const panel = e.target.nextSibling;
-                const bullet = e.target.previousSibling;
-
-                if (panel.style.maxHeight === maxHeight) {
-                  panel.style.maxHeight = "0";
-                } else {
-                  panel.style.maxHeight = maxHeight;
-                }
-
-                if (bullet.style.transform === "rotate(45deg)") {
-                  bullet.style.transform = "rotate(0deg)";
-                } else {
-                  bullet.style.transform = "rotate(45deg)";
-                }
-              }}
+          <AccordionItem key={idx}>
+            <AccordionBullet expanded={expanded} />
+            <h2>
+              <AccordionTrigger
+                id={`trigger-${idx}`}
+                aria-expanded={expanded}
+                aria-controls={`panel-${idx}`}
+                onClick={() => {
+                  if (expanded) {
+                    setExpandedNum(-1);
+                  } else {
+                    setExpandedNum(idx);
+                  }
+                }}
+                onKeyDown={(e) => {
+                  if (e.key === "ArrowDown") {
+                    e.preventDefault();
+                    document
+                      .getElementById(`trigger-${(idx + 1) % items.length}`)
+                      .focus();
+                  } else if (e.key === "ArrowUp") {
+                    e.preventDefault();
+                    document
+                      .getElementById(
+                        `trigger-${idx - 1 < 0 ? items.length - 1 : idx - 1}`
+                      )
+                      .focus();
+                  } else if (e.key === "Home") {
+                    document.getElementById("trigger-0").focus();
+                  } else if (e.key === "End") {
+                    document
+                      .getElementById(`trigger-${items.length - 1}`)
+                      .focus();
+                  }
+                }}
+                // onKeyDown={e => {
+                //   if (e.key === " " || e.key === "Enter") {
+                //     e.preventDefault();
+                //     if (
+                //       document.getElementById("themes-submenu-narrow").style
+                //         .display === "flex"
+                //     ) {
+                //       closeSubmenu("themes-submenu-narrow");
+                //     } else {
+                //       setTimeout(() => {
+                //         openSubmenu("themes-submenu-narrow");
+                //       }, 200);
+                //     }
+                //   } else if (e.shiftKey && e.key === "Tab") {
+                //     closeSubmenu("themes-submenu-narrow");
+                //   }
+                // }}
+              >
+                <AccordionTitle>{item.triggerText}</AccordionTitle>
+              </AccordionTrigger>
+            </h2>
+            <AccordionPanel
+              id={`panel-${idx}`}
+              role="region"
+              aria-labelledby={`trigger-${idx}`}
+              expanded={expanded}
+              maxHeight={maxHeight}
             >
-              {item.triggerText}
-            </AccordionTrigger>
-            <AccordionPanel>
               <Text style={{ marginTop: 30 }}>{item.panelContents}</Text>
             </AccordionPanel>
           </AccordionItem>

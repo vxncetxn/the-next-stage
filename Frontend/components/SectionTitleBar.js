@@ -20,7 +20,7 @@ const SectionTitleBar = styled.div`
   );
 `;
 
-const SectionTitle = styled.h2`
+const SectionTitle = styled.div`
   font-family: var(--font-primary);
   font-size: 100px;
   color: var(--color-text);
@@ -47,10 +47,12 @@ const SectionTitle = styled.h2`
   }
 `;
 
-const SectionTitleBarComp = ({ children, position, ...others }) => {
+const SectionTitleBarComp = ({ level, position, children, ...others }) => {
   return (
     <SectionTitleBar position={position} {...others}>
-      <SectionTitle position={position}>{children}</SectionTitle>
+      <SectionTitle as={level === 2 ? "h2" : "h1"} position={position}>
+        {children}
+      </SectionTitle>
     </SectionTitleBar>
   );
 };

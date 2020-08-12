@@ -129,7 +129,9 @@ const faqItems = [
 const FaqsComp = () => {
   return (
     <Faqs>
-      <FaqsTitleBar position="left">faqs</FaqsTitleBar>
+      <FaqsTitleBar level={1} position="left">
+        faqs
+      </FaqsTitleBar>
       <FaqsContent>
         <Accordion items={faqItems} />
       </FaqsContent>

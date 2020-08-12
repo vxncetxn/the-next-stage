@@ -107,7 +107,9 @@ const PressComp = () => {
       <PressContent>
         <Accordion items={pressItems} />
       </PressContent>
-      <PressTitleBar position="right">press room</PressTitleBar>
+      <PressTitleBar level={1} position="right">
+        press room
+      </PressTitleBar>
     </Press>
   );
 };

@@ -87,7 +87,9 @@ const GalleryItemPage = ({ artefact }) => {
         <meta property="twitter:title" content={title} key="twitter-title" />
         <meta property="twitter:url" content={url} key="twitter-url" />
       </Head>
-      <GalleryTitleBar position="left">gallery</GalleryTitleBar>
+      <GalleryTitleBar level={1} position="left">
+        gallery
+      </GalleryTitleBar>
       <GalleryContent></GalleryContent>
       <GalleryModal content={artefact} closeHandler={closeModal} />
     </Gallery>

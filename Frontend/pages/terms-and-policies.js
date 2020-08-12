@@ -96,7 +96,9 @@ const TncsPage = () => {
           including versions of Lorem Ipsum.
         </Text>
       </TncsContent>
-      <TncsTitleBar position="right">Terms & Policies</TncsTitleBar>
+      <TncsTitleBar level={1} position="right">
+        Terms & Policies
+      </TncsTitleBar>
     </Tncs>
   );
 };

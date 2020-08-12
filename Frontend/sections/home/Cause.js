@@ -192,7 +192,9 @@ const CauseComp = () => {
           .
         </Text>
       </CauseContent>
-      <CauseTitleBar position="right">cause</CauseTitleBar>
+      <CauseTitleBar level={2} position="right">
+        cause
+      </CauseTitleBar>
       <ImageGroupWrapper>
         <ImageGroup>
           <ImageOne />
