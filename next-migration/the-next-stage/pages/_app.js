@@ -129,9 +129,42 @@ function MyApp({ Component, pageProps }) {
   return (
     <ReactQueryConfigProvider config={queryConfig}>
       <Head>
+        <link
+          rel="apple-touch-icon"
+          sizes="180x180"
+          href="/apple-touch-icon.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="32x32"
+          href="/favicon-32x32.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="16x16"
+          href="/favicon-16x16.png"
+        />
+        <link rel="manifest" href="/site.webmanifest" />
+
         <title key="title">{title}</title>
         <meta name="description" content={description} />
         <link rel="canonical" href={url} key="link" />
+
+        <meta property="og:title" content={title} key="og-title" />
+        <meta property="og:description" content={description} />
+        <meta property="og:url" content={url} key="og-url" />
+        <meta property="og:image" content="/og.jpg" />
+        <meta property="og:type" content="website" />
+        <meta property="og:locale" content="en_SG" />
+        <meta property="og:site_name" content="The Next Stage" />
+
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta property="twitter:title" content={title} key="twitter-title" />
+        <meta property="twitter:description" content={description} />
+        <meta property="twitter:url" content={url} key="twitter-url" />
+        <meta property="twitter:image" content="/og-twitter.jpg" />
       </Head>
       <Defaults />
       <Navbar setHamburgerOpen={setHamburgerOpen} />

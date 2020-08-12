@@ -3,16 +3,16 @@ import styled from "styled-components";
 import SectionTitleBar from "../components/SectionTitleBar";
 import Text from "../components/Text";
 
-const Privacy = styled.section`
+const Tncs = styled.section`
   position: relative;
   display: flex;
 `;
 
-const PrivacyTitleBar = styled(SectionTitleBar)`
+const TncsTitleBar = styled(SectionTitleBar)`
   padding-top: 150px;
 `;
 
-const PrivacyContent = styled.div`
+const TncsContent = styled.div`
   padding: 150px 100px 50px 100px;
 
   @media (max-width: 1200px) {
@@ -28,11 +28,10 @@ const PrivacyContent = styled.div`
   }
 `;
 
-const PrivacyComp = () => {
+const TncsPage = () => {
   return (
-    <Privacy>
-      <PrivacyTitleBar position="left">Privacy Policy</PrivacyTitleBar>
-      <PrivacyContent>
+    <Tncs>
+      <TncsContent>
         <Text>
           Lorem Ipsum is simply dummy text of the printing and typesetting
           industry. Lorem Ipsum has been the industry's standard dummy text ever
@@ -96,9 +95,10 @@ const PrivacyComp = () => {
           more recently with desktop publishing software like Aldus PageMaker
           including versions of Lorem Ipsum.
         </Text>
-      </PrivacyContent>
-    </Privacy>
+      </TncsContent>
+      <TncsTitleBar position="right">Terms & Policies</TncsTitleBar>
+    </Tncs>
   );
 };
 
-export default PrivacyComp;
+export default TncsPage;

@@ -68,23 +68,24 @@ const GalleryItemPage = ({ artefact }) => {
     router.push("/gallery");
   };
 
+  const title = artefact
+    ? `Memento By ${artefact.nickname}  | The Next Stage — In Support of Esplanade`
+    : `Loading Memento  | The Next Stage — In Support of Esplanade`;
+  const url = artefact
+    ? `https://thenextstage.sg/gallery/${artefact.id}`
+    : `https://thenextstage.sg/gallery`;
+
   return (
     <Gallery>
       <Head>
-        <title key="title">
-          {artefact
-            ? `Memento By ${artefact.nickname}  | The Next Stage — In Support of Esplanade`
-            : `Loading Memento  | The Next Stage — In Support of Esplanade`}
-        </title>
-        <link
-          rel="canonical"
-          href={
-            artefact
-              ? `https://thenextstage.sg/gallery/${artefact.id}`
-              : `https://thenextstage.sg/gallery}`
-          }
-          key="link"
-        />
+        <title key="title">{title}</title>
+        <link rel="canonical" href={url} key="link" />
+
+        <meta property="og:title" content={title} key="og-title" />
+        <meta property="og:url" content={url} key="og-url" />
+
+        <meta property="twitter:title" content={title} key="twitter-title" />
+        <meta property="twitter:url" content={url} key="twitter-url" />
       </Head>
       <GalleryTitleBar position="left">gallery</GalleryTitleBar>
       <GalleryContent></GalleryContent>

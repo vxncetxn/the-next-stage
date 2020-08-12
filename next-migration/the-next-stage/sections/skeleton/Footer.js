@@ -1,6 +1,5 @@
 import { useState } from "react";
 import styled, { keyframes } from "styled-components";
-import { useRouter } from "next/router";
 import Link from "next/link";
 
 import FacebookIcon from "../../assets/icons/facebook.svg";
@@ -232,7 +231,6 @@ const ContactsColumn = styled.ul`
 `;
 
 const FooterSection = () => {
-  const pathname = useRouter().pathname;
   const [subscribeVal, setSubscribeVal] = useState("");
   const [subscribeError, setSubscribeError] = useState("");
 
@@ -255,26 +253,6 @@ const FooterSection = () => {
   return (
     <Footer>
       <PrimaryRow>
-        {/* <LinkColumn>
-          <li>Home Page</li>
-          {["Theatre", "Cause", "Donate", "Socials"].map((section) => {
-            return (
-              <li key={section}>
-                {pathname === "/" ? (
-                  <button
-                    onClick={() => scrollToElement(section.toLowerCase())}
-                  >
-                    {section}
-                  </button>
-                ) : (
-                  <Link href={`/#${section.toLowerCase()}`}>
-                    <a>{section}</a>
-                  </Link>
-                )}
-              </li>
-            );
-          })}
-        </LinkColumn> */}
         <LinkColumn>
           <li>Site</li>
           <li>
@@ -298,7 +276,7 @@ const FooterSection = () => {
             </Link>
           </li>
           <li>
-            <Link href="/privacy-policy">
+            <Link href="/terms-and-policies">
               <a>Terms & Policies</a>
             </Link>
           </li>
