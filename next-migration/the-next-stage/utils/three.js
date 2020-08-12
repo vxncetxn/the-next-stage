@@ -222,10 +222,10 @@ export class Color {}
 // export { ImageUtils } from 'three/src/extras/ImageUtils.js';
 // export { ShapeUtils } from 'three/src/extras/ShapeUtils.js';
 // export { WebGLUtils } from 'three/src/renderers/webgl/WebGLUtils.js';
-// export { MOUSE } from "three/src/constants.js";
+export { MOUSE } from "three/src/constants.js";
 export class PCFSoftShadowMap {}
 export class ACESFilmicToneMapping {}
 export class sRGBEncoding {}
-export class MOUSE {}
+// export class MOUSE {}
 //export * from 'three/src/Three.Legacy.js';
 // export { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
