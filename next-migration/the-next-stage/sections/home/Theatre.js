@@ -1,5 +1,6 @@
 import styled from "styled-components";
-// import { LiteYouTubeEmbed } from "react-lite-youtube-embed";
+
+import LiteYouTubeEmbed from "../../utils/youtube";
 
 import SectionTitleBar from "../../components/SectionTitleBar";
 import Text from "../../components/Text";
@@ -84,13 +85,10 @@ const TheatreSection = () => {
         </Text>
       </TheatreContent>
       <YoutubeFrameWrapper>
-        {/* <LiteYouTubeEmbed
+        <LiteYouTubeEmbed
           id="p8muUyKAqSM"
-          adNetwork={true}
-          playlist={false}
-          poster="hqdefault"
-          title="YouTube Embed"
-        /> */}
+          title="Embedded Youtube promotional video of Singtel Waterfront Theatre"
+        />
       </YoutubeFrameWrapper>
     </Theatre>
   );

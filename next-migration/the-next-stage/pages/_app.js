@@ -5,6 +5,8 @@ import Head from "next/head";
 import { ReactQueryConfigProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query-devtools";
 
+import "../utils/youtube.css";
+
 import Navbar from "../sections/skeleton/Navbar";
 import Hamburger from "../sections/skeleton/Hamburger";
 import Footer from "../sections/skeleton/Footer";
