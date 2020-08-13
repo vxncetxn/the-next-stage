@@ -105,7 +105,7 @@ const PressComp = () => {
   return (
     <Press>
       <PressContent>
-        <Accordion items={pressItems} />
+        <Accordion id="press-accordion" items={pressItems} />
       </PressContent>
       <PressTitleBar level={1} position="right">
         press room

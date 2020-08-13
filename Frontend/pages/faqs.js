@@ -133,7 +133,7 @@ const FaqsComp = () => {
         faqs
       </FaqsTitleBar>
       <FaqsContent>
-        <Accordion items={faqItems} />
+        <Accordion id="faqs-accordion" items={faqItems} />
       </FaqsContent>
     </Faqs>
   );

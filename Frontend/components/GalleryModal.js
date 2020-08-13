@@ -1,3 +1,4 @@
+import { useState, useEffect, useRef } from "react";
 import styled, { keyframes } from "styled-components";
 
 import LeftArrowIcon from "../assets/icons/left-arrow.svg";
@@ -254,6 +255,49 @@ const GalleryModalComp = ({
 }) => {
   useLockBodyScroll();
 
+  const closeButtonRef = useRef();
+  const nextButtonRef = useRef();
+  const prevButtonRef = useRef();
+  const lastShareRef = useRef();
+
+  const [lastFocusable, setLastFocusable] = useState(() => {
+    if (nextHandler && prevHandler) {
+      if (idx + 1 <= contents.length - 1) {
+        return "nextButton";
+      } else {
+        return "prevButton";
+      }
+    } else {
+      return "lastShare";
+    }
+  });
+
+  const handleLastFocusKeyDown = (e) => {
+    if (!e.shiftKey && e.key === "Tab") {
+      e.preventDefault();
+      closeButtonRef.current.focus();
+    }
+  };
+
+  useEffect(() => {
+    closeButtonRef.current.focus();
+  }, []);
+
+  useEffect(() => {
+    const handleWindowKeyDown = (e) => {
+      if (e.key === "Escape") {
+        console.log(`HELLO ${idx}`);
+        closeHandler(idx);
+      }
+    };
+
+    window.addEventListener("keydown", handleWindowKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleWindowKeyDown);
+    };
+  }, [idx]);
+
   const {
     id,
     form,
@@ -275,18 +319,31 @@ const GalleryModalComp = ({
 
   return (
     <Container {...others}>
-      {prevHandler && idx - 1 >= 0 ? (
-        <LeftButton onClick={() => prevHandler(idx)}>
-          <LeftArrowIcon />
-        </LeftButton>
-      ) : null}
-      {nextHandler && idx + 1 <= contents.length - 1 ? (
-        <RightButton onClick={() => nextHandler(idx)}>
-          <RightArrowIcon />
-        </RightButton>
-      ) : null}
-      <Modal>
-        <CloseButton onClick={closeHandler} aria-label="Close artefact modal">
+      <Modal
+        role="dialog"
+        aria-label={content ? `Virtual memento by ${nickname}` : null}
+        aria-modal="true"
+      >
+        <CloseButton
+          ref={closeButtonRef}
+          onClick={() => closeHandler(idx)}
+          onKeyDown={(e) => {
+            if (e.shiftKey && e.key === "Tab") {
+              e.preventDefault();
+              switch (lastFocusable) {
+                case "prevButton":
+                  prevButtonRef.current.focus();
+                  break;
+                case "nextButton":
+                  nextButtonRef.current.focus();
+                  break;
+                default:
+                  lastShareRef.current.focus();
+              }
+            }
+          }}
+          aria-label="Close artefact modal"
+        >
           <CloseIcon />
         </CloseButton>
         <ArtefactContainer>
@@ -319,8 +376,14 @@ const GalleryModalComp = ({
                   <FacebookIcon />
                 </A>
                 <A
+                  ref={lastShareRef}
                   href={`https://twitter.com/share?text=Check out my virtual memento ✨ at&url=https://thenextstage.sg/gallery/${id}&hashtags=thenextstage,esplanade,arts`}
                   aria-label="Share your memento on Twitter"
+                  onKeyDown={(e) => {
+                    if (lastFocusable === "lastShare") {
+                      handleLastFocusKeyDown(e);
+                    }
+                  }}
                 >
                   <TwitterIcon />
                 </A>
@@ -331,6 +394,50 @@ const GalleryModalComp = ({
           <GalleryModalShim />
         )}
       </Modal>
+      {prevHandler && idx - 1 >= 0 ? (
+        <LeftButton
+          ref={prevButtonRef}
+          onClick={() => {
+            prevHandler(idx);
+            if (idx + 1 < contents.length - 1) {
+              setLastFocusable("nextButton");
+            }
+            if (idx - 1 === 0) {
+              nextButtonRef.current.focus();
+            } else {
+              prevButtonRef.current.focus();
+            }
+          }}
+          onKeyDown={(e) => {
+            if (lastFocusable === "prevButton") {
+              handleLastFocusKeyDown(e);
+            }
+          }}
+        >
+          <LeftArrowIcon />
+        </LeftButton>
+      ) : null}
+      {nextHandler && idx + 1 <= contents.length - 1 ? (
+        <RightButton
+          ref={nextButtonRef}
+          onClick={() => {
+            nextHandler(idx);
+            if (idx + 1 === contents.length - 1) {
+              setLastFocusable("prevButton");
+              prevButtonRef.current.focus();
+            } else {
+              nextButtonRef.current.focus();
+            }
+          }}
+          onKeyDown={(e) => {
+            if (lastFocusable === "nextButton") {
+              handleLastFocusKeyDown(e);
+            }
+          }}
+        >
+          <RightArrowIcon />
+        </RightButton>
+      ) : null}
     </Container>
   );
 };

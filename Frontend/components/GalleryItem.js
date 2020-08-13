@@ -1,3 +1,4 @@
+import { forwardRef } from "react";
 import styled, { keyframes } from "styled-components";
 
 import Artefact from "./Artefact";
@@ -8,8 +9,9 @@ const Flow = keyframes`
   }
 `;
 
-const GalleryItem = styled.li`
+const GalleryItem = styled.button`
   position: relative;
+  width: 100%;
   height: 300px;
   background-color: var(--color-element);
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
@@ -71,15 +73,19 @@ const Title = styled.div`
   }
 `;
 
-const GalleryItemComp = ({ nickname, form, colorPoles, ...others }) => {
-  return (
-    <GalleryItem {...others}>
-      <Artefact form={form} interactive={false} />
-      <Title colorPoles={JSON.parse(colorPoles)}>
-        by <span>{nickname}</span>
-      </Title>
-    </GalleryItem>
-  );
-};
+const GalleryItemComp = forwardRef(
+  ({ nickname, form, colorPoles, ...others }, ref) => {
+    return (
+      <li>
+        <GalleryItem ref={ref} {...others}>
+          <Artefact form={form} interactive={false} />
+          <Title colorPoles={JSON.parse(colorPoles)}>
+            by <span>{nickname}</span>
+          </Title>
+        </GalleryItem>
+      </li>
+    );
+  }
+);
 
 export default GalleryItemComp;

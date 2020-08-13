@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef, memo } from "react";
 import styled from "styled-components";
 import { useQuery, usePaginatedQuery, queryCache } from "react-query";
 
@@ -95,6 +95,7 @@ const Count = styled.p`
 // }
 
 const GalleryPage = (/*{ total, artefacts }*/) => {
+  const itemRefs = useRef([]);
   const pageQuery = parseInt(useURLQuery().get("page"), 10);
 
   const [page, setPage] = useState(pageQuery ? pageQuery : 1);
@@ -119,9 +120,10 @@ const GalleryPage = (/*{ total, artefacts }*/) => {
     }
   }, [page, total]);
 
-  const closeModal = () => {
+  const closeModal = (idx) => {
     setContent(null);
     history.pushState({}, "", `/gallery?page=${page}`);
+    itemRefs.current[idx].focus();
   };
   const goToNextItem = (idx) => {
     if (idx + 1 <= artefacts.length - 1) {
@@ -155,6 +157,7 @@ const GalleryPage = (/*{ total, artefacts }*/) => {
           {artefacts
             ? artefacts.map((artefact, idx) => (
                 <GalleryItem
+                  ref={(ref) => (itemRefs.current[idx] = ref)}
                   nickname={artefact.nickname}
                   form={artefact.form}
                   colorPoles={artefact.colorPoles}

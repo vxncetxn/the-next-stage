@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import styled from "styled-components";
+import PropTypes from "prop-types";
 
 import Text from "../components/Text";
 
@@ -79,11 +80,12 @@ const AccordionPanel = styled.div`
   transition: max-height 0.5s ease-out;
 `;
 
-const AccordionComp = ({ items, ...others }) => {
+const AccordionComp = ({ id, items, ...others }) => {
+  const triggerRefs = useRef([]);
   const [expandedNum, setExpandedNum] = useState(-1);
 
   return (
-    <Accordion {...others}>
+    <Accordion id={id} {...others}>
       {items.map((item, idx) => {
         const maxHeight = item.maxHeight ? item.maxHeight : "100px";
         const expanded = idx === expandedNum;
@@ -93,9 +95,10 @@ const AccordionComp = ({ items, ...others }) => {
             <AccordionBullet expanded={expanded} />
             <h2>
               <AccordionTrigger
-                id={`trigger-${idx}`}
+                ref={(ref) => (triggerRefs.current[idx] = ref)}
+                id={`${id}-trigger-${idx}`}
                 aria-expanded={expanded}
-                aria-controls={`panel-${idx}`}
+                aria-controls={`${id}-panel-${idx}`}
                 onClick={() => {
                   if (expanded) {
                     setExpandedNum(-1);
@@ -106,49 +109,26 @@ const AccordionComp = ({ items, ...others }) => {
                 onKeyDown={(e) => {
                   if (e.key === "ArrowDown") {
                     e.preventDefault();
-                    document
-                      .getElementById(`trigger-${(idx + 1) % items.length}`)
-                      .focus();
+                    triggerRefs.current[(idx + 1) % items.length].focus();
                   } else if (e.key === "ArrowUp") {
                     e.preventDefault();
-                    document
-                      .getElementById(
-                        `trigger-${idx - 1 < 0 ? items.length - 1 : idx - 1}`
-                      )
-                      .focus();
+                    triggerRefs.current[
+                      idx - 1 < 0 ? items.length - 1 : idx - 1
+                    ].focus();
                   } else if (e.key === "Home") {
-                    document.getElementById("trigger-0").focus();
+                    triggerRefs.current[0].focus();
                   } else if (e.key === "End") {
-                    document
-                      .getElementById(`trigger-${items.length - 1}`)
-                      .focus();
+                    triggerRefs.current[items.length - 1].focus();
                   }
                 }}
-                // onKeyDown={e => {
-                //   if (e.key === " " || e.key === "Enter") {
-                //     e.preventDefault();
-                //     if (
-                //       document.getElementById("themes-submenu-narrow").style
-                //         .display === "flex"
-                //     ) {
-                //       closeSubmenu("themes-submenu-narrow");
-                //     } else {
-                //       setTimeout(() => {
-                //         openSubmenu("themes-submenu-narrow");
-                //       }, 200);
-                //     }
-                //   } else if (e.shiftKey && e.key === "Tab") {
-                //     closeSubmenu("themes-submenu-narrow");
-                //   }
-                // }}
               >
                 <AccordionTitle>{item.triggerText}</AccordionTitle>
               </AccordionTrigger>
             </h2>
             <AccordionPanel
-              id={`panel-${idx}`}
+              id={`${id}-panel-${idx}`}
               role="region"
-              aria-labelledby={`trigger-${idx}`}
+              aria-labelledby={`${id}-trigger-${idx}`}
               expanded={expanded}
               maxHeight={maxHeight}
             >
@@ -159,6 +139,11 @@ const AccordionComp = ({ items, ...others }) => {
       })}
     </Accordion>
   );
+};
+
+AccordionComp.propTypes = {
+  id: PropTypes.string.isRequired,
+  items: PropTypes.array.isRequired,
 };
 
 export default AccordionComp;

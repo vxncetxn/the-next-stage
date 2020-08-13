@@ -69,6 +69,12 @@ const Defaults = createGlobalStyle`
       text-decoration: none;
     }
 
+    a:focus,
+    button:focus,
+    input:focus {
+      outline: 3px solid var(--color-gradient-one);
+    }
+
     iframe.instagram-media {
       max-width: 100% !important;
       width: 100% !important;

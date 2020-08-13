@@ -1,9 +1,17 @@
-const PlainAnchorComp = ({ href, children, ...others }) => {
+import { forwardRef } from "react";
+
+const PlainAnchorComp = forwardRef(({ href, children, ...others }, ref) => {
   return (
-    <a href={href} target="_blank" rel="noreferrer noopener" {...others}>
+    <a
+      ref={ref}
+      href={href}
+      target="_blank"
+      rel="noreferrer noopener"
+      {...others}
+    >
       {children}
     </a>
   );
-};
+});
 
 export default PlainAnchorComp;
