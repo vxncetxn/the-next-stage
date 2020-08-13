@@ -178,8 +178,8 @@ const DonateComp = () => {
   const [option, setOption] = useState("10");
 
   return (
-    <Donate id="donate">
-      <DonateTitleBar level={2} position="left">
+    <Donate id="donate" aria-labelledby="donate-title">
+      <DonateTitleBar id="donate-title" level={2} position="left">
         donate
       </DonateTitleBar>
       <DonateContent>

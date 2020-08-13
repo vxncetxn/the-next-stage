@@ -122,7 +122,7 @@ const SocialsComp = () => {
   });
 
   return (
-    <Socials id="socials">
+    <Socials id="socials" aria-labelledby="socials-title">
       <SocialsContent ref={contentRef}>
         <Hashtag>thenextstage</Hashtag>
         <Text style={{ marginBottom: 50 }}>
@@ -134,7 +134,7 @@ const SocialsComp = () => {
         </Text>
         {contentInView ? <SocialsCol embedUrlsArr={embedUrlsArr} /> : null}
       </SocialsContent>
-      <SocialsTitleBar level={2} position="right">
+      <SocialsTitleBar id="socials-title" level={2} position="right">
         socials
       </SocialsTitleBar>
     </Socials>

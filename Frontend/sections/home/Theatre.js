@@ -54,8 +54,8 @@ const YoutubeFrameWrapper = styled.div`
 
 const TheatreSection = () => {
   return (
-    <Theatre id="theatre">
-      <SectionTitleBar level={2} position="left">
+    <Theatre id="theatre" aria-labelledby="theatre-title">
+      <SectionTitleBar id="theatre-title" level={2} position="left">
         theatre
       </SectionTitleBar>
       <TheatreContent>

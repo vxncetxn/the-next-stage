@@ -166,7 +166,7 @@ const ImageFour = styled.div`
 
 const CauseComp = () => {
   return (
-    <Cause id="cause">
+    <Cause id="cause" aria-labelledby="cause-title">
       <CauseContent>
         <QuoteText style={{ marginBottom: 40 }}>
           a platform through which we can reach out to the communities
@@ -184,23 +184,35 @@ const CauseComp = () => {
           arts experiences to over 10000 beneficiaries in Singapore. Your
           generous support for the new theatre will enable them to further such
           meaningful causes and outreach efforts and extend it to the
-          generations ahead of us. To find out even more about Esplanade's
-          community engagement efforts, please refer to{" "}
+          generations ahead of us. To find out even more about such efforts by
+          Esplanade, please refer to{" "}
           <Anchor href="https://www.esplanade.com/about-us/community-engagement">
-            this link
+            Esplanade's community engagement page
           </Anchor>
           .
         </Text>
       </CauseContent>
-      <CauseTitleBar level={2} position="right">
+      <CauseTitleBar id="cause-title" level={2} position="right">
         cause
       </CauseTitleBar>
       <ImageGroupWrapper>
         <ImageGroup>
-          <ImageOne />
-          <ImageTwo />
-          <ImageThree />
-          <ImageFour />
+          <ImageOne
+            role="img"
+            aria-label="Group of musicians carrying various instruments and standing in a line."
+          />
+          <ImageTwo
+            role="img"
+            aria-label="Close-up of old man smiling widely."
+          />
+          <ImageThree
+            role="img"
+            aria-label="Group of old folks playing the traditional Chinese drum called tang gu."
+          />
+          <ImageFour
+            role="img"
+            aria-label="Band playing in live venue, focus is on lead vocallist."
+          />
         </ImageGroup>
       </ImageGroupWrapper>
     </Cause>

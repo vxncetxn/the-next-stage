@@ -114,7 +114,9 @@ const HeroSection = () => {
           </HeroTitleGroup>
           <SubTitle>— in collaboration with Esplanade</SubTitle>
         </HeroContent>
-        <HeroAnim>{<Artefact form={form} interactive={false} />}</HeroAnim>
+        <HeroAnim>
+          <Artefact form={form} interactive={false} />
+        </HeroAnim>
       </Hero>
     </>
   );

@@ -47,10 +47,10 @@ const SectionTitle = styled.div`
   }
 `;
 
-const SectionTitleBarComp = ({ level, position, children, ...others }) => {
+const SectionTitleBarComp = ({ id, level, position, children, ...others }) => {
   return (
     <SectionTitleBar position={position} {...others}>
-      <SectionTitle as={level === 2 ? "h2" : "h1"} position={position}>
+      <SectionTitle id={id} as={level === 2 ? "h2" : "h1"} position={position}>
         {children}
       </SectionTitle>
     </SectionTitleBar>

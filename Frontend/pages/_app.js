@@ -176,7 +176,9 @@ function MyApp({ Component, pageProps }) {
       <Navbar setHamburgerOpen={setHamburgerOpen} />
       {hamburgerOpen ? <Hamburger setHamburgerOpen={setHamburgerOpen} /> : null}
       <Container>
-        <Component {...pageProps} />
+        <main role="main" aria-label="Main content">
+          <Component {...pageProps} />
+        </main>
       </Container>
       <Footer />
       <ReactQueryDevtools />

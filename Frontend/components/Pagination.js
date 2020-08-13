@@ -192,7 +192,7 @@ const PaginationComp = ({ totalPages, page, setPage, ...others }) => {
   };
 
   return (
-    <nav role="navigation" aria-label="Pagination navigation for mementos">
+    <nav aria-label="Pagination for mementos">
       <Pagination {...others}>
         <li>
           <PagButton
