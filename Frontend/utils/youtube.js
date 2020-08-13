@@ -23,7 +23,7 @@ const LiteYouTubeEmbed = ({
   const iframeSrc = !playlist
     ? `${ytUrl}/embed/${videoId}?autoplay=1`
     : `${ytUrl}/embed/videoseries?list=${videoId}`;
-  const refVideo = useRef();
+  const videoRef = useRef();
 
   const warmConnections = () => {
     if (preconnected) return;
@@ -32,10 +32,12 @@ const LiteYouTubeEmbed = ({
   const addIframe = () => {
     if (iframe) return;
     setIframe(true);
+    videoRef.current.tabIndex = "0";
+    videoRef.current.focus();
   };
 
   useEffect(() => {
-    const { current } = refVideo;
+    const { current } = videoRef;
     current.style.backgroundImage = `url('${posterUrl}')`;
     current.addEventListener("pointerover", warmConnections, true);
     current.addEventListener("click", addIframe, true);
@@ -69,9 +71,9 @@ const LiteYouTubeEmbed = ({
       <div
         className={`${wrapperClass} ${iframe && activatedClass}`}
         data-title={videoTitle}
-        ref={refVideo}
+        ref={videoRef}
       >
-        {iframe ? null : <div className={playerClass}></div>}
+        {iframe ? null : <button className={playerClass}></button>}
         {iframe && (
           <iframe
             className={iframeClass}

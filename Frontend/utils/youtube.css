@@ -8,6 +8,10 @@
   cursor: pointer;
 }
 
+.yt-lite:focus {
+  outline: 3px solid var(--color-gradient-one);
+}
+
 /* gradient */
 .yt-lite::before {
   content: "";
