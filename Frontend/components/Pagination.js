@@ -12,7 +12,7 @@ const Flow = keyframes`
   }
 `;
 
-const Pagination = styled.div`
+const Pagination = styled.ul`
   display: inline-flex;
   font-family: var(--font-primary);
   font-size: 24px;
@@ -183,45 +183,67 @@ const PaginationComp = ({ totalPages, page, setPage, ...others }) => {
   const goToNextPage = () => {
     if (page + 1 <= totalPages) {
       setPage(page + 1);
-      history.pushState({}, "", `/gallery?page=${page + 1}`);
     }
   };
   const goToPreviousPage = () => {
     if (page - 1 > 0) {
       setPage(page - 1);
-      history.pushState({}, "", `/gallery?page=${page - 1}`);
     }
   };
 
   return (
-    <Pagination {...others}>
-      <PagButton onClick={goToPreviousPage} disabled={page === 1}>
-        {/* prev */}
-        <LeftArrowIcon width="14" height="14" />
-      </PagButton>
-      {getPagNumsArr().map((num, idx) => {
-        if (num === "...") {
-          return <Ellipsis key={idx}>..</Ellipsis>;
-        } else {
-          return (
-            <PagButton
-              key={idx}
-              onClick={() => {
-                setPage(num);
-                history.pushState({}, "", `/gallery?page=${num}`);
-              }}
-              selected={page === num}
-            >
-              {num.toString().padStart(2, "0")}
-            </PagButton>
-          );
-        }
-      })}
-      <PagButton onClick={goToNextPage} disabled={page === totalPages}>
-        {/* next */}
-        <RightArrowIcon width="14" height="14" />
-      </PagButton>
-    </Pagination>
+    <nav role="navigation" aria-label="Pagination navigation for mementos">
+      <Pagination {...others}>
+        <li>
+          <PagButton
+            onClick={goToPreviousPage}
+            disabled={page === 1}
+            aria-disabled={page === 1}
+            aria-label="Go to previous page"
+          >
+            <LeftArrowIcon width="14" height="14" />
+          </PagButton>
+        </li>
+        {getPagNumsArr().map((num, idx) => {
+          if (num === "...") {
+            return (
+              <li key={idx}>
+                <Ellipsis role="img" aria-label="ellipses">
+                  ..
+                </Ellipsis>
+              </li>
+            );
+          } else {
+            return (
+              <li key={idx}>
+                <PagButton
+                  onClick={() => setPage(num)}
+                  selected={page === num}
+                  aria-current={page === num}
+                  aria-label={
+                    page === num
+                      ? `Page ${num}, current page`
+                      : `Go to page ${num}`
+                  }
+                >
+                  {num.toString().padStart(2, "0")}
+                </PagButton>
+              </li>
+            );
+          }
+        })}
+        <li>
+          <PagButton
+            onClick={goToNextPage}
+            disabled={page === totalPages}
+            aria-disabled={page === totalPages}
+            aria-label="Go to next page"
+          >
+            <RightArrowIcon width="14" height="14" />
+          </PagButton>
+        </li>
+      </Pagination>
+    </nav>
   );
 };
 

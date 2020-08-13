@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef, memo } from "react";
+import { useEffect, useState, useRef } from "react";
 import styled from "styled-components";
 import { useQuery, usePaginatedQuery, queryCache } from "react-query";
 
@@ -59,6 +59,45 @@ const GalleryItemShim = styled(Shim)`
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
 `;
 
+const Controls = styled.div`
+  position: -webkit-sticky;
+  position: sticky;
+  top: 107px;
+  z-index: 999;
+  width: calc(100% + 200px);
+  padding: 0px 100px 10px 100px;
+  background-color: var(--color-background);
+  transform: translateX(-100px);
+  // box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+
+  & > * + * {
+    margin-top: 15px;
+
+    @media (max-width: 600px) {
+      margin-top: 10px;
+    }
+  }
+
+  @media (max-width: 1200px) {
+    width: calc(100% + 150px);
+    transform: translateX(-75px);
+    padding: 0px 75px 10px 75px;
+  }
+
+  @media (max-width: 896px) {
+    width: calc(100% + 100px);
+    transform: translateX(-50px);
+    padding: 0px 50px 10px 50px;
+  }
+
+  @media (max-width: 600px) {
+    top: 84px;
+    width: calc(100% + 40px);
+    transform: translateX(-20px);
+    padding: 0px 20px 5px 20px;
+  }
+`;
+
 const Count = styled.p`
   font-family: var(--font-primary);
   font-size: 24px;
@@ -113,6 +152,10 @@ const GalleryPage = (/*{ total, artefacts }*/) => {
   } = usePaginatedQuery(["artefacts", page], () => fetchArtefacts(page));
 
   useEffect(() => {
+    history.pushState({}, "", `/gallery?page=${page}`);
+  }, [page]);
+
+  useEffect(() => {
     if (page + 1 <= Math.ceil(total / 6)) {
       queryCache.prefetchQuery(["artefacts", page + 1], () =>
         fetchArtefacts(page + 1)
@@ -146,6 +189,14 @@ const GalleryPage = (/*{ total, artefacts }*/) => {
         gallery
       </GalleryTitleBar>
       <GalleryContent>
+        {/* <Controls>
+          <Count>{total} artefacts:</Count>
+          <Pagination
+            totalPages={Math.ceil(total / 6)}
+            page={page}
+            setPage={setPage}
+          />
+        </Controls> */}
         <Count>{total} artefacts:</Count>
         <Pagination
           style={{ marginTop: 20 }}
