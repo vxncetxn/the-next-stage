@@ -1,6 +1,7 @@
 import styled, { keyframes } from "styled-components";
 import { useInView } from "react-intersection-observer";
 
+import Stack from "../../components/Stack";
 import SectionTitleBar from "../../components/SectionTitleBar";
 import Text from "../../components/Text";
 import SocialsCol from "../../components/SocialsCol";
@@ -28,7 +29,7 @@ const SocialsTitleBar = styled(SectionTitleBar)`
   }
 `;
 
-const SocialsContent = styled.div`
+const SocialsContent = styled(Stack)`
   width: 100%;
   padding: calc(225px + 100px) 100px 50px 100px;
 
@@ -47,7 +48,6 @@ const SocialsContent = styled.div`
 
 const Hashtag = styled.p`
   position: relative;
-  margin-bottom: 20px;
   padding-left: 4%;
   font-family: var(--font-primary);
   font-size: 42px;
@@ -125,7 +125,7 @@ const SocialsComp = () => {
     <Socials id="socials" aria-labelledby="socials-title">
       <SocialsContent ref={contentRef}>
         <Hashtag>thenextstage</Hashtag>
-        <Text style={{ marginBottom: 50 }}>
+        <Text>
           Use this hashtag on Instagram and you might find yourself featured
           here!{" "}
           <span role="img" aria-label="emoji of smiling head with sunglasses">

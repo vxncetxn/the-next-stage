@@ -31,6 +31,7 @@ const Defaults = createGlobalStyle`
       --color-gradient-one: #ee0979;
       --color-gradient-two: #ff6a00;
       --color-grey: #b3b3b3;
+      --color-neg: red;
 
       --ratio: 1.61803398875;
       --s-1: 14px;
@@ -69,6 +70,7 @@ const Defaults = createGlobalStyle`
 
     html {
       font-size: 62.5%;
+      scroll-padding-top: 107px; /* height of sticky header */
     }
 
     body {
@@ -109,11 +111,12 @@ const Defaults = createGlobalStyle`
       min-width: auto !important;
       max-height: auto !important;
     }
+  }
 `;
 
-const Container = styled.div`
+const Container = styled.main`
   max-width: 1440px;
-  margin: 0 auto;
+  margin: 0 auto 0 auto;
 `;
 
 function MyApp({ Component, pageProps }) {
@@ -203,10 +206,8 @@ function MyApp({ Component, pageProps }) {
       <Defaults />
       <Navbar setHamburgerOpen={setHamburgerOpen} />
       {hamburgerOpen ? <Hamburger setHamburgerOpen={setHamburgerOpen} /> : null}
-      <Container>
-        <main role="main" aria-label="Main content">
-          <Component {...pageProps} />
-        </main>
+      <Container role="main" aria-label="Main content">
+        <Component {...pageProps} />
       </Container>
       <Footer />
       <ReactQueryDevtools />

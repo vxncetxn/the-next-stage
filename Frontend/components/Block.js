@@ -37,7 +37,7 @@ const BlockComp = ({
   ...others
 }) => {
   return (
-    <Block id={id} {...others}>
+    <Block {...others}>
       <Label htmlFor={id} step={step}>
         {labelText}
       </Label>

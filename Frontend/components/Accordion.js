@@ -2,14 +2,11 @@ import { useState, useRef } from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
 
+import Stack from "../components/Stack";
 import Text from "../components/Text";
 
-const Accordion = styled.div`
+const Accordion = styled(Stack)`
   width: 100%;
-
-  & > div + div {
-    margin-top: 70px;
-  }
 `;
 
 const AccordionItem = styled.div`
@@ -85,7 +82,7 @@ const AccordionComp = ({ id, items, ...others }) => {
   const [expandedNum, setExpandedNum] = useState(-1);
 
   return (
-    <Accordion id={id} {...others}>
+    <Accordion ratio={2} id={id} {...others}>
       {items.map((item, idx) => {
         const maxHeight = item.maxHeight ? item.maxHeight : "100px";
         const expanded = idx === expandedNum;

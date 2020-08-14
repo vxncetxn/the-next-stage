@@ -1,5 +1,6 @@
 import styled from "styled-components";
 
+import Stack from "../../components/Stack";
 import SectionTitleBar from "../../components/SectionTitleBar";
 import Text from "../../components/Text";
 import QuoteText from "../../components/QuoteText";
@@ -22,7 +23,7 @@ const CauseTitleBar = styled(SectionTitleBar)`
   }
 `;
 
-const CauseContent = styled.div`
+const CauseContent = styled(Stack)`
   width: 100%;
   padding: calc(18vw + 100px) 100px 420px 100px;
 
@@ -169,7 +170,7 @@ const CauseComp = () => {
   return (
     <Cause id="cause" aria-labelledby="cause-title">
       <CauseContent>
-        <QuoteText style={{ marginBottom: 40 }}>
+        <QuoteText>
           a platform through which we can reach out to the communities
         </QuoteText>
         <Text>
@@ -179,8 +180,8 @@ const CauseComp = () => {
           Waterfront Theatre, are not merely buildings - they are platforms to
           reach out to the communities and bring them transformative and
           meaningful experiences through the medium of arts.
-          <br></br>
-          <br></br>
+        </Text>
+        <Text>
           Ever since their inception, Esplanade has been active in bringing such
           arts experiences to over 10000 beneficiaries in Singapore. Your
           generous support for the new theatre will enable them to further such

@@ -5,6 +5,7 @@ import { useQuery, usePaginatedQuery, queryCache } from "react-query";
 import { range, useURLQuery } from "../../utils";
 import { fetchTotal, fetchArtefacts } from "../../utils/fetch";
 
+import Stack from "../../components/Stack";
 import SectionTitleBar from "../../components/SectionTitleBar";
 import GalleryItem from "../../components/GalleryItem";
 import Shim from "../../components/Shim";
@@ -20,7 +21,7 @@ const GalleryTitleBar = styled(SectionTitleBar)`
   padding-top: 140px;
 `;
 
-const GalleryContent = styled.div`
+const GalleryContent = styled(Stack)`
   padding: 150px 100px 50px 100px;
   width: 100%;
 
@@ -45,8 +46,7 @@ const GalleryGrid = styled.ul`
     auto-fill,
     minmax(var(--auto-grid-min-size), 1fr)
   );
-  gap: 30px;
-  margin-top: 50px;
+  gap: var(--rhythm);
 
   @media (max-width: 896px) {
     --auto-grid-min-size: 200px;
@@ -70,13 +70,13 @@ const Controls = styled.div`
   transform: translateX(-100px);
   // box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
 
-  & > * + * {
-    margin-top: 15px;
+  // & > * + * {
+  //   margin-top: 15px;
 
-    @media (max-width: 600px) {
-      margin-top: 10px;
-    }
-  }
+  //   @media (max-width: 600px) {
+  //     margin-top: 10px;
+  //   }
+  // }
 
   @media (max-width: 1200px) {
     width: calc(100% + 150px);
@@ -199,7 +199,6 @@ const GalleryPage = (/*{ total, artefacts }*/) => {
         </Controls> */}
         <Count>{total} artefacts:</Count>
         <Pagination
-          style={{ marginTop: 20 }}
           totalPages={Math.ceil(total / 6)}
           page={page}
           setPage={setPage}

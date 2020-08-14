@@ -1,5 +1,6 @@
 import styled from "styled-components";
 
+import Stack from "../components/Stack";
 import SectionTitleBar from "../components/SectionTitleBar";
 import Text from "../components/Text";
 
@@ -12,7 +13,7 @@ const TncsTitleBar = styled(SectionTitleBar)`
   padding-top: 150px;
 `;
 
-const TncsContent = styled.div`
+const TncsContent = styled(Stack)`
   padding: 150px 100px 50px 100px;
 
   @media (max-width: 1200px) {
@@ -43,8 +44,6 @@ const TncsPage = () => {
           more recently with desktop publishing software like Aldus PageMaker
           including versions of Lorem Ipsum.
         </Text>
-        <br />
-        <br />
         <Text>
           Lorem Ipsum is simply dummy text of the printing and typesetting
           industry. Lorem Ipsum has been the industry's standard dummy text ever
@@ -56,8 +55,6 @@ const TncsPage = () => {
           more recently with desktop publishing software like Aldus PageMaker
           including versions of Lorem Ipsum.
         </Text>
-        <br />
-        <br />
         <Text>
           Lorem Ipsum is simply dummy text of the printing and typesetting
           industry. Lorem Ipsum has been the industry's standard dummy text ever
@@ -69,8 +66,6 @@ const TncsPage = () => {
           more recently with desktop publishing software like Aldus PageMaker
           including versions of Lorem Ipsum.
         </Text>
-        <br />
-        <br />
         <Text>
           Lorem Ipsum is simply dummy text of the printing and typesetting
           industry. Lorem Ipsum has been the industry's standard dummy text ever
@@ -82,8 +77,6 @@ const TncsPage = () => {
           more recently with desktop publishing software like Aldus PageMaker
           including versions of Lorem Ipsum.
         </Text>
-        <br />
-        <br />
         <Text>
           Lorem Ipsum is simply dummy text of the printing and typesetting
           industry. Lorem Ipsum has been the industry's standard dummy text ever

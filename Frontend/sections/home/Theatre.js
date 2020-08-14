@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 import LiteYouTubeEmbed from "../../utils/youtube";
 
+import Stack from "../../components/Stack";
 import SectionTitleBar from "../../components/SectionTitleBar";
 import Text from "../../components/Text";
 import QuoteText from "../../components/QuoteText";
@@ -10,9 +11,11 @@ import Anchor from "../../components/Anchor";
 const Theatre = styled.section`
   position: relative;
   display: flex;
+  // padding-top: 107px;
+  // margin-top: -107px;
 `;
 
-const TheatreContent = styled.div`
+const TheatreContent = styled(Stack)`
   width: 100%;
   padding: 50px 100px calc(18vw + 100px) 100px;
 
@@ -60,9 +63,7 @@ const TheatreSection = () => {
         theatre
       </SectionTitleBar>
       <TheatreContent>
-        <QuoteText style={{ marginBottom: "var(--rhythm)" }}>
-          Esplanade has always been a place for everyone.
-        </QuoteText>
+        <QuoteText>Esplanade has always been a place for everyone.</QuoteText>
         <Text>
           <i>The Next Stage</i> is a fundraising initiative organised by
           students from the{" "}
@@ -77,9 +78,7 @@ const TheatreSection = () => {
           ground for the theatre's construction on 18th June 2019 and it is
           currently slated for completion in 2022.
         </Text>
-        {/* <br />
-        <br /> */}
-        <Text style={{ marginTop: "var(--rhythm)" }}>
+        <Text>
           The new theatre will help to fill the gap between Esplanade's existing
           large 2000-seat venues and smaller studio spaces, so that community,
           youth and arts groups who have done well in smaller venues and are

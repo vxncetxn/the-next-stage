@@ -1,6 +1,7 @@
 import { useState } from "react";
 import styled, { keyframes } from "styled-components";
 
+import Stack from "../../components/Stack";
 import SectionTitleBar from "../../components/SectionTitleBar";
 import Text from "../../components/Text";
 import Anchor from "../../components/Anchor";
@@ -33,7 +34,7 @@ const DonateTitleBar = styled(SectionTitleBar)`
   }
 `;
 
-const DonateContent = styled.div`
+const DonateContent = styled(Stack)`
   width: 100%;
   padding: 390px 100px calc(225px + 100px) 100px;
 
@@ -54,11 +55,7 @@ const StepsText = styled(Text)`
   position: relative;
   padding-top: 30px;
   padding-left: 20px;
-  margin-top: 50px;
-
-  @media (max-width: 896px) {
-    margin-top: 20px;
-  }
+  margin-top: calc(var(--rhythm) * 2);
 
   &:before {
     content: "${(props) => props.step}";
@@ -191,15 +188,16 @@ const DonateComp = () => {
           greatly on the generous contributions of each and every one of their
           donors, sponsors and volunteers to persist in their mission to promote
           the arts to the wider community.
-          <br></br>
-          <br></br>
+        </Text>
+        <Text>
           Hence, we urge you to make a personal contribution to{" "}
           <i>The Next Stage</i> and to make the incentive to do so even greater,
           we have prepared a unique donation campaign where you can create a
           virtual art memento which will be showcased in our online{" "}
           <Anchor to="/gallery">public gallery</Anchor>. This memento will serve
-          to commemorate your generous contributions to our campaign.<br></br>
-          <br></br>
+          to commemorate your generous contributions to our campaign.
+        </Text>
+        <Text>
           The following steps detail the process for the donation campaign:
         </Text>
         <StepsText step="1">

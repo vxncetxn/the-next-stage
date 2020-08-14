@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import { useMutation, queryCache } from "react-query";
 
@@ -12,6 +12,7 @@ import Block from "../../components/Block";
 import Input from "../../components/Input";
 import DuoInput from "../../components/DuoInput";
 import Textarea from "../../components/Textarea";
+import ErrorSummary from "../../components/ErrorSummary";
 
 const Form = styled(Stack)`
   margin-top: calc(var(--rhythm) * 2.5);
@@ -26,34 +27,6 @@ const SubmitButton = styled(CTAButton)`
   align-items: center;
 `;
 
-const ErrorSummary = styled.div`
-  // margin-top: 100px;
-  background-color: var(--color-element);
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-  padding: 30px 35px;
-  border-radius: 8px;
-`;
-
-const ErrorLink = styled.a`
-  font-family: var(--font-secondary);
-  font-size: 18px;
-  color: red;
-  text-decoration: underline dotted;
-  line-height: 2;
-
-  @media (max-width: 1200px) {
-    font-size: 16px;
-  }
-
-  @media (max-width: 896px) {
-    font-size: 14px;
-  }
-
-  @media (max-width: 600px) {
-    font-size: 12px;
-  }
-`;
-
 const MagicPreSection = () => {
   const errorSummaryRef = useRef();
 
@@ -64,7 +37,7 @@ const MagicPreSection = () => {
   const [artistError, setArtistError] = useState("");
   const [message, setMessage] = useState("");
   const [messageError, setMessageError] = useState("");
-  const [errorsArr, setErrorsArr] = useState([]);
+  const [errors, setErrors] = useState([]);
 
   const [submit, { status: submitStatus }] = useMutation(
     () =>
@@ -86,34 +59,38 @@ const MagicPreSection = () => {
   const submitHandler = async (e) => {
     e.preventDefault();
 
-    let errorNums = [];
+    let errorsArr = [];
     if (!nickname) {
       setNicknameError("A nickname is required.*");
-      errorNums.push(1);
-    }
-    if (!message) {
-      setMessageError("A message is required.*");
-      errorNums.push(2);
+      errorsArr.push({ id: "nickname", message: "1. A nickname is required." });
     }
     if (artistLink && !artist) {
       setArtistError(
         "An artist name is required if you have filled in an artist link.*"
       );
-      errorNums.push(3);
+      errorsArr.push({
+        id: "artist",
+        message:
+          "2. An artist name is required if you have filled in an artist link.",
+      });
+    }
+    if (!message) {
+      setMessageError("A message is required.*");
+      errorsArr.push({ id: "message", message: "3. A message is required." });
     }
 
-    if (errorNums.length) {
-      // setSubmitError("*Some of the fields have errors.");
-      setErrorsArr(errorNums);
-      // console.log(errorSummaryRef);
-      setTimeout(() => {
-        errorSummaryRef.current.focus();
-        window.scrollBy(0, -200);
-      }, 100);
+    if (errorsArr.length) {
+      setErrors(errorsArr);
     } else {
       submit();
     }
   };
+
+  useEffect(() => {
+    if (errorSummaryRef.current) {
+      errorSummaryRef.current.childNodes[1].focus();
+    }
+  }, [errors]);
 
   return (
     <>
@@ -123,39 +100,8 @@ const MagicPreSection = () => {
         <Anchor to="/gallery">public gallery</Anchor>. The digital artefact will
         be uniquely generated from your responses below, have fun! 🥳
       </Text>
-      {errorsArr.length ? (
-        <ErrorSummary role="alert">
-          <Text
-            style={{
-              fontFamily: "var(--font-primary)",
-              color: "var(--color-text)",
-            }}
-          >
-            There are {errorsArr.length} errors with your submission:
-          </Text>
-          <br />
-          <br />
-          {nicknameError ? (
-            <>
-              <ErrorLink ref={errorSummaryRef} href="#nickname">
-                1. {nicknameError}
-              </ErrorLink>
-              <br />
-            </>
-          ) : null}
-          {artistError ? (
-            <>
-              <ErrorLink href="#artist">2. {artistError}</ErrorLink>
-              <br />
-            </>
-          ) : null}
-          {messageError ? (
-            <>
-              <ErrorLink href="#message">3. {messageError}</ErrorLink>
-              <br />
-            </>
-          ) : null}
-        </ErrorSummary>
+      {errors.length ? (
+        <ErrorSummary ref={errorSummaryRef} errors={errors} />
       ) : null}
       <Form forwardedAs="form" ratio={2.5}>
         <Block
