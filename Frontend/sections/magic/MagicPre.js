@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import styled from "styled-components";
 import { useMutation, queryCache } from "react-query";
 
 import { postArtefact } from "../../utils/fetch";
 
+import Stack from "../../components/Stack";
 import Text from "../../components/Text";
 import Anchor from "../../components/Anchor";
 import CTAButton from "../../components/CTAButton";
@@ -12,15 +13,8 @@ import Input from "../../components/Input";
 import DuoInput from "../../components/DuoInput";
 import Textarea from "../../components/Textarea";
 
-const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-  margin-top: 100px;
-
-  & > div + div,
-  & > div + button {
-    margin-top: 100px;
-  }
+const Form = styled(Stack)`
+  margin-top: calc(var(--rhythm) * 2.5);
 `;
 
 const SubmitButton = styled(CTAButton)`
@@ -32,17 +26,37 @@ const SubmitButton = styled(CTAButton)`
   align-items: center;
 `;
 
-const SubmitError = styled(Text)`
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  font-size: 14px;
+const ErrorSummary = styled.div`
+  // margin-top: 100px;
+  background-color: var(--color-element);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  padding: 30px 35px;
+  border-radius: 8px;
+`;
+
+const ErrorLink = styled.a`
+  font-family: var(--font-secondary);
+  font-size: 18px;
   color: red;
-  text-align: right;
-  height: 50px;
+  text-decoration: underline dotted;
+  line-height: 2;
+
+  @media (max-width: 1200px) {
+    font-size: 16px;
+  }
+
+  @media (max-width: 896px) {
+    font-size: 14px;
+  }
+
+  @media (max-width: 600px) {
+    font-size: 12px;
+  }
 `;
 
 const MagicPreSection = () => {
+  const errorSummaryRef = useRef();
+
   const [nickname, setNickname] = useState("");
   const [nicknameError, setNicknameError] = useState("");
   const [artist, setArtist] = useState("");
@@ -50,7 +64,7 @@ const MagicPreSection = () => {
   const [artistError, setArtistError] = useState("");
   const [message, setMessage] = useState("");
   const [messageError, setMessageError] = useState("");
-  const [submitError, setSubmitError] = useState("");
+  const [errorsArr, setErrorsArr] = useState([]);
 
   const [submit, { status: submitStatus }] = useMutation(
     () =>
@@ -72,26 +86,31 @@ const MagicPreSection = () => {
   const submitHandler = async (e) => {
     e.preventDefault();
 
-    let hasError = false;
+    let errorNums = [];
     if (!nickname) {
-      setNicknameError("*A nickname is required.");
-      hasError = true;
+      setNicknameError("A nickname is required.*");
+      errorNums.push(1);
     }
     if (!message) {
-      setMessageError("*A message is required.");
-      hasError = true;
+      setMessageError("A message is required.*");
+      errorNums.push(2);
     }
     if (artistLink && !artist) {
       setArtistError(
-        "*An artist name is required if you have filled in an artist link."
+        "An artist name is required if you have filled in an artist link.*"
       );
-      hasError = true;
+      errorNums.push(3);
     }
 
-    if (hasError) {
-      setSubmitError("*Some of the fields have errors.");
+    if (errorNums.length) {
+      // setSubmitError("*Some of the fields have errors.");
+      setErrorsArr(errorNums);
+      // console.log(errorSummaryRef);
+      setTimeout(() => {
+        errorSummaryRef.current.focus();
+        window.scrollBy(0, -200);
+      }, 100);
     } else {
-      // console.log(nickname, message);
       submit();
     }
   };
@@ -104,8 +123,45 @@ const MagicPreSection = () => {
         <Anchor to="/gallery">public gallery</Anchor>. The digital artefact will
         be uniquely generated from your responses below, have fun! 🥳
       </Text>
-      <Form>
+      {errorsArr.length ? (
+        <ErrorSummary role="alert">
+          <Text
+            style={{
+              fontFamily: "var(--font-primary)",
+              color: "var(--color-text)",
+            }}
+          >
+            There are {errorsArr.length} errors with your submission:
+          </Text>
+          <br />
+          <br />
+          {nicknameError ? (
+            <>
+              <ErrorLink ref={errorSummaryRef} href="#nickname">
+                1. {nicknameError}
+              </ErrorLink>
+              <br />
+            </>
+          ) : null}
+          {artistError ? (
+            <>
+              <ErrorLink href="#artist">2. {artistError}</ErrorLink>
+              <br />
+            </>
+          ) : null}
+          {messageError ? (
+            <>
+              <ErrorLink href="#message">3. {messageError}</ErrorLink>
+              <br />
+            </>
+          ) : null}
+        </ErrorSummary>
+      ) : null}
+      <Form forwardedAs="form" ratio={2.5}>
         <Block
+          id="nickname"
+          subId="nickname-desc"
+          errId="nickname-err"
           error={nicknameError}
           labelText="choose a nickname*"
           sublabelText="Do note that this will be the name publicly featured in the
@@ -117,6 +173,7 @@ const MagicPreSection = () => {
             value={nickname}
             onChange={(e) => setNickname(e.target.value)}
             placeholder="nickname"
+            aria-required="true"
           />
         </Block>
         <Block
@@ -137,6 +194,9 @@ const MagicPreSection = () => {
           />
         </Block>
         <Block
+          id="message"
+          subId="message-desc"
+          errId="message-err"
           error={messageError}
           labelText="write a message*"
           sublabelText="Write some words of encouragement and support for our local arts 
@@ -147,6 +207,7 @@ const MagicPreSection = () => {
             value={message}
             onChange={(e) => setMessage(e.target.value)}
             placeholder="message"
+            aria-required="true"
           />
         </Block>
         <SubmitButton onClick={(e) => submitHandler(e)}>
@@ -161,7 +222,6 @@ const MagicPreSection = () => {
             "Submit"
           )}
         </SubmitButton>
-        <SubmitError>{submitError}</SubmitError>
       </Form>
     </>
   );

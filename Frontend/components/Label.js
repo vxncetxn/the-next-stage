@@ -10,7 +10,7 @@ const Label = styled.label`
   position: relative;
   display: block;
   font-family: var(--font-secondary);
-  font-size: 48px;
+  font-size: var(--s2);
   color: var(--color-text);
   padding-left: 20px;
   padding-top: 10px;

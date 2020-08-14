@@ -9,7 +9,7 @@ const Flow = keyframes`
 const CTAButton = styled.button`
   font-family: var(--font-primary);
   font-weight: 700;
-  font-size: 18px;
+  font-size: var(--s0);
   color: var(--color-text);
   padding: 10px 30px;
   border-radius: 20px;
@@ -26,18 +26,6 @@ const CTAButton = styled.button`
 
   &:hover {
     animation: ${Flow} 0.3s linear infinite;
-  }
-
-  @media (max-width: 1200px) {
-    font-size: 16px;
-  }
-
-  @media (max-width: 896px) {
-    font-size: 14px;
-  }
-
-  @media (max-width: 600px) {
-    font-size: 12px;
   }
 `;
 

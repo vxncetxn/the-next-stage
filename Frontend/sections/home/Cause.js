@@ -23,6 +23,7 @@ const CauseTitleBar = styled(SectionTitleBar)`
 `;
 
 const CauseContent = styled.div`
+  width: 100%;
   padding: calc(18vw + 100px) 100px 420px 100px;
 
   @media (max-width: 1200px) {

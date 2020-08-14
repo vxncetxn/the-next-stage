@@ -13,6 +13,7 @@ const Theatre = styled.section`
 `;
 
 const TheatreContent = styled.div`
+  width: 100%;
   padding: 50px 100px calc(18vw + 100px) 100px;
 
   @media (max-width: 1200px) {
@@ -59,7 +60,7 @@ const TheatreSection = () => {
         theatre
       </SectionTitleBar>
       <TheatreContent>
-        <QuoteText style={{ marginBottom: 40 }}>
+        <QuoteText style={{ marginBottom: "var(--rhythm)" }}>
           Esplanade has always been a place for everyone.
         </QuoteText>
         <Text>
@@ -75,8 +76,10 @@ const TheatreSection = () => {
           for the upcoming 550-seat Singtel Waterfront Theatre. Esplanade broke
           ground for the theatre's construction on 18th June 2019 and it is
           currently slated for completion in 2022.
-          <br></br>
-          <br></br>
+        </Text>
+        {/* <br />
+        <br /> */}
+        <Text style={{ marginTop: "var(--rhythm)" }}>
           The new theatre will help to fill the gap between Esplanade's existing
           large 2000-seat venues and smaller studio spaces, so that community,
           youth and arts groups who have done well in smaller venues and are

@@ -8,7 +8,7 @@ const Input = styled.input`
   border-bottom: 2px solid var(--color-text);
   padding: 10px 25px 10px 25px;
   font-family: var(--font-primary);
-  font-size: 32px;
+  font-size: var(--s1);
   color: var(--color-text);
   line-height: 2;
   text-align: right;

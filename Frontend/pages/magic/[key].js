@@ -8,6 +8,7 @@ import { fetchDonor } from "../../utils/fetch";
 import MagicPre from "../../sections/magic/MagicPre";
 import MagicPost from "../../sections/magic/MagicPost";
 
+import Stack from "../../components/Stack";
 import SectionTitleBar from "../../components/SectionTitleBar";
 import Text from "../../components/Text";
 import Shim from "../../components/Shim";
@@ -21,7 +22,7 @@ const MagicTitleBar = styled(SectionTitleBar)`
   padding-top: 140px;
 `;
 
-const MagicContent = styled.div`
+const MagicContent = styled(Stack)`
   padding: 150px 100px 50px 100px;
   width: 100%;
 
@@ -40,17 +41,15 @@ const MagicContent = styled.div`
 
 const Hello = styled.p`
   font-family: var(--font-primary);
-  font-size: 48px;
-  line-height: 1;
+  font-size: var(--s2);
   color: var(--color-text);
-  margin-bottom: 50px;
 `;
 
 const HelloShim = styled(Shim)`
   border-radius: 4px;
   width: 40%;
   height: 45px;
-  margin-bottom: 60px;
+  margin-bottom: var(--rhythm);
 `;
 
 const TextShim = styled(Shim)`
@@ -61,7 +60,6 @@ const TextShim = styled(Shim)`
 `;
 
 const MagicLinkPage = () => {
-  console.log(useRouter());
   const key = useRouter().query.key;
 
   const { status: donorStatus, data: donor } = useQuery(
@@ -83,8 +81,6 @@ const MagicLinkPage = () => {
               their tireless mission to bring about transformative arts
               experiences to our communities.
             </Text>
-            <br />
-            <br />
             {donor.artefact ? <MagicPost donor={donor} /> : <MagicPre />}
           </>
         ) : (

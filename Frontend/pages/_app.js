@@ -31,6 +31,34 @@ const Defaults = createGlobalStyle`
       --color-gradient-one: #ee0979;
       --color-gradient-two: #ff6a00;
       --color-grey: #b3b3b3;
+
+      --ratio: 1.61803398875;
+      --s-1: 14px;
+      --s0: 18px;
+      --s1: calc(var(--s0) * var(--ratio));
+      --s2: calc(var(--s1) * var(--ratio));
+      --s3: calc(var(--s2) * var(--ratio));
+      --s4: calc(var(--s3) * var(--ratio));
+      --rhythm: calc(var(--s0) * 2);
+    }
+
+    @media (max-width: 1200px) {
+      :root {
+        --s0: 16px;
+      }
+    }
+  
+    @media (max-width: 896px) {
+      :root {
+        --s0: 14px;
+      }
+    }
+  
+    @media (max-width: 600px) {
+      :root {
+        --s-1: 12px;
+        --s0: 12px;
+      }
     }
 
     * {
@@ -85,7 +113,7 @@ const Defaults = createGlobalStyle`
 
 const Container = styled.div`
   max-width: 1440px;
-  margin: 0 auto 0 auto;
+  margin: 0 auto;
 `;
 
 function MyApp({ Component, pageProps }) {

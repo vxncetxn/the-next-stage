@@ -18,11 +18,15 @@ const SectionTitleBar = styled.div`
     var(--color-gradient-one) 0%,
     var(--color-gradient-two) 100%
   );
+
+  @media (max-width: 896px) {
+    flex-basis: 25%;
+  }
 `;
 
 const SectionTitle = styled.div`
   font-family: var(--font-primary);
-  font-size: 100px;
+  font-size: var(--s4);
   color: var(--color-text);
   white-space: pre;
   writing-mode: vertical-lr;
@@ -34,16 +38,8 @@ const SectionTitle = styled.div`
     background-color: none;
   }
 
-  @media (max-width: 1200px) {
-    font-size: 90px;
-  }
-
   @media (max-width: 896px) {
-    font-size: 80px;
-  }
-
-  @media (max-width: 600px) {
-    font-size: 60px;
+    font-size: var(--s3);
   }
 `;
 

@@ -34,6 +34,7 @@ const DonateTitleBar = styled(SectionTitleBar)`
 `;
 
 const DonateContent = styled.div`
+  width: 100%;
   padding: 390px 100px calc(225px + 100px) 100px;
 
   @media (max-width: 1200px) {

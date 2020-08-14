@@ -52,19 +52,11 @@ const Quote = styled.blockquote`
 
 const QuoteText = styled.p`
   font-family: var(--font-primary);
-  font-size: 42px;
+  font-size: var(--s2);
   color: var(--color-text);
 
-  @media (max-width: 1200px) {
-    font-size: 34px;
-  }
-
   @media (max-width: 896px) {
-    font-size: 26px;
-  }
-
-  @media (max-width: 600px) {
-    font-size: 18px;
+    font-size: var(--s1);
   }
 `;
 

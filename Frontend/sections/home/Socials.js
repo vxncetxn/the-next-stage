@@ -29,7 +29,7 @@ const SocialsTitleBar = styled(SectionTitleBar)`
 `;
 
 const SocialsContent = styled.div`
-  width: 70%;
+  width: 100%;
   padding: calc(225px + 100px) 100px 50px 100px;
 
   @media (max-width: 1200px) {
