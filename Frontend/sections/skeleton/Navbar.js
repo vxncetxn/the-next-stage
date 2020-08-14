@@ -1,7 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
+import { createPortal } from "react-dom";
 import styled from "styled-components";
 import { useRouter } from "next/router";
 import Link from "next/link";
+
+import Hamburger from "./Hamburger";
 
 import HamburgerIcon from "../../assets/icons/hamburger.svg";
 
@@ -60,8 +63,10 @@ const LinksList = styled.ul`
   }
 `;
 
-const NavbarSection = ({ setHamburgerOpen }) => {
+const NavbarSection = ({ hamburgerOpen, setHamburgerOpen }) => {
   const pathname = useRouter().pathname;
+
+  const openButtonRef = useRef();
 
   const [atPageTop, setAtPageTop] = useState(true);
 
@@ -84,6 +89,11 @@ const NavbarSection = ({ setHamburgerOpen }) => {
       }
     });
   }, []);
+
+  const closeHandler = () => {
+    setHamburgerOpen(false);
+    openButtonRef.current.focus();
+  };
 
   return (
     <Navbar atPageTop={pathname === "/" ? atPageTop : false}>
@@ -109,6 +119,7 @@ const NavbarSection = ({ setHamburgerOpen }) => {
           </li>
           <li>
             <button
+              ref={openButtonRef}
               onClick={() => setHamburgerOpen(true)}
               aria-label="Open navigation menu"
             >
@@ -117,6 +128,9 @@ const NavbarSection = ({ setHamburgerOpen }) => {
           </li>
         </LinksList>
       </nav>
+      {hamburgerOpen
+        ? createPortal(<Hamburger closeHandler={closeHandler} />, document.body)
+        : null}
     </Navbar>
   );
 };

@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import { createPortal } from "react-dom";
 import styled, { keyframes } from "styled-components";
 
 import LeftArrowIcon from "../assets/icons/left-arrow.svg";
@@ -286,7 +287,6 @@ const GalleryModalComp = ({
   useEffect(() => {
     const handleWindowKeyDown = (e) => {
       if (e.key === "Escape") {
-        console.log(`HELLO ${idx}`);
         closeHandler(idx);
       }
     };
@@ -317,7 +317,7 @@ const GalleryModalComp = ({
   };
   const createDate = new Date(updatedAt);
 
-  return (
+  return createPortal(
     <Container {...others}>
       <Modal
         role="dialog"
@@ -438,7 +438,8 @@ const GalleryModalComp = ({
           <RightArrowIcon />
         </RightButton>
       ) : null}
-    </Container>
+    </Container>,
+    document.body
   );
 };
 

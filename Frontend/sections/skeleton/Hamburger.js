@@ -1,5 +1,5 @@
+import { useEffect, useRef } from "react";
 import styled, { keyframes } from "styled-components";
-import { useRouter } from "next/router";
 import Link from "next/link";
 
 import CloseIcon from "../../assets/icons/close.svg";
@@ -38,6 +38,8 @@ const FadeInText = keyframes`
 
 const Hamburger = styled.div`
   position: fixed;
+  left: 0;
+  top: 0;
   z-index: 999999;
   display: flex;
   justify-content: center;
@@ -99,15 +101,45 @@ const SocialsRow = styled.div`
   margin-top: 20px;
 `;
 
-const HamburgerSection = ({ setHamburgerOpen }) => {
-  const pathname = useRouter().pathname;
-
+const HamburgerSection = ({ closeHandler }) => {
   useLockBodyScroll();
 
+  const closeButtonRef = useRef();
+  const lastFocusRef = useRef();
+
+  useEffect(() => {
+    closeButtonRef.current.focus();
+  }, []);
+
+  useEffect(() => {
+    const handleWindowKeyDown = (e) => {
+      if (e.key === "Escape") {
+        closeHandler();
+      }
+    };
+
+    window.addEventListener("keydown", handleWindowKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleWindowKeyDown);
+    };
+  }, []);
+
   return (
-    <Hamburger>
+    <Hamburger
+      role="dialog"
+      aria-label="Mobile navigation menu"
+      aria-modal="true"
+    >
       <CloseButton
-        onClick={() => setHamburgerOpen(false)}
+        ref={closeButtonRef}
+        onClick={closeHandler}
+        onKeyDown={(e) => {
+          if (e.shiftKey && e.key === "Tab") {
+            e.preventDefault();
+            lastFocusRef.current.focus();
+          }
+        }}
         aria-label="Close navigation menu"
       >
         <CloseIcon />
@@ -140,7 +172,16 @@ const HamburgerSection = ({ setHamburgerOpen }) => {
             <A href="https://www.youtube.com/user/EsplanadeSG">
               <YoutubeIcon />
             </A>
-            <A href="https://www.instagram.com/esplanadesingapore/">
+            <A
+              ref={lastFocusRef}
+              onKeyDown={(e) => {
+                if (!e.shiftKey && e.key === "Tab") {
+                  e.preventDefault();
+                  closeButtonRef.current.focus();
+                }
+              }}
+              href="https://www.instagram.com/esplanadesingapore/"
+            >
               <InstagramIcon />
             </A>
           </SocialsRow>

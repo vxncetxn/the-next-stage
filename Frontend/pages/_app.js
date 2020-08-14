@@ -8,7 +8,6 @@ import { ReactQueryDevtools } from "react-query-devtools";
 import "../utils/youtube.css";
 
 import Navbar from "../sections/skeleton/Navbar";
-import Hamburger from "../sections/skeleton/Hamburger";
 import Footer from "../sections/skeleton/Footer";
 
 require("typeface-space-mono");
@@ -204,8 +203,10 @@ function MyApp({ Component, pageProps }) {
         <meta property="twitter:image" content="/og-twitter.jpg" />
       </Head>
       <Defaults />
-      <Navbar setHamburgerOpen={setHamburgerOpen} />
-      {hamburgerOpen ? <Hamburger setHamburgerOpen={setHamburgerOpen} /> : null}
+      <Navbar
+        hamburgerOpen={hamburgerOpen}
+        setHamburgerOpen={setHamburgerOpen}
+      />
       <Container role="main" aria-label="Main content">
         <Component {...pageProps} />
       </Container>
