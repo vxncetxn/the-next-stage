@@ -1,6 +1,7 @@
 import { useState, useRef } from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
+import { Transition } from "react-transition-group";
 
 import Stack from "../components/Stack";
 import Text from "../components/Text";
@@ -72,7 +73,7 @@ const AccordionTitle = styled.span`
 `;
 
 const AccordionPanel = styled.div`
-  max-height: ${(props) => (props.expanded ? `${props.maxHeight}` : "0")};
+  max-height: 0;
   overflow: hidden;
   transition: max-height 0.5s ease-out;
 `;
@@ -86,6 +87,13 @@ const AccordionComp = ({ id, items, ...others }) => {
       {items.map((item, idx) => {
         const maxHeight = item.maxHeight ? item.maxHeight : "100px";
         const expanded = idx === expandedNum;
+
+        const transitionStyles = {
+          entering: { maxHeight: 0 },
+          entered: { maxHeight },
+          exiting: { maxHeight: 0 },
+          exited: { maxHeight: 0 },
+        };
 
         return (
           <AccordionItem key={idx}>
@@ -122,15 +130,27 @@ const AccordionComp = ({ id, items, ...others }) => {
                 <AccordionTitle>{item.triggerText}</AccordionTitle>
               </AccordionTrigger>
             </h2>
-            <AccordionPanel
-              id={`${id}-panel-${idx}`}
-              role="region"
-              aria-labelledby={`${id}-trigger-${idx}`}
-              expanded={expanded}
-              maxHeight={maxHeight}
+            <Transition
+              in={expanded}
+              timeout={{ enter: 0, exit: 500 }}
+              mountOnEnter={true}
+              unmountOnExit={true}
             >
-              <Text style={{ marginTop: 30 }}>{item.panelContents}</Text>
-            </AccordionPanel>
+              {(state) => (
+                <AccordionPanel
+                  style={{
+                    ...transitionStyles[state],
+                  }}
+                  id={`${id}-panel-${idx}`}
+                  role="region"
+                  aria-labelledby={`${id}-trigger-${idx}`}
+                  expanded={expanded}
+                  maxHeight={maxHeight}
+                >
+                  <Text style={{ marginTop: 30 }}>{item.panelContents}</Text>
+                </AccordionPanel>
+              )}
+            </Transition>
           </AccordionItem>
         );
       })}
