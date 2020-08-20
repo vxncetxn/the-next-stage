@@ -79,23 +79,19 @@ const HeroTitle = styled.h1`
 
 const SubTitle = styled.p`
   font-family: var(--font-secondary);
-  font-size: 20px;
+  font-size: var(--s0);
   color: var(--color-text);
   margin-top: 40px;
-  width: 400px;
+  width: 450px;
   text-align: right;
+  cursor: default;
 
-  @media (max-width: 1200px) {
-    font-size: 18px;
+  &::selection {
+    background-color: none;
   }
 
   @media (max-width: 896px) {
-    font-size: 16px;
-  }
-
-  @media (max-width: 600px) {
-    font-size: 14px;
-    width: 200px;
+    width: 300px;
   }
 `;
 
@@ -112,7 +108,7 @@ const HeroSection = () => {
             <HeroTitle className="hero-title">next</HeroTitle>
             <HeroTitle className="hero-title">stage</HeroTitle>
           </HeroTitleGroup>
-          <SubTitle>— in collaboration with Esplanade</SubTitle>
+          <SubTitle>— a fundraising initiative for Esplanade</SubTitle>
         </HeroContent>
         <HeroAnim>
           <Artefact form={form} interactive={false} />

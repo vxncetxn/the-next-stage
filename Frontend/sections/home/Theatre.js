@@ -70,13 +70,12 @@ const TheatreSection = () => {
           <Anchor href="https://www.sutd.edu.sg/">
             Singapore University of Technology and Design
           </Anchor>{" "}
-          in collaboration with{" "}
+          for the upcoming 550-seat Singtel Waterfront Theatre by{" "}
           <Anchor href="https://www.esplanade.com/">
             Esplanade — Theatres on the Bay
           </Anchor>{" "}
-          for the upcoming 550-seat Singtel Waterfront Theatre. Esplanade broke
-          ground for the theatre's construction on 18th June 2019 and it is
-          currently slated for completion in 2022.
+          . Esplanade broke ground for the theatre's construction on 18th June
+          2019 and it is currently slated for completion in 2022.
         </Text>
         <Text>
           The new theatre will help to fill the gap between Esplanade's existing
