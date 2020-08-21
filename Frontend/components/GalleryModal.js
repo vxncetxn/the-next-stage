@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import styled, { keyframes } from "styled-components";
+import { document, exists } from "browser-monads";
 
 import LeftArrowIcon from "../assets/icons/left-arrow.svg";
 import RightArrowIcon from "../assets/icons/right-arrow.svg";
@@ -317,129 +318,132 @@ const GalleryModalComp = ({
   };
   const createDate = new Date(updatedAt);
 
-  return createPortal(
-    <Container {...others}>
-      <Modal
-        role="dialog"
-        aria-label={content ? `Virtual memento by ${nickname}` : null}
-        aria-modal="true"
-      >
-        <CloseButton
-          ref={closeButtonRef}
-          onClick={() => closeHandler(idx)}
-          onKeyDown={(e) => {
-            if (e.shiftKey && e.key === "Tab") {
-              e.preventDefault();
-              switch (lastFocusable) {
-                case "prevButton":
-                  prevButtonRef.current.focus();
-                  break;
-                case "nextButton":
-                  nextButtonRef.current.focus();
-                  break;
-                default:
-                  lastShareRef.current.focus();
+  return (
+    exists(document) &&
+    createPortal(
+      <Container {...others}>
+        <Modal
+          role="dialog"
+          aria-label={content ? `Virtual memento by ${nickname}` : null}
+          aria-modal="true"
+        >
+          <CloseButton
+            ref={closeButtonRef}
+            onClick={() => closeHandler(idx)}
+            onKeyDown={(e) => {
+              if (e.shiftKey && e.key === "Tab") {
+                e.preventDefault();
+                switch (lastFocusable) {
+                  case "prevButton":
+                    prevButtonRef.current.focus();
+                    break;
+                  case "nextButton":
+                    nextButtonRef.current.focus();
+                    break;
+                  default:
+                    lastShareRef.current.focus();
+                }
               }
-            }
-          }}
-          aria-label="Close artefact modal"
-        >
-          <CloseIcon />
-        </CloseButton>
-        <ArtefactContainer>
-          {content ? <Artefact form={form} interactive={true} /> : null}
-        </ArtefactContainer>
-        {content ? (
-          <Content>
-            <Title colorPoles={JSON.parse(colorPoles)}>
-              by <span>{nickname}</span>
-            </Title>
-            <Info>
-              <InfoTime>
-                <p>{`${createDate.getDate()} ${getMonthName(
-                  createDate.getMonth()
-                )} ${createDate.getFullYear()}`}</p>
-                <p>{`${
-                  createDate.getHours() + 1
-                }:${createDate.getMinutes()}`}</p>
-              </InfoTime>
-              <InfoAmt>${amount}</InfoAmt>
-            </Info>
-            <Message>{message}</Message>
-            <Share>
-              <p>Share: </p>
-              <div>
-                <A
-                  href={`https://www.facebook.com/sharer/sharer.php?u=https://thenextstage.sg/gallery/${id}&t=Share on Facebook`}
-                  aria-label="Share your memento on Facebook"
-                >
-                  <FacebookIcon />
-                </A>
-                <A
-                  ref={lastShareRef}
-                  href={`https://twitter.com/share?text=Check out my virtual memento ✨ at&url=https://thenextstage.sg/gallery/${id}&hashtags=thenextstage,esplanade,arts`}
-                  aria-label="Share your memento on Twitter"
-                  onKeyDown={(e) => {
-                    if (lastFocusable === "lastShare") {
-                      handleLastFocusKeyDown(e);
-                    }
-                  }}
-                >
-                  <TwitterIcon />
-                </A>
-              </div>
-            </Share>
-          </Content>
-        ) : (
-          <GalleryModalShim />
-        )}
-      </Modal>
-      {prevHandler && idx - 1 >= 0 ? (
-        <LeftButton
-          ref={prevButtonRef}
-          onClick={() => {
-            prevHandler(idx);
-            if (idx + 1 < contents.length - 1) {
-              setLastFocusable("nextButton");
-            }
-            if (idx - 1 === 0) {
-              nextButtonRef.current.focus();
-            } else {
-              prevButtonRef.current.focus();
-            }
-          }}
-          onKeyDown={(e) => {
-            if (lastFocusable === "prevButton") {
-              handleLastFocusKeyDown(e);
-            }
-          }}
-        >
-          <LeftArrowIcon />
-        </LeftButton>
-      ) : null}
-      {nextHandler && idx + 1 <= contents.length - 1 ? (
-        <RightButton
-          ref={nextButtonRef}
-          onClick={() => {
-            nextHandler(idx);
-            if (idx + 1 === contents.length - 1) {
-              setLastFocusable("prevButton");
-              prevButtonRef.current.focus();
-            } else {
-              nextButtonRef.current.focus();
-            }
-          }}
-          onKeyDown={(e) => {
-            if (lastFocusable === "nextButton") {
-              handleLastFocusKeyDown(e);
-            }
-          }}
-        >
-          <RightArrowIcon />
-        </RightButton>
-      ) : null}
-    </Container>,
-    document.body
+            }}
+            aria-label="Close artefact modal"
+          >
+            <CloseIcon />
+          </CloseButton>
+          <ArtefactContainer>
+            {content ? <Artefact form={form} interactive={true} /> : null}
+          </ArtefactContainer>
+          {content ? (
+            <Content>
+              <Title colorPoles={JSON.parse(colorPoles)}>
+                by <span>{nickname}</span>
+              </Title>
+              <Info>
+                <InfoTime>
+                  <p>{`${createDate.getDate()} ${getMonthName(
+                    createDate.getMonth()
+                  )} ${createDate.getFullYear()}`}</p>
+                  <p>{`${
+                    createDate.getHours() + 1
+                  }:${createDate.getMinutes()}`}</p>
+                </InfoTime>
+                <InfoAmt>${amount}</InfoAmt>
+              </Info>
+              <Message>{message}</Message>
+              <Share>
+                <p>Share: </p>
+                <div>
+                  <A
+                    href={`https://www.facebook.com/sharer/sharer.php?u=https://thenextstage.sg/gallery/${id}&t=Share on Facebook`}
+                    aria-label="Share your memento on Facebook"
+                  >
+                    <FacebookIcon />
+                  </A>
+                  <A
+                    ref={lastShareRef}
+                    href={`https://twitter.com/share?text=Check out my virtual memento ✨ at&url=https://thenextstage.sg/gallery/${id}&hashtags=thenextstage,esplanade,arts`}
+                    aria-label="Share your memento on Twitter"
+                    onKeyDown={(e) => {
+                      if (lastFocusable === "lastShare") {
+                        handleLastFocusKeyDown(e);
+                      }
+                    }}
+                  >
+                    <TwitterIcon />
+                  </A>
+                </div>
+              </Share>
+            </Content>
+          ) : (
+            <GalleryModalShim />
+          )}
+        </Modal>
+        {prevHandler && idx - 1 >= 0 ? (
+          <LeftButton
+            ref={prevButtonRef}
+            onClick={() => {
+              prevHandler(idx);
+              if (idx + 1 < contents.length - 1) {
+                setLastFocusable("nextButton");
+              }
+              if (idx - 1 === 0) {
+                nextButtonRef.current.focus();
+              } else {
+                prevButtonRef.current.focus();
+              }
+            }}
+            onKeyDown={(e) => {
+              if (lastFocusable === "prevButton") {
+                handleLastFocusKeyDown(e);
+              }
+            }}
+          >
+            <LeftArrowIcon />
+          </LeftButton>
+        ) : null}
+        {nextHandler && idx + 1 <= contents.length - 1 ? (
+          <RightButton
+            ref={nextButtonRef}
+            onClick={() => {
+              nextHandler(idx);
+              if (idx + 1 === contents.length - 1) {
+                setLastFocusable("prevButton");
+                prevButtonRef.current.focus();
+              } else {
+                nextButtonRef.current.focus();
+              }
+            }}
+            onKeyDown={(e) => {
+              if (lastFocusable === "nextButton") {
+                handleLastFocusKeyDown(e);
+              }
+            }}
+          >
+            <RightArrowIcon />
+          </RightButton>
+        ) : null}
+      </Container>,
+      document.body
+    )
   );
 };
 
