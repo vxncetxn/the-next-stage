@@ -211,7 +211,7 @@ function MyApp({ Component, pageProps }) {
         <Component {...pageProps} />
       </Container>
       <Footer />
-      <ReactQueryDevtools />
+      {/* <ReactQueryDevtools /> */}
     </ReactQueryConfigProvider>
   );
 }
